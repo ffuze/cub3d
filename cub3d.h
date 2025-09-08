@@ -6,7 +6,7 @@
 /*   By: adegl-in <adegl-in@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 19:30:31 by adegl-in          #+#    #+#             */
-/*   Updated: 2025/09/08 18:05:44 by adegl-in         ###   ########.fr       */
+/*   Updated: 2025/09/08 19:45:18 by adegl-in         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ typedef struct s_player
 
 typedef struct s_map
 {
-	char	**grid;
-	char	**player_pos;
-	int		width;
-	int		height;
+	char		**grid;
+	char		**player_pos;
+	size_t		width;
+	size_t		height;
 }	t_map;
 
 typedef struct s_game
@@ -53,5 +53,7 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 }   t_game;
+
+void    load_map(t_game *game, const char *filename);
 
 #endif

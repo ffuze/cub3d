@@ -6,7 +6,7 @@
 /*   By: adegl-in <adegl-in@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 19:28:51 by adegl-in          #+#    #+#             */
-/*   Updated: 2025/09/08 17:33:55 by adegl-in         ###   ########.fr       */
+/*   Updated: 2025/09/08 19:47:27 by adegl-in         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ int main(int argc, char **argv)
 	int		i;
 	
 	i = 0;
-	(void)argv;
-	if (argc != 1)
+	if (argc != 2)
 		return (0);
 	game = (t_game){0};
 	game.window.mlx_ptr = mlx_init();
@@ -53,17 +52,9 @@ int main(int argc, char **argv)
 		WWIDTH, WHEIGHT, "cub3D");
 	if (!game.window.win_ptr)
 		return (0);
-	// printf("x: %d, y: %d", game.player.x);
-	while (i < 370)
-	{
-		printf("%d +++++++++++++++++++++++ %d\n", i, i);
-		printf("%d +++++++++++++++++++++++ %d\n", game.player.x, game.player.y);
-		mlx_pixel_put(game.window.mlx_ptr, game.window.win_ptr, game.player.x,
-			game.player.y, 0xFFDE21);
-		game.player.x++;
-		game.player.y++;
-		i++;
-	}
+	load_map(&game, argv[1]);
+	mlx_pixel_put(game.window.mlx_ptr, game.window.win_ptr, game.player.x,
+		game.player.y, 0xFFDE21);
 	mlx_hook(game.window.win_ptr, DestroyNotify, StructureNotifyMask,
 		&on_destroy, &game);
 	mlx_hook(game.window.win_ptr, 2, 1L << 0,
