@@ -7,7 +7,7 @@ MLX = $(MLX_DIR)/libmlx.a
 
 OBJS_DIR = obj
 
-SRCS = index.c
+SRCS = index.c read_map.c
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 
 LIBFT_DIR = libft

@@ -6,7 +6,7 @@
 /*   By: adegl-in <adegl-in@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 19:30:31 by adegl-in          #+#    #+#             */
-/*   Updated: 2025/09/05 21:34:18 by adegl-in         ###   ########.fr       */
+/*   Updated: 2025/09/08 18:05:44 by adegl-in         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct s_window
 
 typedef struct s_player
 {
-	float	x;
-	float	y;
+	int		x;
+	int		y;
 	// float	new_x;
 	// float	new_y;
 }	t_player;
@@ -43,6 +43,8 @@ typedef struct s_map
 {
 	char	**grid;
 	char	**player_pos;
+	int		width;
+	int		height;
 }	t_map;
 
 typedef struct s_game
