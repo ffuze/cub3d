@@ -6,7 +6,7 @@
 /*   By: adegl-in <adegl-in@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 19:28:51 by adegl-in          #+#    #+#             */
-/*   Updated: 2025/09/08 19:47:27 by adegl-in         ###   ########.fr       */
+/*   Updated: 2025/09/09 18:36:09 by adegl-in         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int main(int argc, char **argv)
 	if (!game.window.win_ptr)
 		return (0);
 	load_map(&game, argv[1]);
-	mlx_pixel_put(game.window.mlx_ptr, game.window.win_ptr, game.player.x,
-		game.player.y, 0xFFDE21);
+	draw_pixels(&game);
+	free(game.map.grid);
 	mlx_hook(game.window.win_ptr, DestroyNotify, StructureNotifyMask,
 		&on_destroy, &game);
 	mlx_hook(game.window.win_ptr, 2, 1L << 0,

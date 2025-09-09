@@ -6,7 +6,7 @@
 /*   By: adegl-in <adegl-in@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 19:30:31 by adegl-in          #+#    #+#             */
-/*   Updated: 2025/09/08 19:45:18 by adegl-in         ###   ########.fr       */
+/*   Updated: 2025/09/09 16:37:00 by adegl-in         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ typedef struct s_game
 }   t_game;
 
 void    load_map(t_game *game, const char *filename);
+void	draw_pixels(t_game *game);
 
 #endif
