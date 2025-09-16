@@ -5,140 +5,107 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lemarino <lemarino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 10:03:55 by lemarino          #+#    #+#             */
-/*   Updated: 2025/07/14 15:29:32 by lemarino         ###   ########.fr       */
+/*   Created: 2025/01/13 15:02:09 by lemarino          #+#    #+#             */
+/*   Updated: 2025/03/04 14:48:35 by lemarino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-char	*ft_freebuffer(char *buffer, char *buf)
+static char	*ft_appenduntil(const char *src, int c)
 {
-	char	*temp;
+	char	chr;
+	char	*dst;
+	size_t	i;
+	size_t	j;
 
-	temp = ft_strjoin(buffer, buf);
-	if (!temp)
-		return (NULL);
-	free(buffer);
-	return (temp);
-}
-
-char	*ft_updatebuffer(char *buffer)
-{
-	int		i;
-	int		j;
-	char	*line;
-
+	chr = (char)c;
 	i = 0;
 	j = 0;
-	while (buffer[i] && buffer[i] != '\n')
+	while (src[i] != chr && src[i])
 		i++;
-	if (!buffer[i])
-		return (free(buffer), NULL);
-	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
-	if (!line)
-		return (free(buffer), NULL);
+	if (i == 0 && src[i] == '\0')
+		return (NULL);
 	i++;
-	while (buffer[i])
+	dst = malloc(i + 1);
+	if (!dst)
+		return (free(dst), NULL);
+	while (j < i)
 	{
-		line[j] = buffer[i];
-		i++;
+		dst[j] = src[j];
 		j++;
 	}
-	free(buffer);
-	return (line);
+	dst[j] = '\0';
+	return (dst);
 }
 
-char	*ft_readline(char *buffer)
+// Lines 55 to 58 remove empty lines  
+static char	*ft_store_excess(char *buf)
 {
-	char	*line;
-	int		i;
+	char	*temp_storage;
+	size_t	l;
+	size_t	i;
 
 	i = 0;
-	if (!buffer[i])
+	if (!buf)
 		return (NULL);
-	while (buffer[i] && buffer[i] != '\n')
+	if (!ft_strchr2(buf, '\n'))
+		return (NULL);
+	l = ft_strlen(ft_strchr2(buf, '\n'));
+	while (buf[i] && buf[i] != '\n')
 		i++;
-	line = ft_calloc(i + 2, sizeof(char));
-	if (!line)
-		return (free(line), NULL);
-	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
+	if (ft_strlen(buf) == i + 1)
+		return (NULL);
+	else
 	{
-		line[i] = buffer[i];
-		i++;
+		temp_storage = ft_strdup(ft_strchr2(buf, '\n'));
+		if (!ft_strchr2(buf, '\n'))
+			return (free(temp_storage), temp_storage = NULL, NULL);
+		temp_storage[l] = '\0';
+		return (temp_storage);
 	}
-	if (buffer[i] && buffer[i] == '\n')
-		line[i++] = '\n';
-	return (line);
 }
 
-char	*ft_setspacefile(int fd, char *l)
+static char	*ft_reading_line(char *buf, char *storage, int fd)
 {
-	char	*buffer;
-	int		n_bytes;
+	char	*t_buf;
+	ssize_t	bytes_read;
 
-	if (!l)
-		l = ft_calloc(1, 1);
-	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!buffer)
-		return (free(buffer), NULL);
-	n_bytes = 1;
-	while (n_bytes > 0)
+	if (!storage)
+		storage = ft_strdup("");
+	buf = ft_strdup(storage);
+	free (storage);
+	storage = NULL;
+	if (ft_strchr2(buf, '\n'))
+		return (buf);
+	while (1)
 	{
-		n_bytes = read(fd, buffer, BUFFER_SIZE);
-		if (n_bytes == -1)
-			return (free(l), NULL);
-		buffer[n_bytes] = '\0';
-		l = ft_freebuffer(l, buffer);
-		if (!l)
-			return (NULL);
-		if (ft_strchr(buffer, '\n'))
-			break ;
+		t_buf = ft_calloc(BUFFER_SIZE + 1, 1);
+		if (!t_buf)
+			return (free(t_buf), t_buf = NULL, NULL);
+		bytes_read = read(fd, t_buf, BUFFER_SIZE);
+		if (bytes_read < 0)
+			return (free(t_buf), t_buf = NULL, free(buf), buf = NULL, NULL);
+		buf = ft_strjoin(buf, t_buf);
+		if (bytes_read == 0 || ft_strchr2(buf, '\n'))
+			return (free(t_buf), t_buf = NULL, buf);
+		free(t_buf);
 	}
-	free(buffer);
-	return (l);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
-	char		*line;
+	char		*buf;
+	char		*temp;
+	static char	*storage[1024];
 
+	buf = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = ft_setspacefile(fd, buffer);
-	if (!buffer)
-		return (free(buffer), NULL);
-	line = ft_readline(buffer);
-	buffer = ft_updatebuffer(buffer);
-	return (line);
+	buf = ft_reading_line(buf, storage[fd], fd);
+	if (!buf)
+		return (NULL);
+	storage[fd] = ft_store_excess(buf);
+	temp = ft_appenduntil(buf, '\n');
+	return (free(buf), buf = NULL, temp);
 }
-
-/* int	main(int argc, char **argv)
-{
-	int		fd;
-	char	*line;
-
-	if (argc != 2)
-	{
-		fprintf(stderr, "Uso: %s <file_path>\n", argv[0]);
-		return (1);
-	}
-
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-	{
-		perror("Errore nell'apertura del file");
-		return (1);
-	}
-
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		printf("%s", line);
-		free(line);
-	}
-
-	close(fd);
-	return (0);
-} */

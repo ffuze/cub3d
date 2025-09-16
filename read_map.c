@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   read_map.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: adegl-in <adegl-in@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/08 17:50:54 by adegl-in          #+#    #+#             */
-/*   Updated: 2025/09/09 18:33:00 by adegl-in         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "./cub3d.h"
 
 static void    get_map_height(int fd, t_game *game)
@@ -21,7 +9,7 @@ static void    get_map_height(int fd, t_game *game)
         line = get_next_line(fd);
         if (!line)
             break ;
-        game->map.height++;
+        game->map.map_h++;
     }
 	close(fd);
 }
@@ -32,8 +20,8 @@ void    print_map(t_game *game)
 	size_t	j;
 	
 	i = 0;
-	printf("dovrei aver stampato qualcosa ma sono down e non lo faccio: %zu\n", game->map.height);
-	while (i < game->map.height)
+	printf("dovrei aver stampato qualcosa ma sono down e non lo faccio: %zu\n", game->map.map_h);
+	while (i < game->map.map_h)
 	{
 		j = 0;
 		while (j < ft_strlen(game->map.grid[i]))
@@ -48,7 +36,7 @@ void    print_map(t_game *game)
 
 void	allocate_map_grid(t_game *game)
 {
-	game->map.grid = malloc((game->map.height + 1) * sizeof(char *));
+	game->map.grid = malloc((game->map.map_h + 1) * sizeof(char *));
 	if (!game->map.grid)
 		exit(EXIT_FAILURE);
 }
@@ -68,7 +56,7 @@ void    load_map(t_game *game, const char *filename)
 	if (!fd)
 		return ;
 	allocate_map_grid(game);
-	while (++i < game->map.height)
+	while (++i < game->map.map_h)
 	{
 		temp_line = get_next_line(fd);
 		if (!temp_line)
@@ -98,7 +86,7 @@ void    check_player_pos(t_game *game)
 	
 	i = 0;
 	j = 0;
-	while (i < game->map.height)
+	while (i < game->map.map_h)
 	{
 		while (j < ft_strlen(game->map.grid[i]))
 		{

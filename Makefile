@@ -7,7 +7,11 @@ MLX = $(MLX_DIR)/libmlx.a
 
 OBJS_DIR = obj
 
-SRCS = index.c read_map.c render_map.c
+SRCS = index.c read_map.c render_map.c \
+			parsing/parsing.c parsing/parse_textures.c parsing/get_color.c \
+			parsing/parse_map.c parsing/parsing_utils.c \
+			free_memory.c \
+
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 
 LIBFT_DIR = libft
@@ -26,24 +30,27 @@ CYAN = \033[36;5m
 all: $(LIBFT) $(NAME)
 
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+	@	mkdir -p $(OBJ_DIR)	--quiet
 
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+	@	$(MAKE) -C $(LIBFT_DIR) --quiet
 
 $(NAME): $(LIBFT) $(SRCS)
-	$(CC) $(CFLAGS) $(SRCS) $(LIBS) -o $(NAME)
+	@	$(CC) $(CFLAGS) $(SRCS) $(LIBS) -o $(NAME)
+	@echo "$(GREEN)Object files created!$(NO_COLOR)"
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
-	$(MAKE) clean -C $(LIBFT_DIR)
+	@echo "$(YELLOW)Cleaning...$(NO_COLOR)"
+	@	rm -f $(OBJS)
+	@	$(MAKE) clean -C $(LIBFT_DIR)
 
 fclean: clean
-	rm -f $(NAME)
-	$(MAKE) fclean -C $(LIBFT_DIR)
+	@echo "$(RED)Full Cleaning...$(NO_COLOR)"
+	@	rm -f $(NAME)
+	@	$(MAKE) fclean -C $(LIBFT_DIR)
 
 re: fclean all
 

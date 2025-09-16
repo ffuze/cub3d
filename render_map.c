@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adegl-in <adegl-in@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lemarino <lemarino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 16:19:25 by adegl-in          #+#    #+#             */
-/*   Updated: 2025/09/09 19:02:04 by adegl-in         ###   ########.fr       */
+/*   Updated: 2025/09/16 12:38:24 by lemarino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void    draw_pixels(t_game *game)
 
 	i = 0;
 	j = 0;
-	while (i < game->map.height)
+	while (i < game->map.map_h)
 	{
 		j = 0;
 		int h = ft_strlen(game->map.grid[i]);

@@ -1,21 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   index.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: adegl-in <adegl-in@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/05 19:28:51 by adegl-in          #+#    #+#             */
-/*   Updated: 2025/09/09 18:36:09 by adegl-in         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "./cub3d.h"
 
 void	init_params(t_game	*game)
 {
 	game->map.grid = NULL;
-	game->map.player_pos = NULL;
+	game->map.p_dir = 0;
 	game->player.x = 20;
 	game->player.y = 20;
 }
@@ -52,7 +40,9 @@ int main(int argc, char **argv)
 		WWIDTH, WHEIGHT, "cub3D");
 	if (!game.window.win_ptr)
 		return (0);
-	load_map(&game, argv[1]);
+	// load_map(&game, argv[1]);
+	if (parse_map_file(argv[1], &game.map) == 0)
+		return (1);
 	draw_pixels(&game);
 	free(game.map.grid);
 	mlx_hook(game.window.win_ptr, DestroyNotify, StructureNotifyMask,

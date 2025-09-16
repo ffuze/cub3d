@@ -5,38 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lemarino <lemarino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/22 16:09:11 by lemarino          #+#    #+#             */
-/*   Updated: 2025/07/14 15:29:32 by lemarino         ###   ########.fr       */
+/*   Created: 2025/02/04 15:37:28 by lemarino          #+#    #+#             */
+/*   Updated: 2025/07/08 18:59:38 by lemarino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-
-/*void	f(unsigned int i, char *s)
+//Applies the function ’f’ on each character of the string passed
+// as argument, passing its index as first argument.
+// Each character is passed by address to ’f’ to be modified if necessary.
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	if (i % 2 == 1)
-		*s = ft_toupper(*s);
-	else
-		*s = ft_tolower(*s);
-}*/
-
-void	ft_striteri(char *s, void (*f)(unsigned int, char *))
-{
-	unsigned int	i;
+	int	i;
 
 	i = 0;
 	while (s[i])
 	{
-		(*f)(i, &s[i]);
+		f(i, &s[i]);
 		i++;
 	}
 }
-
-/*int main()
-{
-	char str[] = "SKOTCHO sCaToLa bUsTa PACCHETTO";
-	printf("Stringa prima del richiamo: %s\n", str);	
-	ft_striteri(str, f);
-	printf("Stringa dopo il richiamo: %s", str);
-}*/
