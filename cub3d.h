@@ -89,8 +89,10 @@ typedef struct s_game
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-void    load_map(t_game *game, const char *filename);
 void	draw_pixels(t_game *game);
+
+/*____________________________________hooks.c________________________________*/
+void	ft_hooks(t_game	*game);
 
 /*____________________________________parsing________________________________*/
 bool	parse_map_file(char *mapfile, t_map *txtr);

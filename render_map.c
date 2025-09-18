@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   render_map.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lemarino <lemarino@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 16:19:25 by adegl-in          #+#    #+#             */
-/*   Updated: 2025/09/16 12:38:24 by lemarino         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "./cub3d.h"
 
 void    draw_pixels(t_game *game)
@@ -34,11 +22,11 @@ void    draw_pixels(t_game *game)
 				|| game->map.grid[i][j] == 'S'
 				|| game->map.grid[i][j] == 'S'
 				|| game->map.grid[i][j] == 'W')
-				mlx_pixel_put(game->window.mlx_ptr, game->window.win_ptr, i, j, 0xFFDE21);
+				mlx_pixel_put(game->window.mlx_ptr, game->window.win_ptr, i*10, j*10, 0xFFDE21);
 			else if (game->map.grid[i][j] == '0')
-				mlx_pixel_put(game->window.mlx_ptr, game->window.win_ptr, i, j, 0x808080);
+				mlx_pixel_put(game->window.mlx_ptr, game->window.win_ptr, i*10, j*10, 0x808080);
 			else if (game->map.grid[i][j] == '1')
-				mlx_pixel_put(game->window.mlx_ptr, game->window.win_ptr, i, j, 0x000000);
+				mlx_pixel_put(game->window.mlx_ptr, game->window.win_ptr, i*10, j*10, 0x000000);
 			else
 				perror("Invalid character detected in the map\n");
 			// mlx_put_image_to_window(game->window.mlx_ptr,

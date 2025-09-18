@@ -7,9 +7,10 @@ MLX = $(MLX_DIR)/libmlx.a
 
 OBJS_DIR = obj
 
-SRCS = index.c read_map.c render_map.c \
+SRCS = index.c render_map.c \
 			parsing/parsing.c parsing/parse_textures.c parsing/get_color.c \
 			parsing/parse_map.c parsing/parsing_utils.c \
+			hooks.c \
 			free_memory.c \
 
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
