@@ -15,7 +15,7 @@ static int	on_keypress(int keysym, t_game *game)
 	return (1);
 }
 
-void	ft_hooks(t_game	*game)
+void	ft_hooks(t_game *game)
 {
 	mlx_hook(game->window.win_ptr, DestroyNotify, StructureNotifyMask,
 		&on_destroy, &game);

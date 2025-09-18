@@ -1,6 +1,6 @@
 #include "./cub3d.h"
 
-void	init_params(t_game	*game)
+void	init_params(t_game *game)
 {
 	game->map.grid = NULL;
 	game->map.p_dir = 0;
