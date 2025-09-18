@@ -2,8 +2,11 @@
 
 int on_destroy(t_game *game)
 {
-	mlx_destroy_display(game->window.mlx_ptr);
-	mlx_destroy_window(game->window.mlx_ptr, game->window.win_ptr);
+	mlx_destroy_image(game->win.mlx_ptr, game->win.nimg);
+	mlx_destroy_window(game->win.mlx_ptr, game->win.win_ptr);
+	mlx_destroy_display(game->win.mlx_ptr);
+	free(game->win.mlx_ptr);
+	free_mapstruct(&game->map);
 	exit(0);
 }
 
@@ -17,8 +20,8 @@ static int	on_keypress(int keysym, t_game *game)
 
 void	ft_hooks(t_game *game)
 {
-	mlx_hook(game->window.win_ptr, DestroyNotify, StructureNotifyMask,
-		&on_destroy, &game);
-	mlx_hook(game->window.win_ptr, 2, 1L << 0,
-		&on_keypress, &game);
+	mlx_hook(game->win.win_ptr, DestroyNotify, StructureNotifyMask,
+		&on_destroy, game);
+	mlx_hook(game->win.win_ptr, 2, 1L << 0,
+		&on_keypress, game);
 }

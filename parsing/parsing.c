@@ -1,7 +1,7 @@
 #include "../cub3d.h"
 
 /////////////////////////////////////////////////////////////
-void print_map_data(t_map *map)
+void print_map_data(t_map *map, t_player *plr)
 {
 	ft_printf(BRCYAN"\n");
 	ft_printf("n_txtr: %s\n", map->n_txtr);
@@ -13,18 +13,21 @@ void print_map_data(t_map *map)
 	ft_printf("map hight: %d\n", map->map_h);
 	ft_printf("map width: %d\n", map->map_l);
 	ft_printf("n_players: %d\n", map->n_players);
-	// if (!map->map)
-	// {
-	// 	ft_printf(NO_ALL"No map found.\n");
-	// 	return ;
-	// }
-	// for (int i = 0; map->map[i]; i++)
-	// 	ft_printf("%s\n", map->map[i]);
+	if (!map->grid)
+	{
+		ft_printf(NO_ALL"No map found.\n");
+		return ;
+	}
+	for (int i = 0; map->grid[i]; i++)
+		ft_printf("%s\n", map->grid[i]);
+	ft_printf("player x pos: %d\n", plr->x);
+	ft_printf("player y pos: %d\n", plr->y);
+	ft_printf("player direction: %d\n", plr->p_dir);
 	ft_printf(NO_ALL"\n");
 }
 /////////////////////////////////////////////////////////////
 
-void	init_mapvars(t_map *map)
+static void	init_mapvars(t_map *map)
 {
 	map->n_players = 0;
 	map->n_txtr = NULL;
@@ -33,14 +36,47 @@ void	init_mapvars(t_map *map)
 	map->w_txtr = NULL;
 	map->map_h = 0;
 	map->map_l = 0;
-	map->p_dir = 0;
 	map->fcol = -1;
 	map->ccol = -1;
 	map->grid = NULL;
 }
 
+static void	def_starting_direction(t_map *map, t_player *plr)
+{
+	ft_printf("maggggggggg\n");
+	if (map->grid[plr->x][plr->y] == 'N')
+		plr->p_dir = NORTH;
+	else if (map->grid[plr->x][plr->y] == 'S')
+		plr->p_dir = SOUTH;
+	else if (map->grid[plr->x][plr->y] == 'E')
+		plr->p_dir = EAST;
+	else if (map->grid[plr->x][plr->y] == 'W')
+		plr->p_dir = WEST;
+}
+
+static void	init_player(t_map *map, t_player *plr)
+{
+	plr->x = 0;
+	plr->y = 0;
+	plr->p_dir = MISSING;
+	while (map->grid[plr->x])
+	{
+		while (map->grid[plr->x][plr->y])
+		{
+			if (map->grid[plr->x][plr->y] != '0' && \
+					map->grid[plr->x][plr->y] != '1' && \
+					map->grid[plr->x][plr->y] != ' ' && \
+					map->grid[plr->x][plr->y] != '\n')
+				return (def_starting_direction(map, plr));
+			plr->y++;
+		}
+		plr->y = 0;
+		plr->x++;
+	}
+}
+
 // Reads the .ber file to parse it and save the data found in it.
-bool	parse_map_file(char *mapfile, t_map *map)
+bool	parse_map_file(char *mapfile, t_map *map, t_player *plr)
 {
 	int		fd;
 	char	*str;
@@ -61,6 +97,9 @@ bool	parse_map_file(char *mapfile, t_map *map)
 	if (!parse_map(map, &str, fd))
 		return (0);
 
-	print_map_data(map);////////////////////////////////
+	// Posizione del player
+	init_player(map, plr);
+
+	print_map_data(map, plr);////////////////////////////////
 	return (close(fd), 1);
 }

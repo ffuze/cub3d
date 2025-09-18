@@ -51,14 +51,31 @@
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 /*+++++++++++++++++++++++++++++++++++STRUCTS+++++++++++++++++++++++++++++++++*/
-typedef struct s_window
+
+typedef enum	s_dir
+{
+	MISSING,
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+}	t_dir;
+
+typedef struct s_win
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-}	t_window;
+
+	void	*nimg;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_win;
 
 typedef struct s_player
 {
+	int		p_dir;//	Players starting facing direction.
 	int		x;
 	int		y;
 	// float	new_x;
@@ -76,16 +93,15 @@ typedef struct s_map
 	char	**grid;
 	size_t	map_h;//	Map hight
 	size_t	map_l;//	Map width (longest line)
-	int		p_dir;//	Players starting facing directionn.
 	int		n_players;
 }	t_map;
 
 typedef struct s_game
 {
-	t_window    window;
+	t_win		win;
 	t_map		map;
-	t_player	player;
-}   t_game;
+	t_player	plr;
+}	t_game;
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
@@ -95,20 +111,20 @@ void	draw_pixels(t_game *game);
 void	ft_hooks(t_game	*game);
 
 /*____________________________________parsing________________________________*/
-bool	parse_map_file(char *mapfile, t_map *txtr);
-bool	parse_textures(t_map *txtr, char **str, int fd);
-bool	set_map_textures(t_map *txtr, char *str);
+bool	parse_map_file(char *mapfile, t_map *map, t_player *plr);
+bool	parse_textures(t_map *map, char **str, int fd);
+bool	set_map_textures(t_map *map, char *str);
 int		get_color(char *str);
 int		rgb_to_int(int r, int g, int b);
-bool	check_getcolor_fail(t_map *txtr, char *str);
+bool	check_getcolor_fail(t_map *map, char *str);
 bool	isprint_iter(char *str);
-bool	parse_map(t_map *txtr, char **str, int fd);
+bool	parse_map(t_map *map, char **str, int fd);
 bool	isvalid_chr(char *str);
-bool	copy_map(t_map *txtr, char *str, int fd);
-bool	valid_map(t_map *txtr, char **map);
-bool	check_map_struct(t_map *txtr);
+bool	copy_map(t_map *map, char *str, int fd);
+bool	valid_map(t_map *map, char **grid);
+bool	check_map_struct(t_map *map);
 
 /*____________________________________free_mem________________________________*/
-void	free_mapstruct(t_map *txtr);
+void	free_mapstruct(t_map *map);
 
 #endif
