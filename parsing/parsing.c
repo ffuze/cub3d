@@ -20,8 +20,8 @@ void print_map_data(t_map *map, t_player *plr)
 	}
 	for (int i = 0; map->grid[i]; i++)
 		ft_printf("%s\n", map->grid[i]);
-	ft_printf("player x pos: %d\n", plr->x);
-	ft_printf("player y pos: %d\n", plr->y);
+	ft_printf("player x pos: %d\n", plr->pos_x);
+	ft_printf("player y pos: %d\n", plr->pos_y);
 	ft_printf("player direction: %d\n", plr->p_dir);
 	ft_printf(NO_ALL"\n");
 }
@@ -41,37 +41,43 @@ static void	init_mapvars(t_map *map)
 	map->grid = NULL;
 }
 
-static void	def_starting_direction(t_map *map, t_player *plr)
+static void	def_starting_direction(t_map *map, t_player *plr, int i, int j)
 {
-	ft_printf("maggggggggg\n");
-	if (map->grid[plr->x][plr->y] == 'N')
+	if (map->grid[i][j] == 'N')
 		plr->p_dir = NORTH;
-	else if (map->grid[plr->x][plr->y] == 'S')
+	else if (map->grid[i][j] == 'S')
 		plr->p_dir = SOUTH;
-	else if (map->grid[plr->x][plr->y] == 'E')
+	else if (map->grid[i][j] == 'E')
 		plr->p_dir = EAST;
-	else if (map->grid[plr->x][plr->y] == 'W')
+	else if (map->grid[i][j] == 'W')
 		plr->p_dir = WEST;
+	plr->pos_x = i;
+	plr->pos_y = j;
 }
 
 static void	init_player(t_map *map, t_player *plr)
 {
-	plr->x = 0;
-	plr->y = 0;
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	plr->pos_x = 0;
+	plr->pos_y = 0;
 	plr->p_dir = MISSING;
-	while (map->grid[plr->x])
+	while (map->grid[i])
 	{
-		while (map->grid[plr->x][plr->y])
+		while (map->grid[i][j])
 		{
-			if (map->grid[plr->x][plr->y] != '0' && \
-					map->grid[plr->x][plr->y] != '1' && \
-					map->grid[plr->x][plr->y] != ' ' && \
-					map->grid[plr->x][plr->y] != '\n')
-				return (def_starting_direction(map, plr));
-			plr->y++;
+			if (map->grid[i][j] == 'N' || \
+					map->grid[i][j] == 'S' || \
+					map->grid[i][j] == 'E' || \
+					map->grid[i][j] == 'W')
+				return (def_starting_direction(map, plr, i, j));
+			j++;
 		}
-		plr->y = 0;
-		plr->x++;
+		j = 0;
+		i++;
 	}
 }
 

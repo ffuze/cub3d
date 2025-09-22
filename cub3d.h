@@ -61,7 +61,7 @@ typedef enum	s_dir
 	WEST
 }	t_dir;
 
-typedef struct s_win
+typedef struct	s_win
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
@@ -73,16 +73,16 @@ typedef struct s_win
 	int		endian;
 }	t_win;
 
-typedef struct s_player
+typedef struct	s_player
 {
 	int		p_dir;//	Players starting facing direction.
-	int		x;
-	int		y;
-	// float	new_x;
-	// float	new_y;
+	float	pos_x;//	Current player position(line)
+	float	pos_y;//	Current player position(column)
+	// float	npos_x;//	New player position
+	// float	npos_y;
 }	t_player;
 
-typedef struct s_map
+typedef struct	s_map
 {
 	char	*n_txtr;//	Path to North wall texture
 	char	*s_txtr;//	Path to South wall texture
@@ -96,16 +96,15 @@ typedef struct s_map
 	int		n_players;
 }	t_map;
 
-typedef struct s_game
+typedef struct	s_game
 {
 	t_win		win;
 	t_map		map;
 	t_player	plr;
+	int			scale;
 }	t_game;
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-void	draw_pixels(t_game *game);
 
 /*____________________________________hooks.c________________________________*/
 void	ft_hooks(t_game	*game);
@@ -124,7 +123,13 @@ bool	copy_map(t_map *map, char *str, int fd);
 bool	valid_map(t_map *map, char **grid);
 bool	check_map_struct(t_map *map);
 
-/*____________________________________free_mem________________________________*/
+/*___________________________________minimap.c_______________________________*/
+void	render_map(t_game *game);
+void	ft_padding(t_game *game, int color, float x, float y);
+/*_______________________________move_on_minimap.c___________________________*/
+void	move_on_minimap(int keysym, t_game *game);
+
+/*___________________________________free_mem________________________________*/
 void	free_mapstruct(t_map *map);
 
 #endif

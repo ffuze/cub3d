@@ -13,7 +13,6 @@ bool	copy_map(t_map *map, char *str, int fd)
 		map->grid = ft_realloc(map->grid, (map->map_h) * sizeof(char *), \
 										(map->map_h + 1) * sizeof(char *));
 		map->grid[map->map_h] = ft_strdup(str);
-		// ft_printf(BRCYAN"%s"NO_ALL, map->grid[map->map_h]);////////////////////////////////
 		len = ft_strlen(map->grid[map->map_h]);
 		if (len > map->map_l)
 			map->map_l = len;

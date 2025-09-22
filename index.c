@@ -7,8 +7,9 @@ int main(int argc, char **argv)
 	
 	i = 0;
 	if (argc != 2)
-		return (0);
+	return (0);
 	game = (t_game){0};
+	game.scale = 10;// Fattore di distanziamento dei pixel della minimappa
 	game.win.mlx_ptr = mlx_init();
 	if (!game.win.mlx_ptr)
 		return (0);
@@ -23,7 +24,7 @@ int main(int argc, char **argv)
 
 	if (parse_map_file(argv[1], &game.map, &game.plr) == 0)
 		return (1);
-	draw_pixels(&game);
+	render_map(&game);
 	mlx_put_image_to_window(game.win.mlx_ptr, game.win.win_ptr, game.win.nimg, 0, 0);
 
 	ft_hooks(&game);
