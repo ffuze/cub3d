@@ -12,7 +12,8 @@ SRCS = index.c render_map.c \
 			parsing/parse_map.c parsing/parsing_utils.c \
 			hooks.c \
 			free_memory.c \
-			ray_calculations.c wall_calculations.c time_calculations.c
+			ray_calculations.c wall_calculations.c time_calculations.c \
+			initialize_structs.c
 
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 

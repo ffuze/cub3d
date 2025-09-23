@@ -68,6 +68,7 @@ void    execute_algorithm(t_game *game)
 
 	i = -1;
 	time = get_current_time();
+	initialize_all(game);
 	while (++i < WINWIDTH)
 	{
 		get_ray_derivates(game);

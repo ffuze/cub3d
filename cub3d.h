@@ -161,4 +161,7 @@ void	draw_ver_line(t_game *game, int x);
 /*____________________________________ray_calc________________________________*/
 void    execute_algorithm(t_game *game);
 
+/*____________________________________init____________________________________*/
+void	initialize_all(t_game *game);
+
 #endif
