@@ -37,7 +37,7 @@ static int	pick_color(t_game *game, size_t i, size_t j)
 		return (-1);
 }
 
-void	render_map(t_game *game)
+void	render_minimap(t_game *game)
 {
 	size_t	i;
 	size_t	j;

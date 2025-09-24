@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 		free(game.win.mlx_ptr);
 		return (1);
 	}
-	render_map(&game);
+	render_minimap(&game);
     mlx_put_image_to_window(game.win.mlx_ptr, game.win.win_ptr, game.win.nimg, 0, 0);
     initialize_player(&game);  // Re-inizializza dopo il parsing
     execute_algorithm(&game);
