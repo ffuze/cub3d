@@ -133,6 +133,7 @@ void	draw_pixels(t_game *game);
 
 /*____________________________________hooks.c________________________________*/
 void	ft_hooks(t_game	*game);
+int		on_destroy(t_game *game);
 
 /*____________________________________parsing________________________________*/
 bool	parse_map_file(char *mapfile, t_map *map, t_player *plr);
@@ -162,6 +163,7 @@ void	draw_ver_line(t_game *game, int x);
 void    execute_algorithm(t_game *game);
 
 /*____________________________________init____________________________________*/
+void    initialize_player(t_game *game);
 void	initialize_all(t_game *game);
 
 #endif

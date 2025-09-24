@@ -4,11 +4,14 @@ void    get_ray_derivates(t_game *game)
 {
 	game->map.map_x = (int)game->plr.x;
 	game->map.map_y = (int)game->plr.y;
-	game->map.camera_x = 2 * game->plr.x / (double)WINWIDTH - 1;
+	game->map.camera_x = 2 * game->map.x / (double)WINWIDTH - 1;
 	game->plr.ray_dir_x = game->plr.ray_x + game->map.plane_x * game->map.camera_x;
 	game->plr.ray_dir_y = game->plr.ray_y + game->map.plane_y * game->map.camera_x;
 	if (game->plr.ray_dir_x == 0 || game->plr.ray_dir_y == 0)
-		exit(EXIT_FAILURE);
+	{
+		printf("Error: ray direction is zero\n");
+		on_destroy(game);
+	}
 	game->plr.delta_x = 1 / game->plr.ray_dir_x;
 	game->plr.delta_y = 1 / game->plr.ray_dir_y;
 }
@@ -68,11 +71,10 @@ void    execute_algorithm(t_game *game)
 
 	i = -1;
 	time = get_current_time();
-	initialize_all(game);
 	while (++i < WINWIDTH)
 	{
+		game->map.x = i;
 		get_ray_derivates(game);
-		printf("test\n");
 		calculate_nearest_coords(game);
 		get_next_position(game);
 		if (game->map.side)
