@@ -1,7 +1,6 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-
 # include "./minilibx-linux/mlx.h"
 # include "./libft/libft.h"
 # include <stdio.h>
@@ -11,6 +10,7 @@
 # include <fcntl.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <sys/time.h>
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MACROS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 /*~~~~~~~~~~~~~~~COLORS~~~~~~~~~~~~~~~*/
@@ -46,8 +46,8 @@
 
 /*~~~~~~~~~~~~~~~~VARs~~~~~~~~~~~~~~~~*/
 // to be switched with dynamic map sizes
-# define WWIDTH 400
-# define WHEIGHT 400
+# define WINWIDTH 400
+# define WINHEIGHT 400
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 /*+++++++++++++++++++++++++++++++++++STRUCTS+++++++++++++++++++++++++++++++++*/
@@ -77,9 +77,18 @@ typedef struct	s_player
 {
 	int		p_dir;//	Players starting facing direction.
 	float	pos_x;//	Current player position(line)
-	float	pos_y;//	Current player position(column)
-	// float	npos_x;//	New player position
-	// float	npos_y;
+	float	pos_y;// 	Current player position (column)
+	float	ray_x;
+	float	ray_y;
+	float	ray_dir_x;
+	float	ray_dir_y;
+	float	delta_x;
+	float	delta_y;
+	float	dist_x;
+	float	dist_y;
+	float	perp_wall_dist;
+	float	move_speed;
+	float	rot_speed;
 }	t_player;
 
 typedef struct	s_map
@@ -94,6 +103,19 @@ typedef struct	s_map
 	size_t	map_h;//	Map hight
 	size_t	map_l;//	Map width (longest line)
 	int		n_players;
+	float	plane_x;
+	float	plane_y;
+	float	camera_x;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+	int		wall_height;
+	int		x;
+    int 	draw_start;
+    int 	draw_end;
+    int		hex_color;
 }	t_map;
 
 typedef struct	s_game
@@ -108,6 +130,7 @@ typedef struct	s_game
 
 /*____________________________________hooks.c________________________________*/
 void	ft_hooks(t_game	*game);
+int		on_destroy(t_game *game);
 
 /*____________________________________parsing________________________________*/
 bool	parse_map_file(char *mapfile, t_map *map, t_player *plr);
@@ -131,5 +154,19 @@ void	move_on_minimap(int keysym, t_game *game);
 
 /*___________________________________free_mem________________________________*/
 void	free_mapstruct(t_map *map);
+
+/*____________________________________time_calc_______________________________*/
+float	get_current_time(void);
+void    get_fps(t_game *game);
+
+/*____________________________________wall_calc_______________________________*/
+void	draw_ver_line(t_game *game, int x);
+
+/*____________________________________ray_calc________________________________*/
+void    execute_algorithm(t_game *game);
+
+/*____________________________________init____________________________________*/
+void    initialize_player(t_game *game);
+void	initialize_all(t_game *game);
 
 #endif

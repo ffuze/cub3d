@@ -13,6 +13,8 @@ SRCS = index.c \
 			minimap/render_map.c minimap/move_on_minimap.c \
 			hooks.c \
 			free_memory.c \
+			ray_calculations.c wall_calculations.c time_calculations.c \
+			initialize_structs.c
 
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 
