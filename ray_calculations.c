@@ -2,8 +2,8 @@
 
 void    get_ray_derivates(t_game *game)
 {
-	game->map.map_x = (int)game->plr.x;
-	game->map.map_y = (int)game->plr.y;
+	game->map.map_x = (int)game->plr.pos_x;
+	game->map.map_y = (int)game->plr.pos_y;
 	game->map.camera_x = 2 * game->map.x / (double)WINWIDTH - 1;
 	game->plr.ray_dir_x = game->plr.ray_x + game->map.plane_x * game->map.camera_x;
 	game->plr.ray_dir_y = game->plr.ray_y + game->map.plane_y * game->map.camera_x;
@@ -21,22 +21,22 @@ void	calculate_nearest_coords(t_game *game)
 	if (game->plr.ray_dir_x < 0)
 	{
 		game->map.step_x = -1;
-		game->plr.dist_x = (game->plr.x - game->map.map_x) * game->plr.delta_x;
+		game->plr.dist_x = (game->plr.pos_x - game->map.map_x) * game->plr.delta_x;
 	}
 	else
 	{
 		game->map.step_x = 1;
-		game->plr.dist_x = ((float)game->map.map_x + 1.0 - game->plr.x) * game->plr.delta_x;
+		game->plr.dist_x = ((float)game->map.map_x + 1.0 - game->plr.pos_x) * game->plr.delta_x;
 	}
 	if (game->plr.ray_dir_y < 0)
 	{
 		game->map.step_y = -1;
-		game->plr.dist_y = (game->plr.y - game->map.map_y) * game->plr.delta_y;
+		game->plr.dist_y = (game->plr.pos_y - game->map.map_y) * game->plr.delta_y;
 	}
 	else
 	{
 		game->map.step_y = 1;
-		game->plr.dist_y = ((float)game->map.map_y + 1.0 - game->plr.y) * game->plr.delta_y;
+		game->plr.dist_y = ((float)game->map.map_y + 1.0 - game->plr.pos_y) * game->plr.delta_y;
 	}
 }
 
