@@ -167,6 +167,8 @@ void    execute_algorithm(t_game *game);
 
 /*____________________________________init____________________________________*/
 void    initialize_player(t_game *game);
+/*____________________________________init____________________________________*/
 void	initialize_all(t_game *game);
+void	setup_player_direction(t_game *game);
 
 #endif

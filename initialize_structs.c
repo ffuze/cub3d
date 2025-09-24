@@ -6,21 +6,29 @@ void	check_plr_dir(t_game *game)
 	{
 		game->plr.ray_x = 0;
 		game->plr.ray_y = -1;
+		game->map.plane_x = 0.66f;  // Piano perpendiciolare al ray
+		game->map.plane_y = 0;
 	}
 	else if (game->plr.p_dir == SOUTH)
 	{
 		game->plr.ray_x = 0;
 		game->plr.ray_y = 1;
+		game->map.plane_x = -0.66f;
+		game->map.plane_y = 0;
 	}
 	else if (game->plr.p_dir == EAST)
 	{
 		game->plr.ray_x = 1;
 		game->plr.ray_y = 0;
+		game->map.plane_x = 0;
+		game->map.plane_y = 0.66f;
 	}
 	else if (game->plr.p_dir == WEST)
 	{
 		game->plr.ray_x = -1;
 		game->plr.ray_y = 0;
+		game->map.plane_x = 0;
+		game->map.plane_y = -0.66f;
 	}
 }
 
@@ -50,7 +58,7 @@ void    initialize_map(t_game *game)
 	game->map.map_h = 0;
 	game->map.map_l = 0;
 	game->map.n_players = 0;
-	game->map.plane_x = 0.66f;
+	game->map.plane_x = 0.0f;
 	game->map.plane_y = 0.0f;
 	game->map.camera_x = 0.0f;
 	game->map.map_x = 0;
@@ -64,6 +72,16 @@ void    initialize_map(t_game *game)
 	game->map.draw_end = 0;
 	game->map.hex_color = 0;
 }
+
+////////////////////////////////////////////
+void	setup_player_direction(t_game *game)
+{
+	printf("player direction: %d, pos (%f, %f)\n", game->plr.p_dir, game->plr.pos_x, game->plr.pos_y);
+	check_plr_dir(game);
+	printf("ray direction set to (%f, %f)\n", game->plr.ray_x, game->plr.ray_y);
+	printf("plane direction set to (%f, %f)\n", game->map.plane_x, game->map.plane_y);
+}
+////////////////////////////////////////////
 
 void    initialize_all(t_game *game)
 {

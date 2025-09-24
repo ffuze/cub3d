@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 	}
 	render_minimap(&game);
     mlx_put_image_to_window(game.win.mlx_ptr, game.win.win_ptr, game.win.nimg, 0, 0);
-    initialize_player(&game);  // Re-inizializza dopo il parsing
+    setup_player_direction(&game);
     execute_algorithm(&game);
     printf("Execute algorithm completato\n"); // Debug
     ft_hooks(&game);
