@@ -16,6 +16,7 @@ void draw_ver_line(t_game *game, int x)
     int		y;
     char	*dest;
 
+    get_wall_height(game);
     if (game->map.grid[game->map.map_x][game->map.map_y])
     {
         if (game->map.grid[game->map.map_x][game->map.map_y] == '1')
@@ -30,19 +31,28 @@ void draw_ver_line(t_game *game, int x)
     y = -1;
     while (++y < game->map.draw_start)
     {
-        dest = game->win.addr + (y * game->win.line_length + x * (game->win.bits_per_pixel / 8));
-        *(unsigned int*)dest = 0x87CEEB;
+        if (y >= 0 && y < WINHEIGHT && x >= 0 && x < WINWIDTH)
+        {
+            dest = game->win.addr + (y * game->win.line_length + x * (game->win.bits_per_pixel / 8));
+            *(unsigned int*)dest = 0x87CEEB;
+        }
     }
     y = game->map.draw_start - 1;
     while (++y <= game->map.draw_end)
     {
-        dest = game->win.addr + (y * game->win.line_length + x * (game->win.bits_per_pixel / 8));
-        *(unsigned int*)dest = game->map.hex_color;
+        if (y >= 0 && y < WINHEIGHT && x >= 0 && x < WINWIDTH)
+        {
+            dest = game->win.addr + (y * game->win.line_length + x * (game->win.bits_per_pixel / 8));
+            *(unsigned int*)dest = game->map.hex_color;
+        }
     }
     y = game->map.draw_end;
     while (++y < WINHEIGHT)
     {
-        dest = game->win.addr + (y * game->win.line_length + x * (game->win.bits_per_pixel / 8));
-        *(unsigned int*)dest = 0x8B4513;
+        if (y >= 0 && y < WINHEIGHT && x >= 0 && x < WINWIDTH)
+        {
+            dest = game->win.addr + (y * game->win.line_length + x * (game->win.bits_per_pixel / 8));
+            *(unsigned int*)dest = 0x8B4513;
+        }
     }
 }

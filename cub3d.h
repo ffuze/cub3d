@@ -11,6 +11,7 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <sys/time.h>
+# include <readline/readline.h>
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MACROS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 /*~~~~~~~~~~~~~~~COLORS~~~~~~~~~~~~~~~*/
@@ -46,8 +47,8 @@
 
 /*~~~~~~~~~~~~~~~~VARs~~~~~~~~~~~~~~~~*/
 // to be switched with dynamic map sizes
-# define WINWIDTH 400
-# define WINHEIGHT 400
+# define WINWIDTH 1000
+# define WINHEIGHT 1000
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 /*+++++++++++++++++++++++++++++++++++STRUCTS+++++++++++++++++++++++++++++++++*/
@@ -65,7 +66,6 @@ typedef struct	s_win
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-
 	void	*nimg;
 	char	*addr;
 	int		bits_per_pixel;
@@ -160,6 +160,7 @@ float	get_current_time(void);
 void    get_fps(t_game *game);
 
 /*____________________________________wall_calc_______________________________*/
+void	get_wall_height(t_game *game);
 void	draw_ver_line(t_game *game, int x);
 
 /*____________________________________ray_calc________________________________*/

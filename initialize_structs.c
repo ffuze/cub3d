@@ -34,6 +34,8 @@ void	check_plr_dir(t_game *game)
 
 void    initialize_player(t_game *game)
 {
+	game->plr.pos_x = 0;
+	game->plr.pos_y = 0;
 	game->plr.delta_x = 0;
 	game->plr.delta_y = 0;
 	game->plr.dist_x = 0;

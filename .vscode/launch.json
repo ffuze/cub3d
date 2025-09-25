@@ -6,7 +6,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "/home/adegl-in/Desktop/cub3d (yup)/cub3D",  
-            "args": ["test.ber"],
+            "args": ["map.cub"],
             "stopAtEntry": false,
             "cwd": "/home/adegl-in/Desktop/cub3d (yup)",
             "environment": [],

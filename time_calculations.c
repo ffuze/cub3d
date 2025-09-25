@@ -10,16 +10,26 @@ float	get_current_time(void)
 
 void    get_fps(t_game *game)
 {
-	float  old_time;
-	float  time;
-	float  frame_time;
+	float	old_time;
+	float	time;
+	float	frame_time;
+	char	fps_text[50];
+	int		fps_value;
 
-	time = 0.0;
-	old_time = time;
+	old_time = 0;
 	time = get_current_time();
-	frame_time = (time - old_time) / 1000.0;
-	if (frame_time > 0)
-		printf("FPS: %.1f\n", 1.0 / frame_time);
-	game->plr.move_speed = frame_time * 5.0;
-	game->plr.rot_speed = frame_time * 3.0;
+	if (old_time > 0)
+	{
+		frame_time = (time - old_time) / 1000.0;
+		if (frame_time > 0)
+		{
+			game->plr.move_speed = frame_time * 5.0;
+			game->plr.rot_speed = frame_time * 3.0;
+			fps_value = (int)(1.0 / frame_time);
+			printf(fps_text, "FPS: %d", fps_value);
+			mlx_string_put(game->win.mlx_ptr, game->win.win_ptr,
+				10, 20, 0xFFFFFF, fps_text);
+		}
+	}
+	old_time = time;
 }

@@ -71,7 +71,7 @@ void    execute_algorithm(t_game *game)
 
 	i = -1;
 	time = get_current_time();
-	while (++i < WINWIDTH)
+	while (++i < 501) // con WINWIDTH non funziona 
 	{
 		game->map.x = i;
 		get_ray_derivates(game);
@@ -84,4 +84,6 @@ void    execute_algorithm(t_game *game)
 		draw_ver_line(game, i);
 		get_fps(game);
 	}
+	// Put the rendered image to the window
+	mlx_put_image_to_window(game->win.mlx_ptr, game->win.win_ptr, game->win.nimg, 0, 0);
 }
