@@ -28,6 +28,7 @@ void	move_on_minimap(int keysym, t_game *game)
 	{
 		// if (near_wall(game, NORTH))
 		// 	return ;
+		move_front(game);
 		ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
 		game->plr.pos_x -= 0.2;
 		ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
@@ -39,6 +40,7 @@ void	move_on_minimap(int keysym, t_game *game)
 	{
 		// if (near_wall(game, SOUTH))
 		// 	return ;
+		move_behind(game);
 		ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
 		game->plr.pos_x += 0.2;
 		ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
@@ -50,6 +52,7 @@ void	move_on_minimap(int keysym, t_game *game)
 	{
 		// if (near_wall(game, WEST))
 		// 	return ;
+		move_left(game);
 		ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
 		game->plr.pos_y -= 0.2;
 		ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
@@ -61,6 +64,7 @@ void	move_on_minimap(int keysym, t_game *game)
 	{
 		// if (near_wall(game, EAST))
 		// 	return ;
+		move_right(game);
 		ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
 		game->plr.pos_y += 0.2;
 		ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);

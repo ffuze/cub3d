@@ -14,7 +14,8 @@ SRCS = index.c \
 			hooks.c \
 			free_memory.c \
 			ray_calculations.c wall_calculations.c time_calculations.c \
-			initialize_structs.c
+			initialize_structs.c \
+			movement_rotations.c
 
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 

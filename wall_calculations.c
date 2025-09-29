@@ -20,7 +20,7 @@ void draw_ver_line(t_game *game, int x)
     if (game->map.grid[game->map.map_x][game->map.map_y])
     {
         if (game->map.grid[game->map.map_x][game->map.map_y] == '1')
-            game->map.hex_color = 0xFFFFFF;
+            game->map.hex_color = 0x32CD32;
         else if (game->map.grid[game->map.map_x][game->map.map_y] == '0')
             game->map.hex_color = 0x000000;
         else
@@ -34,7 +34,7 @@ void draw_ver_line(t_game *game, int x)
         if (y >= 0 && y < WINHEIGHT && x >= 0 && x < WINWIDTH)
         {
             dest = game->win.addr + (y * game->win.line_length + x * (game->win.bits_per_pixel / 8));
-            *(unsigned int*)dest = 0x87CEEB;
+            *(unsigned int*)dest = 0xD3D3D3;
         }
     }
     y = game->map.draw_start - 1;
@@ -52,7 +52,7 @@ void draw_ver_line(t_game *game, int x)
         if (y >= 0 && y < WINHEIGHT && x >= 0 && x < WINWIDTH)
         {
             dest = game->win.addr + (y * game->win.line_length + x * (game->win.bits_per_pixel / 8));
-            *(unsigned int*)dest = 0x8B4513;
+            *(unsigned int*)dest = 0x222222;
         }
     }
 }

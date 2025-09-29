@@ -23,11 +23,11 @@ void    get_fps(t_game *game)
 		frame_time = (time - old_time) / 1000.0;
 		if (frame_time > 0)
 		{
-			game->plr.move_speed = frame_time * 5.0;
-			game->plr.rot_speed = frame_time * 3.0;
+			gp.move_speed = frame_time * 5.0;
+			gp.rot_speed = frame_time * 3.0;
 			fps_value = (int)(1.0 / frame_time);
 			printf(fps_text, "FPS: %d", fps_value);
-			mlx_string_put(game->win.mlx_ptr, game->win.win_ptr,
+			mlx_string_put(gw.mlx_ptr, gw.win_ptr,
 				10, 20, 0xFFFFFF, fps_text);
 		}
 	}

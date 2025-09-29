@@ -47,9 +47,13 @@
 
 /*~~~~~~~~~~~~~~~~VARs~~~~~~~~~~~~~~~~*/
 // to be switched with dynamic map sizes
-# define WINWIDTH 1000
-# define WINHEIGHT 1000
+# define WINWIDTH 1920
+# define WINHEIGHT 1080
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+# define gm game->map
+# define gp game->plr
+# define gw game->win
 
 /*+++++++++++++++++++++++++++++++++++STRUCTS+++++++++++++++++++++++++++++++++*/
 
@@ -168,8 +172,13 @@ void    execute_algorithm(t_game *game);
 
 /*____________________________________init____________________________________*/
 void    initialize_player(t_game *game);
-/*____________________________________init____________________________________*/
 void	initialize_all(t_game *game);
 void	setup_player_direction(t_game *game);
+
+/*____________________________________movement____________________________________*/
+void    move_front(t_game *game);
+void    move_behind(t_game *game);
+void    move_right(t_game *game);
+void    move_left(t_game *game);
 
 #endif

@@ -21,9 +21,9 @@ static int	on_keypress(int keysym, t_game *game)
 	(void)game;
 	if (keysym == XK_Escape)
 		on_destroy(game);
-	else if (keysym == XK_d || keysym == XK_a || keysym == XK_w || \
-					keysym == XK_s || keysym == XK_e || keysym == XK_q)
-		ft_moveplayer(keysym, game);
+	// else if (keysym == XK_d || keysym == XK_a || keysym == XK_w || \
+	// 				keysym == XK_s || keysym == XK_e || keysym == XK_q)
+	// 	ft_moveplayer(keysym, game);
 	return (1);
 }
 
