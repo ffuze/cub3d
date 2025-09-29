@@ -50,16 +50,16 @@ void    initialize_player(t_game *game)
 
 void    initialize_map(t_game *game)
 {
-	game->map.n_txtr = NULL;
-	game->map.s_txtr = NULL;
-	game->map.e_txtr = NULL;
-	game->map.w_txtr = NULL;
-	game->map.fcol = 0;
-	game->map.ccol = 0;
-	game->map.grid = NULL;
-	game->map.map_h = 0;
-	game->map.map_l = 0;
-	game->map.n_players = 0;
+	// game->map.n_txtr = NULL; INIZIALIZZATI NEL PARSING
+	// game->map.s_txtr = NULL;
+	// game->map.e_txtr = NULL;
+	// game->map.w_txtr = NULL;
+	// game->map.fcol = -1;
+	// game->map.ccol = -1;
+	// game->map.grid = NULL;
+	// game->map.map_h = 0;
+	// game->map.map_l = 0;
+	// game->map.n_players = 0;
 	game->map.plane_x = 0.0f;
 	game->map.plane_y = 0.0f;
 	game->map.camera_x = 0.0f;

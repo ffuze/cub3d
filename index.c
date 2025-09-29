@@ -20,9 +20,8 @@ int main(int argc, char **argv)
 	initialize_all(&game);
 	game.win.nimg = mlx_new_image(game.win.mlx_ptr, WINWIDTH, WINHEIGHT);
 	game.win.addr = mlx_get_data_addr(game.win.nimg, &game.win.bits_per_pixel, \
-		&game.win.line_length, &game.win.endian);
-	//alek gooo fuck ur self and dont play valorant at all u r so bad hahaha ur aim is like iron 1 -0 RR
-	//bro if i actually played valorant 100% locked in all this time id be immortal
+		&game.win.line_len, &game.win.endian);
+	//alek u are preciuos and we love you a lot <3
 	if (parse_map_file(argv[1], &game.map, &game.plr) == 0)
 	{
 		mlx_destroy_image(game.win.mlx_ptr, game.win.nimg);
@@ -31,7 +30,6 @@ int main(int argc, char **argv)
 		free(game.win.mlx_ptr);
 		return (1);
 	}
-    mlx_put_image_to_window(game.win.mlx_ptr, game.win.win_ptr, game.win.nimg, 0, 0);
     setup_player_direction(&game);
     execute_algorithm(&game);
     printf("Execute algorithm completato\n"); // Debug
@@ -39,5 +37,6 @@ int main(int argc, char **argv)
 	printf("Minimap renderizzata\n"); // Debug
     ft_hooks(&game);
     printf("Hooks impostati\n"); // Debug
+    mlx_put_image_to_window(game.win.mlx_ptr, game.win.win_ptr, game.win.nimg, 0, 0);
 	mlx_loop(game.win.mlx_ptr);
 }

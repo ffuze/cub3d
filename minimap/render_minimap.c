@@ -14,7 +14,7 @@ void	ft_padding(t_game *game, int color, float x, float y)
 		{
 			// my_pixelput:
 			int pixel_index;
-			pixel_index = ((x * game->scale + py) * game->win.line_length) + \
+			pixel_index = ((x * game->scale + py) * game->win.line_len) + \
 					((y * game->scale + px) * (game->win.bits_per_pixel / 8));
 			*(unsigned int*)(game->win.addr + pixel_index) = color;
 			px++;

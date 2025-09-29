@@ -32,7 +32,7 @@
 # define BLACK_ON_WHITE "\e[107;30m"
 # define NO_BG "\e[49m"
 
-/*~~~~~~~~~~~~~~~MORE~~~~~~~~~~~~~~~*/
+/*~~~~~~~~~~~~~~~~MORE~~~~~~~~~~~~~~~~*/
 # define BOLD "\e[1m"// "\e[1;4m" Bold and Underlined
 # define NO_BOLD "\e[21m"
 
@@ -47,13 +47,16 @@
 
 /*~~~~~~~~~~~~~~~~VARs~~~~~~~~~~~~~~~~*/
 // to be switched with dynamic map sizes
-# define WINWIDTH 1920
-# define WINHEIGHT 1080
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+# define WINWIDTH 1820
+# define WINHEIGHT 920
 
+/*~~~~~~~~~~~~ABBREVIATIONS~~~~~~~~~~~~*/
 # define gm game->map
 # define gp game->plr
 # define gw game->win
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
 
 /*+++++++++++++++++++++++++++++++++++STRUCTS+++++++++++++++++++++++++++++++++*/
 
@@ -73,7 +76,7 @@ typedef struct	s_win
 	void	*nimg;
 	char	*addr;
 	int		bits_per_pixel;
-	int		line_length;
+	int		line_len;
 	int		endian;
 }	t_win;
 
