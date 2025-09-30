@@ -29,9 +29,9 @@ void	move_on_minimap(int keysym, t_game *game)
 		// if (near_wall(game, NORTH))
 		// 	return ;
 		move_front(game);
-		ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
-		game->plr.pos_x -= 0.2;
-		ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
+		// ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
+		// game->plr.pos_x -= 0.2;
+		// ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
 		// mlx_do_sync(game->win.mlx_ptr);
 		mlx_put_image_to_window(game->win.mlx_ptr, game->win.win_ptr, game->win.nimg, 0, 0);
 		printf(YELLOW"%f\n"NO_ALL, game->plr.pos_x);/////////////////////////////
@@ -41,9 +41,9 @@ void	move_on_minimap(int keysym, t_game *game)
 		// if (near_wall(game, SOUTH))
 		// 	return ;
 		move_behind(game);
-		ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
-		game->plr.pos_x += 0.2;
-		ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
+		// ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
+		// game->plr.pos_x += 0.2;
+		// ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
 		// mlx_do_sync(game->win.mlx_ptr);
 		mlx_put_image_to_window(game->win.mlx_ptr, game->win.win_ptr, game->win.nimg, 0, 0);
 		printf(YELLOW"%f\n"NO_ALL, game->plr.pos_x);/////////////////////////////
@@ -52,10 +52,10 @@ void	move_on_minimap(int keysym, t_game *game)
 	{
 		// if (near_wall(game, WEST))
 		// 	return ;
-		move_left(game);
-		ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
-		game->plr.pos_y -= 0.2;
-		ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
+		strafe_left(game);
+		// ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
+		// game->plr.pos_y -= 0.2;
+		// ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
 		// mlx_do_sync(game->win.mlx_ptr);
 		mlx_put_image_to_window(game->win.mlx_ptr, game->win.win_ptr, game->win.nimg, 0, 0);
 		printf(YELLOW"%f\n"NO_ALL, game->plr.pos_y);/////////////////////////////
@@ -64,10 +64,10 @@ void	move_on_minimap(int keysym, t_game *game)
 	{
 		// if (near_wall(game, EAST))
 		// 	return ;
-		move_right(game);
-		ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
-		game->plr.pos_y += 0.2;
-		ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
+		strafe_right(game);
+		// ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
+		// game->plr.pos_y += 0.2;
+		// ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
 		// mlx_do_sync(game->win.mlx_ptr);
 		mlx_put_image_to_window(game->win.mlx_ptr, game->win.win_ptr, game->win.nimg, 0, 0);
 		printf(YELLOW"%f\n"NO_ALL, game->plr.pos_y);/////////////////////////////

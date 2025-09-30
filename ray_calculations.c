@@ -76,6 +76,7 @@ void    execute_algorithm(t_game *game)
 	while (++i < WINWIDTH)
 	{
 		gm.x = i;
+		get_fps(game);
 		get_ray_derivates(game);
 		calculate_nearest_coords(game);
 		get_next_position(game);
@@ -84,7 +85,6 @@ void    execute_algorithm(t_game *game)
 		else
 			gp.perp_wall_dist = gp.dist_x - gp.delta_x;
 		draw_ver_line(game, i);
-		get_fps(game);
 	}
 	mlx_put_image_to_window(gw.mlx_ptr, gw.win_ptr, gw.nimg, 0, 0);
 }
