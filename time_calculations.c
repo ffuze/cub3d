@@ -30,5 +30,5 @@ void    get_fps(t_game *game)
 			free(fps_string);
 		}
 	}
-	// old_time = time;
+	old_time = time;
 }
