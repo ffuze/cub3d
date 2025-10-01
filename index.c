@@ -38,5 +38,6 @@ int main(int argc, char **argv)
     ft_hooks(&game);
     printf("Hooks impostati\n"); // Debug
     mlx_put_image_to_window(game.win.mlx_ptr, game.win.win_ptr, game.win.nimg, 0, 0);
+	get_fps(&game);
 	mlx_loop(game.win.mlx_ptr);
 }

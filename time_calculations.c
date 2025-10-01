@@ -13,8 +13,8 @@ void    get_fps(t_game *game)
 	float	old_time;
 	float	time;
 	float	frame_time;
-	char	fps_text[50];
 	int		fps_value;
+	char	*fps_string;
 
 	old_time = 0;
 	time = get_current_time();
@@ -23,12 +23,13 @@ void    get_fps(t_game *game)
 		frame_time = (time - old_time) / 1000.0;
 		if (frame_time > 0)
 		{
-			gp.move_speed = frame_time * 5.0;
-			gp.rot_speed = frame_time * 3.0;
+			gp.move_speed = frame_time * 1.01;
+			gp.rot_speed = frame_time * 1.01;
 			fps_value = (int)(1.0 / frame_time);
-			printf(fps_text, "FPS: %d", fps_value);
+			fps_string = ft_itoa(fps_value);
 			mlx_string_put(gw.mlx_ptr, gw.win_ptr,
-				10, 20, 0xFFFFFF, fps_text);
+				WINWIDTH - 5, WINHEIGHT - 5, 0xFF0000, fps_string);
+			free(fps_string);
 		}
 	}
 	old_time = time;

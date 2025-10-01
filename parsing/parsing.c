@@ -106,6 +106,6 @@ bool	parse_map_file(char *mapfile, t_map *map, t_player *plr)
 	// Posizione del player
 	init_player(map, plr);
 
-	print_map_data(map, plr);////////////////////////////////
+	// print_map_data(map, plr);////////////////////////////////
 	return (close(fd), 1);
 }
