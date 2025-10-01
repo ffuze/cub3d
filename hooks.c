@@ -25,6 +25,7 @@ void	ft_moveplayer(int keysym, t_game *game)
 	else if (keysym == XK_Right)
 		rotate_right(game);
 	execute_algorithm(game);
+	move_on_minimap(keysym, game);
 	render_minimap(game);
 	mlx_put_image_to_window(game->win.mlx_ptr, game->win.win_ptr, game->win.nimg, 0, 0);
 }

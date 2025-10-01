@@ -2,6 +2,10 @@
 
 void    get_wall_height(t_game *game)
 {
+	// Prevent division by zero
+	if (game->plr.perp_wall_dist < 0.001)
+		game->plr.perp_wall_dist = 0.001;
+	
 	gm.wall_height = WINHEIGHT / game->plr.perp_wall_dist;
 	gm.draw_start = (-gm.wall_height / 2) + (WINHEIGHT / 2);
 	if (gm.draw_start < 0)
@@ -11,7 +15,7 @@ void    get_wall_height(t_game *game)
 		gm.draw_end = WINHEIGHT - 1;
 }
 
-void draw_ver_line(t_game *game, int x)
+void    draw_ver_line(t_game *game, int x)
 {
     int		y;
     char	*dest;
@@ -22,10 +26,12 @@ void draw_ver_line(t_game *game, int x)
         if (gm.grid[gm.map_y][gm.map_x] == '1')
             gm.hex_color = 0x32CD32;
         else if (gm.grid[gm.map_y][gm.map_x] == '0')
-            gm.hex_color = 0x000000;
+            gm.hex_color = 0xFF0000;
         else
             gm.hex_color = 0x32CD32;
     }
+    else
+        gm.hex_color = 0x000000;
     if (gm.side == 1)
         gm.hex_color = gm.hex_color / 2;
     y = -1;
