@@ -86,7 +86,6 @@ void    execute_algorithm(t_game *game)
 	while (++i < WINWIDTH)
 	{
 		gm.x = i;
-		get_fps(game);
 		get_ray_derivates(game);
 		calculate_nearest_coords(game);
 		get_next_position(game);

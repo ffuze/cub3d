@@ -58,10 +58,11 @@ void	move_behind(t_game *game)
 
 void	strafe_right(t_game *game)
 {
-	float	new_x, new_y;
+	float	new_x;
+	float	new_y;
 
-	new_x = gp.pos_x + (gp.ray_y * gp.move_speed);
-	new_y = gp.pos_y - (gp.ray_x * gp.move_speed);
+	new_x = gp.pos_x - (gp.ray_y * gp.move_speed);
+	new_y = gp.pos_y + (gp.ray_x * gp.move_speed);
 	if (!(new_x >= 0 && new_x < gm.map_h && 
 		(int)gp.pos_y >= 0 && (int)gp.pos_y < (int)gm.map_l &&
 		gm.grid[(int)new_x]))
@@ -86,8 +87,8 @@ void	strafe_left(t_game *game)
 	float	new_x;
 	float	new_y;
 
-	new_x = gp.pos_x - (gp.ray_y * gp.move_speed);
-	new_y = gp.pos_y + (gp.ray_x * gp.move_speed);
+	new_x = gp.pos_x + (gp.ray_y * gp.move_speed);
+	new_y = gp.pos_y - (gp.ray_x * gp.move_speed);
 	if (!(new_x >= 0 && new_x < gm.map_h && 
 		(int)gp.pos_y >= 0 && (int)gp.pos_y < (int)gm.map_l &&
 		gm.grid[(int)new_x]))
@@ -109,20 +110,8 @@ void	strafe_left(t_game *game)
 
 void	rotate_right(t_game *game)
 {
-	float	old_ray_x, old_plane_x;
-	
-	old_ray_x = gp.ray_x;
-	old_plane_x = gm.plane_x;
-	gp.ray_x = gp.ray_x * cos(-gp.rot_speed) - gp.ray_y * sin(-gp.rot_speed);
-	gp.ray_y = old_ray_x * sin(-gp.rot_speed) + gp.ray_y * cos(-gp.rot_speed);
-	gm.plane_x = gm.plane_x * cos(-gp.rot_speed) - gm.plane_y * sin(-gp.rot_speed);
-	gm.plane_y = old_plane_x * sin(-gp.rot_speed) + gm.plane_y * cos(-gp.rot_speed);
-	printf("Rotate right: ray(%.2f, %.2f)\n", gp.ray_x, gp.ray_y);
-}
-
-void	rotate_left(t_game *game)
-{
-	float	old_ray_x, old_plane_x;
+	float	old_ray_x;
+	float	old_plane_x;
 	
 	old_ray_x = gp.ray_x;
 	old_plane_x = gm.plane_x;
@@ -131,4 +120,18 @@ void	rotate_left(t_game *game)
 	gm.plane_x = gm.plane_x * cos(gp.rot_speed) - gm.plane_y * sin(gp.rot_speed);
 	gm.plane_y = old_plane_x * sin(gp.rot_speed) + gm.plane_y * cos(gp.rot_speed);
 	printf("Rotate left: ray(%.2f, %.2f)\n", gp.ray_x, gp.ray_y);
+}
+
+void	rotate_left(t_game *game)
+{
+	float	old_ray_x;
+	float	old_plane_x;
+	
+	old_ray_x = gp.ray_x;
+	old_plane_x = gm.plane_x;
+	gp.ray_x = gp.ray_x * cos(-gp.rot_speed) - gp.ray_y * sin(-gp.rot_speed);
+	gp.ray_y = old_ray_x * sin(-gp.rot_speed) + gp.ray_y * cos(-gp.rot_speed);
+	gm.plane_x = gm.plane_x * cos(-gp.rot_speed) - gm.plane_y * sin(-gp.rot_speed);
+	gm.plane_y = old_plane_x * sin(-gp.rot_speed) + gm.plane_y * cos(-gp.rot_speed);
+	printf("Rotate right: ray(%.3f, %.3f)\n", gp.ray_x, gp.ray_y);
 }

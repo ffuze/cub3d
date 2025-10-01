@@ -6,7 +6,7 @@ void	check_plr_dir(t_game *game)
 	{
 		game->plr.ray_x = 0;
 		game->plr.ray_y = -1;
-		game->map.plane_x = 0.66f;  // Piano perpendiciolare al ray
+		game->map.plane_x = 0.66f;
 		game->map.plane_y = 0;
 	}
 	else if (game->plr.p_dir == SOUTH)
@@ -40,11 +40,11 @@ void    initialize_player(t_game *game)
 	game->plr.delta_y = 0;
 	game->plr.dist_x = 0;
 	game->plr.dist_y = 0;
-	game->plr.move_speed = 5.0;
+	game->plr.move_speed = 0.1;
 	game->plr.perp_wall_dist = 0;
 	game->plr.ray_dir_x = 0;
 	game->plr.ray_dir_y = 0;
-	game->plr.rot_speed = 3.0;
+	game->plr.rot_speed = 0.1;
 	check_plr_dir(game);
 }
 
@@ -61,7 +61,7 @@ void    initialize_map(t_game *game)
 	// game->map.map_l = 0;
 	// game->map.n_players = 0;
 	game->map.plane_x = 0.0f;
-	game->map.plane_y = 0.0f;
+	game->map.plane_y = 0.66f;
 	game->map.camera_x = 0.0f;
 	game->map.map_x = 0;
 	game->map.map_y = 0;

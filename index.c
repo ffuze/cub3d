@@ -22,6 +22,7 @@ int main(int argc, char **argv)
 	game.win.addr = mlx_get_data_addr(game.win.nimg, &game.win.bits_per_pixel, \
 		&game.win.line_len, &game.win.endian);
 	//alek u are preciuos and we love you a lot <3
+	//if this was you leo, lets kiss
 	if (parse_map_file(argv[1], &game.map, &game.plr) == 0)
 	{
 		mlx_destroy_image(game.win.mlx_ptr, game.win.nimg);
@@ -30,14 +31,11 @@ int main(int argc, char **argv)
 		free(game.win.mlx_ptr);
 		return (1);
 	}
-    setup_player_direction(&game);
-    execute_algorithm(&game);
-    printf("Execute algorithm completato\n"); // Debug
-	render_minimap(&game);
-	printf("Minimap renderizzata\n"); // Debug
-    ft_hooks(&game);
-    printf("Hooks impostati\n"); // Debug
-    mlx_put_image_to_window(game.win.mlx_ptr, game.win.win_ptr, game.win.nimg, 0, 0);
 	get_fps(&game);
+	setup_player_direction(&game);
+	execute_algorithm(&game);
+	mlx_put_image_to_window(game.win.mlx_ptr, game.win.win_ptr, game.win.nimg, 0, 0);
+	render_minimap(&game);
+	ft_hooks(&game);
 	mlx_loop(game.win.mlx_ptr);
 }

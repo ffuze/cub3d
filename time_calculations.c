@@ -23,8 +23,6 @@ void    get_fps(t_game *game)
 		frame_time = (time - old_time) / 1000.0;
 		if (frame_time > 0)
 		{
-			gp.move_speed = frame_time * 1.01;
-			gp.rot_speed = frame_time * 1.01;
 			fps_value = (int)(1.0 / frame_time);
 			fps_string = ft_itoa(fps_value);
 			mlx_string_put(gw.mlx_ptr, gw.win_ptr,
@@ -32,5 +30,5 @@ void    get_fps(t_game *game)
 			free(fps_string);
 		}
 	}
-	old_time = time;
+	// old_time = time;
 }
