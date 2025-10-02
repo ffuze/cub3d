@@ -2,10 +2,8 @@
 
 void    get_wall_height(t_game *game)
 {
-	// Prevent division by zero
 	if (game->plr.perp_wall_dist < 0.001)
 		game->plr.perp_wall_dist = 0.001;
-	
 	gm.wall_height = WINHEIGHT / game->plr.perp_wall_dist;
 	gm.draw_start = (-gm.wall_height / 2) + (WINHEIGHT / 2);
 	if (gm.draw_start < 0)
