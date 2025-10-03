@@ -52,9 +52,7 @@ void	get_next_position(t_game *game)
 		if (gp.dist_x < gp.dist_y)
 		{
 			if ((gm.map_x + gm.step_x) < 0 || (gm.map_x + gm.step_x) >= (int)gm.map_h)/* || (gm.map_y) < 0 || (gm.map_y) >= (int)gm.map_l */
-			{
 				return ;
-			}
 			gm.map_x += gm.step_x;
 			gp.dist_x += gp.delta_x;
 			gm.side = 0;
@@ -62,17 +60,13 @@ void	get_next_position(t_game *game)
 		else
 		{
 			if ((gm.map_y + gm.step_y) < 0 || (gm.map_y + gm.step_y) >= (int)gm.map_l)
-			{
 				return ;
-			}
 			gm.map_y += gm.step_y;
 			gp.dist_y += gp.delta_y;
 			gm.side = 1;
 		}
 		if (gm.grid[gm.map_y] && gm.grid[gm.map_y][gm.map_x] == '1')
-		{
 			hit = 1;
-		}
 	}
 }
 

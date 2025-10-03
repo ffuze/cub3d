@@ -44,7 +44,7 @@ void    initialize_player(t_game *game)
 	game->plr.perp_wall_dist = 0;
 	game->plr.ray_dir_x = 0;
 	game->plr.ray_dir_y = 0;
-	game->plr.rot_speed = 0.1;
+	game->plr.rot_speed = 0.04;
 	check_plr_dir(game);
 }
 
