@@ -85,8 +85,29 @@ void	setup_player_direction(t_game *game)
 }
 ////////////////////////////////////////////
 
+void	initialize_minimap(t_game *game)
+{
+	gmm.pos_x = gp.pos_x;
+	gmm.pos_y = gp.pos_y;
+	gmm.ray_x = gp.ray_x;
+	gmm.ray_y = gp.ray_y;
+	gmm.move_speed = 0.15f;
+	gmm.rot_speed = 0.12f;
+	gmm.sync_with_player = true;
+	printf("minimap initialized @ pos(%.2f, %.2f), ray(%.2f, %.2f)\n", gmm.pos_x, gmm.pos_y, gmm.ray_x, gmm.ray_y);
+}
+
 void    initialize_all(t_game *game)
 {
+	int	i;
+	
 	initialize_player(game);
 	initialize_map(game);
+	initialize_minimap(game);
+	i = 0;
+	while (i < 256)
+	{
+		game->keys[i] = false;
+		i++;
+	}
 }

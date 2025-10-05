@@ -61,5 +61,5 @@ void	render_minimap(t_game *game)
 		}
 		i++;
 	}
-	ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
+	ft_padding(game, 0xFF0000, gmm.pos_x, gmm.pos_y);
 }
