@@ -54,6 +54,7 @@
 # define gm game->map
 # define gp game->plr
 # define gw game->win
+# define gmm game->minimap
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
@@ -120,17 +121,30 @@ typedef struct	s_map
 	int		side;
 	int		wall_height;
 	int		x;
-    int 	draw_start;
-    int 	draw_end;
-    int		hex_color;
+	int 	draw_start;
+	int 	draw_end;
+	int		hex_color;
 }	t_map;
+
+typedef struct	s_minimap
+{
+	float	pos_x;
+	float	pos_y;
+	float	ray_x;
+	float	ray_y;
+	float	move_speed;
+	float	rot_speed;
+	bool	sync_with_player;
+}	t_minimap;
 
 typedef struct	s_game
 {
 	t_win		win;
 	t_map		map;
 	t_player	plr;
+	t_minimap	minimap;
 	int			scale;
+	bool		keys[256];
 }	t_game;
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -156,8 +170,18 @@ bool	check_map_struct(t_map *map);
 /*___________________________________minimap.c_______________________________*/
 void	render_minimap(t_game *game);
 void	ft_padding(t_game *game, int color, float x, float y);
+
 /*_______________________________move_on_minimap.c___________________________*/
 void	move_on_minimap(int keysym, t_game *game);
+void	sync_minimap_with_player(t_game *game);
+void	sync_player_with_minimap(t_game *game);
+void	toggle_minimap_sync(t_game *game);
+void	strafe_right_minimap(t_game *game);
+void	strafe_left_minimap(t_game *game);
+void	move_up_minimap(t_game *game);
+void	move_down_minimap(t_game *game);
+void	rotate_right_minimap(t_game *game);
+void	rotate_left_minimap(t_game *game);
 
 /*___________________________________free_mem________________________________*/
 void	free_mapstruct(t_map *map);
@@ -176,6 +200,7 @@ void    execute_algorithm(t_game *game);
 /*____________________________________init____________________________________*/
 void    initialize_player(t_game *game);
 void	initialize_all(t_game *game);
+void	initialize_minimap(t_game *game);
 void	setup_player_direction(t_game *game);
 
 /*____________________________________movement____________________________________*/

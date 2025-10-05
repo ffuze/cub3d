@@ -2,7 +2,7 @@
 
 void    get_wall_height(t_game *game)
 {
-    // printf("=======PERP WALL DIST: %f=======\n", gp.perp_wall_dist);
+	// printf("=======PERP WALL DIST: %f=======\n", gp.perp_wall_dist);
 	if (gp.perp_wall_dist < 0.001)
 		gp.perp_wall_dist = 0.001;
 	gm.wall_height = WINHEIGHT / gp.perp_wall_dist;
@@ -16,48 +16,48 @@ void    get_wall_height(t_game *game)
 
 void    draw_ver_line(t_game *game, int x)
 {
-    int		y;
-    char	*dest;
+	int		y;
+	char	*dest;
 
-    get_wall_height(game);
-    if (gm.grid[gm.map_y] && gm.grid[gm.map_y][gm.map_x])
-    {
-        if (gm.grid[gm.map_y][gm.map_x] == '1')
-            gm.hex_color = 0x0000FF;
-        else if (gm.grid[gm.map_y][gm.map_x] == '0')
-            gm.hex_color = 0xFF0000;
-        else
-            gm.hex_color = 0xFFFF00;
-    }
-    else
-        gm.hex_color = 0x000000;
-    if (gm.side == 1)
-        gm.hex_color = gm.hex_color / 2;
-    y = -1;
-    while (++y < gm.draw_start)
-    {
-        if (y >= 0 && y < WINHEIGHT && x >= 0 && x < WINWIDTH)
-        {
-            dest = gw.addr + (y * gw.line_len + x * (gw.bits_per_pixel / 8));
-            *(unsigned int*)dest = 0xD3D3D3;
-        }
-    }
-    y = gm.draw_start - 1;
-    while (++y <= gm.draw_end)
-    {
-        if (y >= 0 && y < WINHEIGHT && x >= 0 && x < WINWIDTH)
-        {
-            dest = gw.addr + (y * gw.line_len + x * (gw.bits_per_pixel / 8));
-            *(unsigned int*)dest = gm.hex_color;
-        }
-    }
-    y = gm.draw_end;
-    while (++y < WINHEIGHT)
-    {
-        if (y >= 0 && y < WINHEIGHT && x >= 0 && x < WINWIDTH)
-        {
-            dest = gw.addr + (y * gw.line_len + x * (gw.bits_per_pixel / 8));
-            *(unsigned int*)dest = 0x222222;
-        }
-    }
+	get_wall_height(game);
+	if (gm.grid[gm.map_y] && gm.grid[gm.map_y][gm.map_x])
+	{
+		if (gm.grid[gm.map_y][gm.map_x] == '1')
+			gm.hex_color = 0x0000FF;
+		else if (gm.grid[gm.map_y][gm.map_x] == '0')
+			gm.hex_color = 0xFF0000;
+		else
+			gm.hex_color = 0xFFFF00;
+	}
+	else
+		gm.hex_color = 0x000000;
+	if (gm.side == 1)
+		gm.hex_color = gm.hex_color / 2;
+	y = -1;
+	while (++y < gm.draw_start)
+	{
+		if (y >= 0 && y < WINHEIGHT && x >= 0 && x < WINWIDTH)
+		{
+			dest = gw.addr + (y * gw.line_len + x * (gw.bits_per_pixel / 8));
+			*(unsigned int*)dest = 0xD3D3D3;
+		}
+	}
+	y = gm.draw_start - 1;
+	while (++y <= gm.draw_end)
+	{
+		if (y >= 0 && y < WINHEIGHT && x >= 0 && x < WINWIDTH)
+		{
+			dest = gw.addr + (y * gw.line_len + x * (gw.bits_per_pixel / 8));
+			*(unsigned int*)dest = gm.hex_color;
+		}
+	}
+	y = gm.draw_end;
+	while (++y < WINHEIGHT)
+	{
+		if (y >= 0 && y < WINHEIGHT && x >= 0 && x < WINWIDTH)
+		{
+			dest = gw.addr + (y * gw.line_len + x * (gw.bits_per_pixel / 8));
+			*(unsigned int*)dest = 0x222222;
+		}
+	}
 }
