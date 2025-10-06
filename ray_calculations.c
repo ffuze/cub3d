@@ -65,7 +65,7 @@ void	get_next_position(t_game *game)
 			gp.dist_y += gp.delta_y;
 			gm.side = 1;
 		}
-		if (gm.grid[gm.map_y] && gm.grid[gm.map_y][gm.map_x] == '1')
+		if (gm.grid[gm.map_x] && gm.grid[gm.map_x][gm.map_y] == '1')
 			hit = 1;
 	}
 }
