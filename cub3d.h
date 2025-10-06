@@ -51,10 +51,10 @@
 # define WINHEIGHT 920
 
 /*~~~~~~~~~~~~ABBREVIATIONS~~~~~~~~~~~~*/
-# define gm game->map
-# define gp game->plr
-# define gw game->win
-# define gmm game->minimap
+# define GM game->map
+# define GP game->plr
+# define GW game->win
+# define GMM game->minimap
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 

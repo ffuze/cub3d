@@ -2,24 +2,24 @@
 
 void	sync_minimap_player(t_game *game)
 {
-	gmm.pos_x = gp.pos_x;
-	gmm.pos_y = gp.pos_y;
-	gmm.ray_x = gp.ray_x;
-	gmm.ray_y = gp.ray_y;
+	GMM.pos_x = GP.pos_x;
+	GMM.pos_y = GP.pos_y;
+	GMM.ray_x = GP.ray_x;
+	GMM.ray_y = GP.ray_y;
 }
 
 void	sync_player_minimap(t_game *game)
 {
-	gp.pos_x = gmm.pos_x;
-	gp.pos_y = gmm.pos_y;
-	gp.ray_x = gmm.ray_x;
-	gp.ray_y = gmm.ray_y;
+	GP.pos_x = GMM.pos_x;
+	GP.pos_y = GMM.pos_y;
+	GP.ray_x = GMM.ray_x;
+	GP.ray_y = GMM.ray_y;
 }
 
 void	toggle_minimap_sync(t_game *game)
 {
-	gmm.sync_with_player = !gmm.sync_with_player;
-	if (gmm.sync_with_player)	
+	GMM.sync_with_player = !GMM.sync_with_player;
+	if (GMM.sync_with_player)	
 		printf("Minimap sync enabled\n");
 	else
 		printf("Minimap sync dsiabled\n");
@@ -53,16 +53,16 @@ void	strafe_right_minimap(t_game *game)
 	float	new_x;
 	float	new_y;
 
-	new_x = gmm.pos_x + gmm.ray_y * gmm.move_speed;
-	new_y = gmm.pos_y - gmm.ray_x * gmm.move_speed;
-	if (new_x >= 0 && new_x < gm.map_h && new_y >= 0 && new_y < gm.map_l)
+	new_x = GMM.pos_x + GMM.ray_y * GMM.move_speed;
+	new_y = GMM.pos_y - GMM.ray_x * GMM.move_speed;
+	if (new_x >= 0 && new_x < GM.map_h && new_y >= 0 && new_y < GM.map_l)
 	{
-		if (gm.grid[(int)new_x][(int)new_y] == '0')
+		if (GM.grid[(int)new_x][(int)new_y] == '0')
 		{
-			ft_padding(game, 0xFFFFFF, gmm.pos_x, gmm.pos_y);
-			gmm.pos_x = new_x;
-			gmm.pos_y = new_y;
-			ft_padding(game, 0xFF0000, gmm.pos_x, gmm.pos_y);
+			ft_padding(game, 0xFFFFFF, GMM.pos_x, GMM.pos_y);
+			GMM.pos_x = new_x;
+			GMM.pos_y = new_y;
+			ft_padding(game, 0xFF0000, GMM.pos_x, GMM.pos_y);
 		}
 	}
 }
@@ -72,16 +72,16 @@ void	strafe_left_minimap(t_game *game)
 	float	new_x;
 	float	new_y;
 
-	new_x = gp.pos_x - gp.ray_y * gp.move_speed;
-	new_y = gp.pos_y + gp.ray_x * gp.move_speed;
-	if (new_x >= 0 && new_x < gm.map_h && new_y >= 0 && new_y < gm.map_l)
+	new_x = GP.pos_x - GP.ray_y * GP.move_speed;
+	new_y = GP.pos_y + GP.ray_x * GP.move_speed;
+	if (new_x >= 0 && new_x < GM.map_h && new_y >= 0 && new_y < GM.map_l)
 	{
-		if (gm.grid[(int)new_x][(int)new_y] == '0')
+		if (GM.grid[(int)new_x][(int)new_y] == '0')
 		{
-			ft_padding(game, 0xFFFFFF, gmm.pos_x, gmm.pos_y);
-			gmm.pos_x = new_x;
-			gmm.pos_y = new_y;
-			ft_padding(game, 0xFF0000, gmm.pos_x, gmm.pos_y);
+			ft_padding(game, 0xFFFFFF, GMM.pos_x, GMM.pos_y);
+			GMM.pos_x = new_x;
+			GMM.pos_y = new_y;
+			ft_padding(game, 0xFF0000, GMM.pos_x, GMM.pos_y);
 		}
 	}
 }
@@ -91,16 +91,16 @@ void	move_up_minimap(t_game *game)
 	float	new_x;
 	float	new_y;
 
-	new_x = gmm.pos_x + gmm.ray_x * gmm.move_speed;
-	new_y = gmm.pos_y + gmm.ray_y * gmm.move_speed;
-	if (new_x >= 0 && new_x < gm.map_h && new_y >= 0 && new_y < gm.map_l)
+	new_x = GMM.pos_x + GMM.ray_x * GMM.move_speed;
+	new_y = GMM.pos_y + GMM.ray_y * GMM.move_speed;
+	if (new_x >= 0 && new_x < GM.map_h && new_y >= 0 && new_y < GM.map_l)
 	{
-		if (gm.grid[(int)new_x][(int)new_y] == '0')
+		if (GM.grid[(int)new_x][(int)new_y] == '0')
 		{
-			ft_padding(game, 0xFFFFFF, gmm.pos_x, gmm.pos_y);
-			gmm.pos_x = new_x;
-			gmm.pos_y = new_y;
-			ft_padding(game, 0xFF0000, gmm.pos_x, gmm.pos_y);
+			ft_padding(game, 0xFFFFFF, GMM.pos_x, GMM.pos_y);
+			GMM.pos_x = new_x;
+			GMM.pos_y = new_y;
+			ft_padding(game, 0xFF0000, GMM.pos_x, GMM.pos_y);
 		}
 	}
 }
@@ -110,16 +110,16 @@ void	move_down_minimap(t_game *game)
 	float	new_x;
 	float	new_y;
 
-	new_x = gp.pos_x - gp.ray_x * gp.move_speed;
-	new_y = gp.pos_y - gp.ray_y * gp.move_speed;
-	if (new_x >= 0 && new_x < gm.map_h && new_y >= 0 && new_y < gm.map_l)
+	new_x = GP.pos_x - GP.ray_x * GP.move_speed;
+	new_y = GP.pos_y - GP.ray_y * GP.move_speed;
+	if (new_x >= 0 && new_x < GM.map_h && new_y >= 0 && new_y < GM.map_l)
 	{
-		if (gm.grid[(int)new_x][(int)new_y] == '0')
+		if (GM.grid[(int)new_x][(int)new_y] == '0')
 		{
-			ft_padding(game, 0xFFFFFF, gmm.pos_x, gmm.pos_y);
-			gmm.pos_x = new_x;
-			gmm.pos_y = new_y;
-			ft_padding(game, 0xFF0000, gmm.pos_x, gmm.pos_y);
+			ft_padding(game, 0xFFFFFF, GMM.pos_x, GMM.pos_y);
+			GMM.pos_x = new_x;
+			GMM.pos_y = new_y;
+			ft_padding(game, 0xFF0000, GMM.pos_x, GMM.pos_y);
 		}
 	}
 }
@@ -128,20 +128,20 @@ void	rotate_right_minimap(t_game *game)
 {
 	float	old_ray_x;
 
-	old_ray_x = gmm.ray_x;
-	gmm.ray_x = gmm.ray_x * cos(-gmm.rot_speed) - gmm.ray_y * sin(-gmm.rot_speed);
-	gmm.ray_y = old_ray_x * sin(-gmm.rot_speed) + gmm.ray_y * cos(-gmm.rot_speed);
-	ft_padding(game, 0xFF0000, gmm.pos_x, gmm.pos_y);
+	old_ray_x = GMM.ray_x;
+	GMM.ray_x = GMM.ray_x * cos(-GMM.rot_speed) - GMM.ray_y * sin(-GMM.rot_speed);
+	GMM.ray_y = old_ray_x * sin(-GMM.rot_speed) + GMM.ray_y * cos(-GMM.rot_speed);
+	ft_padding(game, 0xFF0000, GMM.pos_x, GMM.pos_y);
 }
 
 void	rotate_left_minimap(t_game *game)
 {
 	float	old_ray_x;
 
-	old_ray_x = gmm.ray_x;
-	gmm.ray_x = gmm.ray_x * cos(gmm.rot_speed) - gmm.ray_y * sin(gmm.rot_speed);
-	gmm.ray_y = old_ray_x * sin(gmm.rot_speed) + gmm.ray_y * cos(gmm.rot_speed);
-	ft_padding(game, 0xFF0000, gp.pos_x, gp.pos_y);
+	old_ray_x = GMM.ray_x;
+	GMM.ray_x = GMM.ray_x * cos(GMM.rot_speed) - GMM.ray_y * sin(GMM.rot_speed);
+	GMM.ray_y = old_ray_x * sin(GMM.rot_speed) + GMM.ray_y * cos(GMM.rot_speed);
+	ft_padding(game, 0xFF0000, GP.pos_x, GP.pos_y);
 }
 
 void	move_on_minimap(int keysym, t_game *game)
@@ -155,8 +155,8 @@ void	move_on_minimap(int keysym, t_game *game)
 		// ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
 		// game->plr.pos_x -= 0.2;
 		// ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
-		// mlx_do_sync(game->win.mlx_ptr);
-		mlx_put_image_to_window(game->win.mlx_ptr, game->win.win_ptr, game->win.nimg, 0, 0);
+		// mlx_do_sync(GW.mlx_ptr);
+		mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
 		printf(YELLOW"%f\n"NO_ALL, game->plr.pos_x);/////////////////////////////
 	}
 	else if (keysym == XK_s)
@@ -168,8 +168,8 @@ void	move_on_minimap(int keysym, t_game *game)
 		// ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
 		// game->plr.pos_x += 0.2;
 		// ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
-		// mlx_do_sync(game->win.mlx_ptr);
-		mlx_put_image_to_window(game->win.mlx_ptr, game->win.win_ptr, game->win.nimg, 0, 0);
+		// mlx_do_sync(GW.mlx_ptr);
+		mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
 		printf(YELLOW"%f\n"NO_ALL, game->plr.pos_x);/////////////////////////////
 	}
 	else if (keysym == XK_a)
@@ -181,8 +181,8 @@ void	move_on_minimap(int keysym, t_game *game)
 		// ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
 		// game->plr.pos_y -= 0.2;
 		// ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
-		// mlx_do_sync(game->win.mlx_ptr);
-		mlx_put_image_to_window(game->win.mlx_ptr, game->win.win_ptr, game->win.nimg, 0, 0);
+		// mlx_do_sync(GW.mlx_ptr);
+		mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
 		printf(YELLOW"%f\n"NO_ALL, game->plr.pos_y);/////////////////////////////
 	}
 	else if (keysym == XK_d)
@@ -194,8 +194,8 @@ void	move_on_minimap(int keysym, t_game *game)
 		// ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
 		// game->plr.pos_y += 0.2;
 		// ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
-		// mlx_do_sync(game->win.mlx_ptr);
-		mlx_put_image_to_window(game->win.mlx_ptr, game->win.win_ptr, game->win.nimg, 0, 0);
+		// mlx_do_sync(GW.mlx_ptr);
+		mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
 		printf(YELLOW"%f\n"NO_ALL, game->plr.pos_y);/////////////////////////////
 	}
 }

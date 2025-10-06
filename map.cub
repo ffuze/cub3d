@@ -5,8 +5,8 @@ SO ./path_to_the_south_texture/txtr.xpm
 
 WE        ./path_to_the_west_texture/txtr.xpm
 
-F 220, 100, 0
-C 225   ,     170,    50   
+F 22, 22, 22
+C 211   ,     211,    211   
 
 EA ./path_to_the_east_texture/txtr.xpm
 

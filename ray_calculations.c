@@ -2,43 +2,43 @@
 
 void    get_ray_derivates(t_game *game)
 {
-	gm.map_x = (int)gp.pos_x;
-	gm.map_y = (int)gp.pos_y;
-	gm.camera_x = 2 * gm.x / (double)WINWIDTH - 1;
-	gp.ray_dir_x = gp.ray_x + gm.plane_x * gm.camera_x;
-	gp.ray_dir_y = gp.ray_y + gm.plane_y * gm.camera_x;
-	if (gp.ray_dir_x == 0)
-		gp.delta_x = 1e30;
+	GM.map_x = (int)GP.pos_x;
+	GM.map_y = (int)GP.pos_y;
+	GM.camera_x = 2 * GM.x / (double)WINWIDTH - 1;
+	GP.ray_dir_x = GP.ray_x + GM.plane_x * GM.camera_x;
+	GP.ray_dir_y = GP.ray_y + GM.plane_y * GM.camera_x;
+	if (GP.ray_dir_x == 0)
+		GP.delta_x = 1e30;
 	else
-		gp.delta_x = fabs(1 / gp.ray_dir_x);
+		GP.delta_x = fabs(1 / GP.ray_dir_x);
 		
-	if (gp.ray_dir_y == 0)
-		gp.delta_y = 1e30;
+	if (GP.ray_dir_y == 0)
+		GP.delta_y = 1e30;
 	else
-		gp.delta_y = fabs(1 / gp.ray_dir_y);
+		GP.delta_y = fabs(1 / GP.ray_dir_y);
 }
 
 void	calculate_nearest_coords(t_game *game)
 {
-	if (gp.ray_dir_x < 0)
+	if (GP.ray_dir_x < 0)
 	{
-		gm.step_x = -1;
-		gp.dist_x = (gp.pos_x - gm.map_x) * gp.delta_x;
+		GM.step_x = -1;
+		GP.dist_x = (GP.pos_x - GM.map_x) * GP.delta_x;
 	}
 	else
 	{
-		gm.step_x = 1;
-		gp.dist_x = ((float)gm.map_x + 1.0 - gp.pos_x) * gp.delta_x;
+		GM.step_x = 1;
+		GP.dist_x = ((float)GM.map_x + 1.0 - GP.pos_x) * GP.delta_x;
 	}
-	if (gp.ray_dir_y < 0)
+	if (GP.ray_dir_y < 0)
 	{
-		gm.step_y = -1;
-		gp.dist_y = (gp.pos_y - gm.map_y) * gp.delta_y;
+		GM.step_y = -1;
+		GP.dist_y = (GP.pos_y - GM.map_y) * GP.delta_y;
 	}
 	else
 	{
-		gm.step_y = 1;
-		gp.dist_y = ((float)gm.map_y + 1.0 - gp.pos_y) * gp.delta_y;
+		GM.step_y = 1;
+		GP.dist_y = ((float)GM.map_y + 1.0 - GP.pos_y) * GP.delta_y;
 	}
 }
 
@@ -49,23 +49,23 @@ void	get_next_position(t_game *game)
 	hit = 0;
 	while (!hit)
 	{
-		if (gp.dist_x < gp.dist_y)
+		if (GP.dist_x < GP.dist_y)
 		{
-			if ((gm.map_x + gm.step_x) < 0 || (gm.map_x + gm.step_x) >= (int)gm.map_h)/* || (gm.map_y) < 0 || (gm.map_y) >= (int)gm.map_l */
+			if ((GM.map_x + GM.step_x) < 0 || (GM.map_x + GM.step_x) >= (int)GM.map_h)/* || (GM.map_y) < 0 || (GM.map_y) >= (int)GM.map_l */
 				return ;
-			gm.map_x += gm.step_x;
-			gp.dist_x += gp.delta_x;
-			gm.side = 0;
+			GM.map_x += GM.step_x;
+			GP.dist_x += GP.delta_x;
+			GM.side = 0;
 		}
 		else
 		{
-			if ((gm.map_y + gm.step_y) < 0 || (gm.map_y + gm.step_y) >= (int)gm.map_l)
+			if ((GM.map_y + GM.step_y) < 0 || (GM.map_y + GM.step_y) >= (int)GM.map_l)
 				return ;
-			gm.map_y += gm.step_y;
-			gp.dist_y += gp.delta_y;
-			gm.side = 1;
+			GM.map_y += GM.step_y;
+			GP.dist_y += GP.delta_y;
+			GM.side = 1;
 		}
-		if (gm.grid[gm.map_x] && gm.grid[gm.map_x][gm.map_y] == '1')
+		if (GM.grid[GM.map_x] && GM.grid[GM.map_x][GM.map_y] == '1')
 			hit = 1;
 	}
 }
@@ -79,15 +79,15 @@ void    execute_algorithm(t_game *game)
 	time = get_current_time();
 	while (++i < WINWIDTH)
 	{
-		gm.x = i;
+		GM.x = i;
 		get_ray_derivates(game);
 		calculate_nearest_coords(game);
 		get_next_position(game);
-		if (gm.side)
-			gp.perp_wall_dist = gp.dist_y - gp.delta_y;
+		if (GM.side)
+			GP.perp_wall_dist = GP.dist_y - GP.delta_y;
 		else
-			gp.perp_wall_dist = gp.dist_x - gp.delta_x;
+			GP.perp_wall_dist = GP.dist_x - GP.delta_x;
 		draw_ver_line(game, i);
 	}
-	mlx_put_image_to_window(gw.mlx_ptr, gw.win_ptr, gw.nimg, 0, 0);
+	mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
 }
