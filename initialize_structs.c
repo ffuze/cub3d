@@ -7,27 +7,27 @@ void	check_plr_dir(t_game *game)
 		game->plr.ray_x = -1;
 		game->plr.ray_y = 0;
 		game->map.plane_x = 0;
-		game->map.plane_y = -0.66f;
+		game->map.plane_y = 0.66f;
 	}
 	else if (game->plr.p_dir == SOUTH)
 	{
 		game->plr.ray_x = 1;
 		game->plr.ray_y = 0;
 		game->map.plane_x = 0;
-		game->map.plane_y = 0.66f;
+		game->map.plane_y = -0.66f;
 	}
 	else if (game->plr.p_dir == EAST)
 	{
 		game->plr.ray_x = 0;
 		game->plr.ray_y = 1;
-		game->map.plane_x = -0.66f;
+		game->map.plane_x = 0.66f;
 		game->map.plane_y = 0;
 	}
 	else if (game->plr.p_dir == WEST)
 	{
 		game->plr.ray_x = 0;
 		game->plr.ray_y = -1;
-		game->map.plane_x = 0.66f;
+		game->map.plane_x = -0.66f;
 		game->map.plane_y = 0;
 	}
 }
@@ -93,7 +93,7 @@ void	initialize_minimap(t_game *game)
 	GMM.ray_y = GP.ray_y;
 	GMM.move_speed = 0.15f;
 	GMM.rot_speed = 0.12f;
-	GMM.sync_with_player = true;
+	// GMM.sync_with_player = true;
 	printf("minimap initialized @ pos(%.2f, %.2f), ray(%.2f, %.2f)\n", GMM.pos_x, GMM.pos_y, GMM.ray_x, GMM.ray_y);
 }
 

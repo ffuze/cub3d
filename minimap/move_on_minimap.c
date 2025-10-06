@@ -150,8 +150,8 @@ void	move_on_minimap(int keysym, t_game *game)
 	{
 		// if (near_wall(game, NORTH))
 		// 	return ;
-		move_up_minimap(game);
 		move_front(game);
+		move_up_minimap(game);
 		// ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
 		// game->plr.pos_x -= 0.2;
 		// ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
@@ -163,8 +163,8 @@ void	move_on_minimap(int keysym, t_game *game)
 	{
 		// if (near_wall(game, SOUTH))
 		// 	return ;
-		move_down_minimap(game);
 		move_behind(game);
+		move_down_minimap(game);
 		// ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
 		// game->plr.pos_x += 0.2;
 		// ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
@@ -176,8 +176,8 @@ void	move_on_minimap(int keysym, t_game *game)
 	{
 		// if (near_wall(game, WEST))
 		// 	return ;
-		strafe_left_minimap(game);
 		strafe_left(game);
+		strafe_left_minimap(game);
 		// ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
 		// game->plr.pos_y -= 0.2;
 		// ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
@@ -189,8 +189,8 @@ void	move_on_minimap(int keysym, t_game *game)
 	{
 		// if (near_wall(game, EAST))
 		// 	return ;
-		strafe_right_minimap(game);
 		strafe_right(game);
+		strafe_right_minimap(game);
 		// ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
 		// game->plr.pos_y += 0.2;
 		// ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
