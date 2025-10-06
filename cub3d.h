@@ -178,8 +178,8 @@ void	sync_player_with_minimap(t_game *game);
 void	toggle_minimap_sync(t_game *game);
 void	strafe_right_minimap(t_game *game);
 void	strafe_left_minimap(t_game *game);
-void	move_up_minimap(t_game *game);
-void	move_down_minimap(t_game *game);
+void	move_front_minimap(t_game *game);
+void	move_back_minimap(t_game *game);
 void	rotate_right_minimap(t_game *game);
 void	rotate_left_minimap(t_game *game);
 
@@ -205,7 +205,7 @@ void	setup_player_direction(t_game *game);
 
 /*____________________________________movement____________________________________*/
 void    move_front(t_game *game);
-void    move_behind(t_game *game);
+void    move_back(t_game *game);
 void    strafe_right(t_game *game);
 void    strafe_left(t_game *game);
 void    rotate_right(t_game *game);

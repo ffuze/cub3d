@@ -30,7 +30,7 @@ void    move_front(t_game *game)
 	printf("Move front: pos(%.2f, %.2f)\n", GP.pos_x, GP.pos_y);
 }
 
-void	move_behind(t_game *game)
+void	move_back(t_game *game)
 {
 	float	new_x;
 	float	new_y;
@@ -53,7 +53,7 @@ void	move_behind(t_game *game)
 		GP.pos_x = new_x;
 	if (GM.grid[(int)GP.pos_x][(int)new_y] != '1')
 		GP.pos_y = new_y;
-	printf("Move behind: pos(%.2f, %.2f)\n", GP.pos_x, GP.pos_y);
+	printf("Move back: pos(%.2f, %.2f)\n", GP.pos_x, GP.pos_y);
 }
 
 void	strafe_right(t_game *game)

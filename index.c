@@ -1,5 +1,13 @@
 #include "./cub3d.h"
 
+void	sync_minimap_player(t_game *game)
+{
+	GMM.pos_x = GP.pos_x;
+	GMM.pos_y = GP.pos_y;
+	GMM.ray_x = GP.ray_x;
+	GMM.ray_y = GP.ray_y;
+}
+
 int main(int argc, char **argv)
 {
 	t_game  game;
@@ -23,7 +31,7 @@ int main(int argc, char **argv)
 		&game.win.line_len, &game.win.endian);
 	//Alek u are preciuos and we love you a lot <3
 	//if this was you leo, lets kis
-	// ;*
+	// (づ ￣ ³￣)づ
 	if (parse_map_file(argv[1], &game.map, &game.plr) == 0)
 	{
 		mlx_destroy_image(game.win.mlx_ptr, game.win.nimg);
@@ -34,6 +42,7 @@ int main(int argc, char **argv)
 	}
 	get_fps(&game);
 	setup_player_direction(&game);
+	sync_minimap_player(&game);
 	execute_algorithm(&game);
 	mlx_put_image_to_window(game.win.mlx_ptr, game.win.win_ptr, game.win.nimg, 0, 0);
 	render_minimap(&game);
