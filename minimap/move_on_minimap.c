@@ -53,10 +53,11 @@ void	strafe_right_minimap(t_game *game)
 	float	new_x;
 	float	new_y;
 
-	new_x = (GMM.pos_x + GMM.ray_y * GMM.move_speed) / game->scale;
-	new_y = (GMM.pos_y - GMM.ray_x * GMM.move_speed) / game->scale;
+	new_x = GMM.pos_x + GMM.ray_y * GMM.move_speed;
+	new_y = GMM.pos_y - GMM.ray_x * GMM.move_speed;
 	if (new_x >= 0 && new_x < GM.map_h && new_y >= 0 && new_y < GM.map_l)
 	{
+		ft_printf(MAGENTA"___x=%d, y=%d___\n"NO_ALL, (int)new_x, (int)new_y);/////////////////
 		if (GM.grid[(int)new_x][(int)new_y] == '0')
 		{
 			ft_padding(game, 0xFFFFFF, GMM.pos_x, GMM.pos_y);
@@ -72,10 +73,11 @@ void	strafe_left_minimap(t_game *game)
 	float	new_x;
 	float	new_y;
 
-	new_x = (GP.pos_x - GP.ray_y * GP.move_speed) / game->scale;
-	new_y = (GP.pos_y + GP.ray_x * GP.move_speed) / game->scale;
+	new_x = GMM.pos_x - GMM.ray_y * GMM.move_speed;
+	new_y = GMM.pos_y + GMM.ray_x * GMM.move_speed;
 	if (new_x >= 0 && new_x < GM.map_h && new_y >= 0 && new_y < GM.map_l)
 	{
+		ft_printf(MAGENTA"___x=%d, y=%d___\n"NO_ALL, (int)new_x, (int)new_y);/////////////////
 		if (GM.grid[(int)new_x][(int)new_y] == '0')
 		{
 			ft_padding(game, 0xFFFFFF, GMM.pos_x, GMM.pos_y);
@@ -91,10 +93,11 @@ void	move_up_minimap(t_game *game)
 	float	new_x;
 	float	new_y;
 
-	new_x = (GMM.pos_x + GMM.ray_x * GMM.move_speed) / game->scale;
-	new_y = (GMM.pos_y + GMM.ray_y * GMM.move_speed) / game->scale;
+	new_x = GMM.pos_x + GMM.ray_x * GMM.move_speed;
+	new_y = GMM.pos_y + GMM.ray_y * GMM.move_speed;
 	if (new_x >= 0 && new_x < GM.map_h && new_y >= 0 && new_y < GM.map_l)
 	{
+		ft_printf(MAGENTA"___x=%d, y=%d___\n"NO_ALL, (int)new_x, (int)new_y);/////////////////
 		if (GM.grid[(int)new_x][(int)new_y] == '0')
 		{
 			ft_padding(game, 0xFFFFFF, GMM.pos_x, GMM.pos_y);
@@ -110,10 +113,11 @@ void	move_down_minimap(t_game *game)
 	float	new_x;
 	float	new_y;
 
-	new_x = (GP.pos_x - GP.ray_x * GP.move_speed) / game->scale;
-	new_y = (GP.pos_y - GP.ray_y * GP.move_speed) / game->scale;
+	new_x = GMM.pos_x - GMM.ray_x * GMM.move_speed;
+	new_y = GMM.pos_y - GMM.ray_y * GMM.move_speed;
 	if (new_x >= 0 && new_x < GM.map_h && new_y >= 0 && new_y < GM.map_l)
 	{
+		ft_printf(MAGENTA"___x=%d, y=%d___\n"NO_ALL, (int)new_x, (int)new_y);/////////////////
 		if (GM.grid[(int)new_x][(int)new_y] == '0')
 		{
 			ft_padding(game, 0xFFFFFF, GMM.pos_x, GMM.pos_y);
@@ -141,7 +145,7 @@ void	rotate_left_minimap(t_game *game)
 	old_ray_x = GMM.ray_x;
 	GMM.ray_x = GMM.ray_x * cos(GMM.rot_speed) - GMM.ray_y * sin(GMM.rot_speed);
 	GMM.ray_y = old_ray_x * sin(GMM.rot_speed) + GMM.ray_y * cos(GMM.rot_speed);
-	ft_padding(game, 0xFF0000, GP.pos_x, GP.pos_y);
+	ft_padding(game, 0xFF0000, GMM.pos_x, GMM.pos_y);
 }
 
 void	move_on_minimap(int keysym, t_game *game)
@@ -152,9 +156,6 @@ void	move_on_minimap(int keysym, t_game *game)
 		// 	return ;
 		move_up_minimap(game);
 		move_front(game);
-		// ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
-		// game->plr.pos_x -= 0.2;
-		// ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
 		// mlx_do_sync(GW.mlx_ptr);
 		mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
 		printf(YELLOW"%f\n"NO_ALL, game->plr.pos_x);/////////////////////////////
@@ -165,9 +166,6 @@ void	move_on_minimap(int keysym, t_game *game)
 		// 	return ;
 		move_down_minimap(game);
 		move_behind(game);
-		// ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
-		// game->plr.pos_x += 0.2;
-		// ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
 		// mlx_do_sync(GW.mlx_ptr);
 		mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
 		printf(YELLOW"%f\n"NO_ALL, game->plr.pos_x);/////////////////////////////
@@ -178,9 +176,6 @@ void	move_on_minimap(int keysym, t_game *game)
 		// 	return ;
 		strafe_left_minimap(game);
 		strafe_left(game);
-		// ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
-		// game->plr.pos_y -= 0.2;
-		// ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
 		// mlx_do_sync(GW.mlx_ptr);
 		mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
 		printf(YELLOW"%f\n"NO_ALL, game->plr.pos_y);/////////////////////////////
@@ -191,9 +186,6 @@ void	move_on_minimap(int keysym, t_game *game)
 		// 	return ;
 		strafe_right_minimap(game);
 		strafe_right(game);
-		// ft_padding(game, 0xFFFFFF, game->plr.pos_x, game->plr.pos_y);
-		// game->plr.pos_y += 0.2;
-		// ft_padding(game, 0xFF0000, game->plr.pos_x, game->plr.pos_y);
 		// mlx_do_sync(GW.mlx_ptr);
 		mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
 		printf(YELLOW"%f\n"NO_ALL, game->plr.pos_y);/////////////////////////////
