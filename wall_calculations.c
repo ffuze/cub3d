@@ -20,11 +20,11 @@ void    draw_ver_line(t_game *game, int x)
 	char	*dest;
 
 	get_wall_height(game);
-	if (gm.grid[gm.map_y] && gm.grid[gm.map_y][gm.map_x])
+	if (gm.grid[gm.map_x] && gm.grid[gm.map_x][gm.map_y])
 	{
-		if (gm.grid[gm.map_y][gm.map_x] == '1')
+		if (gm.grid[gm.map_x][gm.map_y] == '1')
 			gm.hex_color = 0x0000FF;
-		else if (gm.grid[gm.map_y][gm.map_x] == '0')
+		else if (gm.grid[gm.map_x][gm.map_y] == '0')
 			gm.hex_color = 0xFF0000;
 		else
 			gm.hex_color = 0xFFFF00;
