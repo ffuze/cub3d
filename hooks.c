@@ -12,18 +12,18 @@ int on_destroy(t_game *game)
 
 void	ft_moveplayer(int keysym, t_game *game)
 {
-	if (keysym == XK_w)
-		move_front(game);
-	else if (keysym == XK_s)
-		move_behind(game);
-	else if (keysym == XK_a)
-		strafe_left(game);
-	else if (keysym == XK_d)
-		strafe_right(game);
-	else if (keysym == XK_Left)
-		rotate_left(game);
-	else if (keysym == XK_Right)
-		rotate_right(game);
+	// if (keysym == XK_w)
+	// 	move_front(game);
+	// else if (keysym == XK_s)
+	// 	move_behind(game);
+	// else if (keysym == XK_a)
+	// 	strafe_left(game);
+	// else if (keysym == XK_d)
+	// 	strafe_right(game);
+	// else if (keysym == XK_Left)
+	// 	rotate_left(game);
+	// else if (keysym == XK_Right)
+	// 	rotate_right(game);
 	execute_algorithm(game);
 	move_on_minimap(keysym, game);
 	render_minimap(game);

@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 	setup_player_direction(&game);
 	execute_algorithm(&game);
 	mlx_put_image_to_window(game.win.mlx_ptr, game.win.win_ptr, game.win.nimg, 0, 0);
-	// render_minimap(&game);
+	render_minimap(&game);
 	ft_hooks(&game);
 	mlx_loop(game.win.mlx_ptr);
 }

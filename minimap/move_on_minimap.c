@@ -154,8 +154,8 @@ void	move_on_minimap(int keysym, t_game *game)
 	{
 		// if (near_wall(game, NORTH))
 		// 	return ;
-		move_up_minimap(game);
 		move_front(game);
+		move_up_minimap(game);
 		// mlx_do_sync(GW.mlx_ptr);
 		mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
 		printf(YELLOW"%f\n"NO_ALL, game->plr.pos_x);/////////////////////////////
@@ -164,7 +164,6 @@ void	move_on_minimap(int keysym, t_game *game)
 	{
 		// if (near_wall(game, SOUTH))
 		// 	return ;
-		move_down_minimap(game);
 		move_behind(game);
 		// mlx_do_sync(GW.mlx_ptr);
 		mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
@@ -174,7 +173,6 @@ void	move_on_minimap(int keysym, t_game *game)
 	{
 		// if (near_wall(game, WEST))
 		// 	return ;
-		strafe_left_minimap(game);
 		strafe_left(game);
 		// mlx_do_sync(GW.mlx_ptr);
 		mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
@@ -184,7 +182,6 @@ void	move_on_minimap(int keysym, t_game *game)
 	{
 		// if (near_wall(game, EAST))
 		// 	return ;
-		strafe_right_minimap(game);
 		strafe_right(game);
 		// mlx_do_sync(GW.mlx_ptr);
 		mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
