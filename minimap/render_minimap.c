@@ -5,6 +5,7 @@ void	ft_padding(t_game *game, int color, float x, float y)
 {
 	int	px;
 	int	py;
+	int	pixel_index;
 
 	py = 0;
 	while (py < game->scale)
@@ -13,7 +14,6 @@ void	ft_padding(t_game *game, int color, float x, float y)
 		while (px < game->scale)
 		{
 			// my_pixelput:
-			int pixel_index;
 			pixel_index = ((x * game->scale + py) * game->win.line_len) + \
 					((y * game->scale + px) * (game->win.bits_per_pixel / 8));
 			*(unsigned int*)(game->win.addr + pixel_index) = color;
@@ -61,5 +61,5 @@ void	render_minimap(t_game *game)
 		}
 		i++;
 	}
-	ft_padding(game, 0xFF0000, GMM.pos_x, GMM.pos_y);
+	//ft_padding(game, 0xFF0000, GMM.pos_x, GMM.pos_y);
 }

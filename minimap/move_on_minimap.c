@@ -53,8 +53,8 @@ void	strafe_right_minimap(t_game *game)
 	float	new_x;
 	float	new_y;
 
-	new_x = GMM.pos_x + GMM.ray_y * GMM.move_speed;
-	new_y = GMM.pos_y - GMM.ray_x * GMM.move_speed;
+	new_x = (GMM.pos_x + GMM.ray_y * GMM.move_speed) / game->scale;
+	new_y = (GMM.pos_y - GMM.ray_x * GMM.move_speed) / game->scale;
 	if (new_x >= 0 && new_x < GM.map_h && new_y >= 0 && new_y < GM.map_l)
 	{
 		if (GM.grid[(int)new_x][(int)new_y] == '0')
@@ -72,8 +72,8 @@ void	strafe_left_minimap(t_game *game)
 	float	new_x;
 	float	new_y;
 
-	new_x = GP.pos_x - GP.ray_y * GP.move_speed;
-	new_y = GP.pos_y + GP.ray_x * GP.move_speed;
+	new_x = (GP.pos_x - GP.ray_y * GP.move_speed) / game->scale;
+	new_y = (GP.pos_y + GP.ray_x * GP.move_speed) / game->scale;
 	if (new_x >= 0 && new_x < GM.map_h && new_y >= 0 && new_y < GM.map_l)
 	{
 		if (GM.grid[(int)new_x][(int)new_y] == '0')
@@ -91,8 +91,8 @@ void	move_up_minimap(t_game *game)
 	float	new_x;
 	float	new_y;
 
-	new_x = GMM.pos_x + GMM.ray_x * GMM.move_speed;
-	new_y = GMM.pos_y + GMM.ray_y * GMM.move_speed;
+	new_x = (GMM.pos_x + GMM.ray_x * GMM.move_speed) / game->scale;
+	new_y = (GMM.pos_y + GMM.ray_y * GMM.move_speed) / game->scale;
 	if (new_x >= 0 && new_x < GM.map_h && new_y >= 0 && new_y < GM.map_l)
 	{
 		if (GM.grid[(int)new_x][(int)new_y] == '0')
@@ -110,8 +110,8 @@ void	move_down_minimap(t_game *game)
 	float	new_x;
 	float	new_y;
 
-	new_x = GP.pos_x - GP.ray_x * GP.move_speed;
-	new_y = GP.pos_y - GP.ray_y * GP.move_speed;
+	new_x = (GP.pos_x - GP.ray_x * GP.move_speed) / game->scale;
+	new_y = (GP.pos_y - GP.ray_y * GP.move_speed) / game->scale;
 	if (new_x >= 0 && new_x < GM.map_h && new_y >= 0 && new_y < GM.map_l)
 	{
 		if (GM.grid[(int)new_x][(int)new_y] == '0')

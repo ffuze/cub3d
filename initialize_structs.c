@@ -4,31 +4,31 @@ void	check_plr_dir(t_game *game)
 {
 	if (game->plr.p_dir == NORTH)
 	{
-		game->plr.ray_x = 0;
-		game->plr.ray_y = -1;
-		game->map.plane_x = 0.66f;
-		game->map.plane_y = 0;
+		game->plr.ray_x = -1;
+		game->plr.ray_y = 0;
+		game->map.plane_x = 0;
+		game->map.plane_y = -0.66f;
 	}
 	else if (game->plr.p_dir == SOUTH)
-	{
-		game->plr.ray_x = 0;
-		game->plr.ray_y = 1;
-		game->map.plane_x = -0.66f;
-		game->map.plane_y = 0;
-	}
-	else if (game->plr.p_dir == EAST)
 	{
 		game->plr.ray_x = 1;
 		game->plr.ray_y = 0;
 		game->map.plane_x = 0;
 		game->map.plane_y = 0.66f;
 	}
+	else if (game->plr.p_dir == EAST)
+	{
+		game->plr.ray_x = 0;
+		game->plr.ray_y = 1;
+		game->map.plane_x = -0.66f;
+		game->map.plane_y = 0;
+	}
 	else if (game->plr.p_dir == WEST)
 	{
-		game->plr.ray_x = -1;
-		game->plr.ray_y = 0;
-		game->map.plane_x = 0;
-		game->map.plane_y = -0.66f;
+		game->plr.ray_x = 0;
+		game->plr.ray_y = -1;
+		game->map.plane_x = 0.66f;
+		game->map.plane_y = 0;
 	}
 }
 

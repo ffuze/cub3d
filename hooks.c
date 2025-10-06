@@ -49,6 +49,3 @@ void	ft_hooks(t_game *game)
 	mlx_hook(game->win.win_ptr, 2, 1L << 0,
 		&on_keypress, game);
 }
-// else if (keysym == XK_d || keysym == XK_a || keysym == XK_w || \
-// 					keysym == XK_s || keysym == XK_e || keysym == XK_q)
-// 		rotate_axis(keysym, img);

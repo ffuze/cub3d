@@ -21,8 +21,9 @@ int main(int argc, char **argv)
 	game.win.nimg = mlx_new_image(game.win.mlx_ptr, WINWIDTH, WINHEIGHT);
 	game.win.addr = mlx_get_data_addr(game.win.nimg, &game.win.bits_per_pixel, \
 		&game.win.line_len, &game.win.endian);
-	//alek u are preciuos and we love you a lot <3
-	//if this was you leo, lets kiss
+	//Alek u are preciuos and we love you a lot <3
+	//if this was you leo, lets kis
+	// ;*
 	if (parse_map_file(argv[1], &game.map, &game.plr) == 0)
 	{
 		mlx_destroy_image(game.win.mlx_ptr, game.win.nimg);
@@ -35,7 +36,7 @@ int main(int argc, char **argv)
 	setup_player_direction(&game);
 	execute_algorithm(&game);
 	mlx_put_image_to_window(game.win.mlx_ptr, game.win.win_ptr, game.win.nimg, 0, 0);
-	render_minimap(&game);
+	// render_minimap(&game);
 	ft_hooks(&game);
 	mlx_loop(game.win.mlx_ptr);
 }
