@@ -61,5 +61,7 @@ void	render_minimap(t_game *game)
 		}
 		i++;
 	}
-	//ft_padding(game, 0xFF0000, GMM.pos_x, GMM.pos_y);
+	GMM.pos_x = GP.pos_x;
+	GMM.pos_y = GP.pos_y;
+	ft_padding(game, 0xFF0000, GMM.pos_x, GMM.pos_y);
 }
