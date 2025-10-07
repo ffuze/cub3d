@@ -32,6 +32,7 @@ int main(int argc, char **argv)
 	//Alek u are preciuos and we love you a lot <3
 	//if this was you leo, lets kis
 	// (づ ￣ ³￣)づ
+	// uwu
 	if (parse_map_file(argv[1], &game.map, &game.plr) == 0)
 	{
 		mlx_destroy_image(game.win.mlx_ptr, game.win.nimg);
