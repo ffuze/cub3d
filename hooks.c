@@ -32,12 +32,29 @@ void	ft_moveplayer(int keysym, t_game *game)
 
 static int	on_keypress(int keysym, t_game *game)
 {
+	static int	m_set;
+
 	(void)game;
 	if (keysym == XK_Escape)
 		on_destroy(game);
-	else if (keysym == XK_d || keysym == XK_a || keysym == XK_w || \
-					keysym == XK_s || keysym == XK_e || keysym == XK_q || \
-					keysym == XK_Left || keysym == XK_Right)
+	else if (keysym == XK_m)
+	{
+		if (!m_set)
+		{
+			game->scale = 20;
+			m_set = 1;
+		}
+		else
+		{
+			game->scale = 10;
+			m_set = 0;
+		}
+		mlx_put_image_to_window(game->win.mlx_ptr, game->win.win_ptr, game->win.nimg, 0, 0);
+		render_minimap(game);
+	}
+	else if (keysym == XK_d || keysym == XK_a || keysym == XK_w
+				|| keysym == XK_s || keysym == XK_e || keysym == XK_q
+				|| keysym == XK_Left || keysym == XK_Right)
 		ft_moveplayer(keysym, game);
 	return (1);
 }
