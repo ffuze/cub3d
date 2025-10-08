@@ -6,17 +6,30 @@ void	ft_padding(t_game *game, int color, float x, float y)
 	int	px;
 	int	py;
 	int	pixel_index;
+	int	pixel_x;
+	int	pixel_y;
 
+	pixel_x = 0;
+	pixel_y = 0;
 	py = 0;
+	// Add bounds checking
+	if (x < 0 || x >= GM.map_h || y < 0 || y >= GM.map_l)
+		return;
 	while (py < game->scale)
 	{
 		px = 0;
 		while (px < game->scale)
 		{
-			// my_pixelput:
-			pixel_index = ((x * game->scale + py) * game->win.line_len) + \
-					((y * game->scale + px) * (game->win.bits_per_pixel / 8));
-			*(unsigned int*)(game->win.addr + pixel_index) = color;
+			pixel_x = (int)(y * game->scale + px);  // Prima non facevamo cast a int
+			pixel_y = (int)(x * game->scale + py);
+
+			// Check if within window bounds
+			if (pixel_x >= 0 && pixel_x < WINWIDTH && pixel_y >= 0 && pixel_y < WINHEIGHT)
+			{
+				pixel_index = (pixel_y * game->win.line_len) + \
+							(pixel_x * (game->win.bits_per_pixel / 8));
+				*(unsigned int*)(game->win.addr + pixel_index) = color;
+			}
 			px++;
 		}
 		py++;
@@ -28,7 +41,7 @@ static int	pick_color(t_game *game, size_t i, size_t j)
 {
 	if (game->map.grid[i][j] == 'N' || game->map.grid[i][j] == 'S' \
 				|| game->map.grid[i][j] == 'E' || game->map.grid[i][j] == 'W')
-		return (0xFF0000);//0xFF0000 red
+		return (0xFFFFFF);//0xFF0000 red
 	else if (game->map.grid[i][j] == '0')
 		return (0xFFFFFF);
 	else if (game->map.grid[i][j] == '1')
@@ -43,8 +56,8 @@ void	render_minimap(t_game *game)
 	size_t	j;
 	int		color;
 
-	i = 0;
-	j = 0;
+	i = 10;
+	j = 10;
 	while (i < game->map.map_h)
 	{
 		j = 0;

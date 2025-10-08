@@ -137,6 +137,7 @@ void	move_on_minimap(int keysym, t_game *game)
 		// mlx_do_sync(GW.mlx_ptr);
 		// mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
 		printf(YELLOW"posx:%f, minim-posx:%f\n"NO_ALL, GP.pos_x, GMM.pos_x);/////////////////////////////
+		printf(YELLOW"posy:%f, minim-posy:%f\n"NO_ALL, GP.pos_y, GMM.pos_y);/////////////////////////////
 	}
 	else if (keysym == XK_s)
 	{
@@ -149,6 +150,7 @@ void	move_on_minimap(int keysym, t_game *game)
 		// mlx_do_sync(GW.mlx_ptr);
 		// mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
 		printf(YELLOW"posx:%f, minim-posx:%f\n"NO_ALL, GP.pos_x, GMM.pos_x);/////////////////////////////
+		printf(YELLOW"posy:%f, minim-posy:%f\n"NO_ALL, GP.pos_y, GMM.pos_y);/////////////////////////////
 	}
 	else if (keysym == XK_a)
 	{
@@ -160,6 +162,7 @@ void	move_on_minimap(int keysym, t_game *game)
 		// strafe_left_minimap(game);
 		// mlx_do_sync(GW.mlx_ptr);
 		// mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
+		printf(YELLOW"posx:%f, minim-posx:%f\n"NO_ALL, GP.pos_x, GMM.pos_x);/////////////////////////////
 		printf(YELLOW"posy:%f, minim-posy:%f\n"NO_ALL, GP.pos_y, GMM.pos_y);/////////////////////////////
 	}
 	else if (keysym == XK_d)
@@ -172,6 +175,7 @@ void	move_on_minimap(int keysym, t_game *game)
 		// strafe_right_minimap(game);
 		// mlx_do_sync(GW.mlx_ptr);
 		// mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
+		printf(YELLOW"posx:%f, minim-posx:%f\n"NO_ALL, GP.pos_x, GMM.pos_x);/////////////////////////////
 		printf(YELLOW"posy:%f, minim-posy:%f\n"NO_ALL, GP.pos_y, GMM.pos_y);/////////////////////////////
 	}
 	else if (keysym == XK_Right || keysym == XK_e)
@@ -181,7 +185,7 @@ void	move_on_minimap(int keysym, t_game *game)
 		rotate_right(game);
 		execute_algorithm(game);
 		render_minimap(game);
-		rotate_right_minimap(game);
+		// rotate_right_minimap(game);
 		// rotate_right_minimap(game);
 		// mlx_do_sync(GW.mlx_ptr);
 		// mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
@@ -193,7 +197,7 @@ void	move_on_minimap(int keysym, t_game *game)
 		rotate_left(game);
 		execute_algorithm(game);
 		render_minimap(game);
-		rotate_left_minimap(game);
+		// rotate_left_minimap(game);
 		// rotate_left_minimap(game);
 		// mlx_do_sync(GW.mlx_ptr);
 		// mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);

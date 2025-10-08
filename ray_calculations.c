@@ -89,5 +89,5 @@ void    execute_algorithm(t_game *game)
 			GP.perp_wall_dist = GP.dist_x - GP.delta_x;
 		draw_ver_line(game, i);
 	}
-	mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
+	// mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
 }
