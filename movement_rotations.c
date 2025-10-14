@@ -4,8 +4,8 @@
 static int	check_collision(t_game *game, float x, float y)
 {
 	float	margin;
-	int		dx;
-	int		dy;
+	int		delta_x;
+	int		delta_y;
 	int		check_x;
 	int		check_y;
 
@@ -16,27 +16,26 @@ static int	check_collision(t_game *game, float x, float y)
 		return (1);
 	if (!GM.grid[(int)x] || !GM.grid[(int)x][(int)y])
 		return (1);
-	dx = -1;
-	while (dx <= 1)
+	delta_x = -1;
+	while (delta_x <= 1)
 	{
-		dy = -1;
-		while (dy <= 1)
+		delta_y = -1;
+		while (delta_y <= 1)
 		{
-			check_x = (int)(x + dx * margin);
-			check_y = (int)(y + dy * margin);
+			check_x = (int)(x + delta_x * margin);
+			check_y = (int)(y + delta_y * margin);
 			if (check_x >= 0 && check_x < (int)GM.map_h &&
 				check_y >= 0 && check_y < (int)GM.map_l)
 			{
 				if (GM.grid[check_x][check_y] == '1')
 					return (1);
 			}
-			dy++;
+			delta_y++;
 		}
-		dx++;
+		delta_x++;
 	}
 	return (0);
 }
-
 
 void    move_front(t_game *game)
 {
