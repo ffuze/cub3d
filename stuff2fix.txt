@@ -6,6 +6,3 @@ it is still moving in the floor
 same time, the player rotates and moves simultanouesly, but the speed in this
 scenario is double (W move_speed + A move_speed) --> this may get applied as
 an actual feature
-
-3 - at the angles of every wall there are empty spaces caused by not-long-enough
-wall margins.
