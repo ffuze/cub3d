@@ -40,11 +40,11 @@ void    initialize_player(t_game *game)
 	game->plr.delta_y = 0;
 	game->plr.dist_x = 0;
 	game->plr.dist_y = 0;
-	game->plr.move_speed = 0.1;
+	game->plr.move_speed = 0.03;
 	game->plr.perp_wall_dist = 0;
 	game->plr.ray_dir_x = 0;
 	game->plr.ray_dir_y = 0;
-	game->plr.rot_speed = 0.04;
+	game->plr.rot_speed = 0.02;
 	check_plr_dir(game);
 }
 
@@ -104,8 +104,11 @@ void    initialize_all(t_game *game)
 	initialize_player(game);
 	initialize_map(game);
 	initialize_minimap(game);
+	game->keys = calloc(65535, sizeof(bool));
+	if (!game->keys)
+		exit(1);
 	i = 0;
-	while (i < 256)
+	while (i < 65535)
 	{
 		game->keys[i] = false;
 		i++;

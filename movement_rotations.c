@@ -1,8 +1,32 @@
 #include "./cub3d.h"
 
-/*
-	MOVIMENTO DEL PLAYER MANCANTE
-*/
+static int	check_collision(t_game *game, float x, float y)
+{
+	float	margin;
+
+	margin = 0.2;
+	if (x - margin < 0 || x + margin >= GM.map_h)
+		return (1);
+	if (y - margin < 0 || y + margin >= GM.map_l)
+		return (1);
+	if (!GM.grid[(int)x] || !GM.grid[(int)x][(int)y])
+		return (1);
+	if (GM.grid[(int)x][(int)y] == '1')
+		return (1);
+	if ((int)(x - margin) >= 0 && GM.grid[(int)(x - margin)][(int)y] == '1')
+		return (1);
+	if ((int)(x + margin) < (int)GM.map_h && GM.grid[(int)(x + margin)][(int)y] == '1')
+		return (1);
+	if ((int)(y - margin) >= 0 && GM.grid[(int)x][(int)(y - margin)] == '1')
+		return (1);
+	if ((int)(y + margin) < (int)GM.map_l && GM.grid[(int)x][(int)(y + margin)] == '1')
+		return (1);
+	if ((int)(x) >= 0 && GM.grid[(int)(x)][(int)y] == '1')
+		return (1);
+	if ((int)(x) < (int)GM.map_h && GM.grid[(int)(x)][(int)y] == '1')
+		return (1);
+	return (0);
+}
 
 void    move_front(t_game *game)
 {
@@ -11,6 +35,8 @@ void    move_front(t_game *game)
 
 	new_x = GP.pos_x + (GP.ray_x * GP.move_speed);
 	new_y = GP.pos_y + (GP.ray_y * GP.move_speed);
+	if (check_collision(game, new_x, new_y))
+		return ;
 	if (!(new_x >= 0 && new_x < GM.map_h && 
 		(int)GP.pos_y >= 0 && (int)GP.pos_y < (int)GM.map_l &&
 		GM.grid[(int)new_x]))
@@ -30,13 +56,15 @@ void    move_front(t_game *game)
 	printf("Move front: pos(%.2f, %.2f)\n", GP.pos_x, GP.pos_y);
 }
 
-void	move_back(t_game *game)
+void	move_behind(t_game *game)
 {
 	float	new_x;
 	float	new_y;
 
 	new_x = GP.pos_x - (GP.ray_x * GP.move_speed);
 	new_y = GP.pos_y - (GP.ray_y * GP.move_speed);
+	if (check_collision(game, new_x, new_y))
+		return ;
 	if (!(new_x >= 0 && new_x < GM.map_h && 
 		(int)GP.pos_y >= 0 && (int)GP.pos_y < (int)GM.map_l &&
 		GM.grid[(int)new_x]))
@@ -53,7 +81,7 @@ void	move_back(t_game *game)
 		GP.pos_x = new_x;
 	if (GM.grid[(int)GP.pos_x][(int)new_y] != '1')
 		GP.pos_y = new_y;
-	printf("Move back: pos(%.2f, %.2f)\n", GP.pos_x, GP.pos_y);
+	printf("Move behind: pos(%.2f, %.2f)\n", GP.pos_x, GP.pos_y);
 }
 
 void	strafe_right(t_game *game)
@@ -63,6 +91,8 @@ void	strafe_right(t_game *game)
 
 	new_x = GP.pos_x + (GP.ray_y * GP.move_speed);
 	new_y = GP.pos_y - (GP.ray_x * GP.move_speed);
+	if (check_collision(game, new_x, new_y))
+		return ;
 	if (!(new_x >= 0 && new_x < GM.map_h && 
 		(int)GP.pos_y >= 0 && (int)GP.pos_y < (int)GM.map_l &&
 		GM.grid[(int)new_x]))
@@ -89,6 +119,8 @@ void	strafe_left(t_game *game)
 
 	new_x = GP.pos_x - (GP.ray_y * GP.move_speed);
 	new_y = GP.pos_y + (GP.ray_x * GP.move_speed);
+	if (check_collision(game, new_x, new_y))
+		return ;
 	if (!(new_x >= 0 && new_x < GM.map_h && 
 		(int)GP.pos_y >= 0 && (int)GP.pos_y < (int)GM.map_l &&
 		GM.grid[(int)new_x]))

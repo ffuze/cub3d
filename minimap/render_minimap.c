@@ -8,22 +8,23 @@ void	ft_padding(t_game *game, int color, float x, float y)
 	int	pixel_index;
 	int	pixel_x;
 	int	pixel_y;
+	// int	cell_x;
+	// int	cell_y;
+	float	cell_x;
+	float	cell_y;
 
-	pixel_x = 0;
-	pixel_y = 0;
-	py = 0;
-	// Add bounds checking
-	if (x < 0 || x >= GM.map_h || y < 0 || y >= GM.map_l)
+	cell_x = (float)x;
+	cell_y = (float)y;
+	if (cell_x < 0 || cell_x >= (int)GM.map_h || cell_y < 0 || cell_y >= (int)GM.map_l)
 		return;
+	py = 0;
 	while (py < game->scale)
 	{
 		px = 0;
 		while (px < game->scale)
 		{
-			pixel_x = (int)(y * game->scale + px);  // Prima non facevamo cast a int
-			pixel_y = (int)(x * game->scale + py);
-
-			// Check if within window bounds
+			pixel_x = (cell_y * game->scale + px) - 0.1;
+			pixel_y = (cell_x * game->scale + py) - 0.1;
 			if (pixel_x >= 0 && pixel_x < WINWIDTH && pixel_y >= 0 && pixel_y < WINHEIGHT)
 			{
 				pixel_index = (pixel_y * game->win.line_len) + \
@@ -56,8 +57,8 @@ void	render_minimap(t_game *game)
 	size_t	j;
 	int		color;
 
-	i = 10;
-	j = 10;
+	i = 0;
+	j = 0;
 	while (i < game->map.map_h)
 	{
 		j = 0;
@@ -66,6 +67,7 @@ void	render_minimap(t_game *game)
 			color = pick_color(game, i, j);
 			if (color < 0)
 			{
+				printf("i: %zu, j: %zu\n", i, j);
 				j++;
 				continue ;
 			}
