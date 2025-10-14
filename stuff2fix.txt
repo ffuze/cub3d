@@ -2,14 +2,10 @@
 in some parts the player icon enters the wall borders, when in reality
 it is still moving in the floor
 
-2 - when you press 'm' on the keyboard the minimap should increase in
-size, and when you press it again it should go back in its normal size
-again, and so forth, but every time the big minimap never disappears
-
-3 - the player, when it keeps pressed a movement button (wasd) against
-a wall, it must keep "rubbing" itself against the wall, but instead
-it blocks everytime
-
-4 - when both the movement and the rotation buttons are pressed at the
+2 - when both the movement and the rotation buttons are pressed at the
 same time, the player rotates and moves simultanouesly, but the speed in this
-scenario is double (W move_speed + A move_speed)
+scenario is double (W move_speed + A move_speed) --> this may get applied as
+an actual feature
+
+3 - at the angles of every wall there are empty spaces caused by not-long-enough
+wall margins.

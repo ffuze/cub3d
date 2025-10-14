@@ -1,5 +1,6 @@
 #include "../cub3d.h"
 
+// VVV this shit now works almost properly. check function check_collision() VVV
 //==================BROKEN==================-
 /* // Returns 1 if next to a wall, 0 otherwise
 bool	near_wall(t_game *game, t_dir dir)
@@ -48,48 +49,32 @@ void	move_player(int keysym, t_game *game)
 {
 	if (keysym == XK_w)
 	{
-		// if (near_wall(game, NORTH))
-		// 	return ;
 		move_front(game);
 		printf(YELLOW"posx:%f, minim-posx:%f\n"NO_ALL, GP.pos_x, GMM.pos_x);/////////////////////////////
 		printf(YELLOW"posy:%f, minim-posy:%f\n"NO_ALL, GP.pos_y, GMM.pos_y);/////////////////////////////
 	}
 	else if (keysym == XK_s)
 	{
-		// if (near_wall(game, SOUTH))
-		// 	return ;
 		move_behind(game);
 		printf(YELLOW"posx:%f, minim-posx:%f\n"NO_ALL, GP.pos_x, GMM.pos_x);/////////////////////////////
 		printf(YELLOW"posy:%f, minim-posy:%f\n"NO_ALL, GP.pos_y, GMM.pos_y);/////////////////////////////
 	}
 	else if (keysym == XK_a)
 	{
-		// if (near_wall(game, WEST))
-		// 	return ;
 		strafe_left(game);
 		printf(YELLOW"posx:%f, minim-posx:%f\n"NO_ALL, GP.pos_x, GMM.pos_x);/////////////////////////////
 		printf(YELLOW"posy:%f, minim-posy:%f\n"NO_ALL, GP.pos_y, GMM.pos_y);/////////////////////////////
 	}
 	else if (keysym == XK_d)
 	{
-		// if (near_wall(game, EAST))
-		// 	return ;
 		strafe_right(game);
 		printf(YELLOW"posx:%f, minim-posx:%f\n"NO_ALL, GP.pos_x, GMM.pos_x);/////////////////////////////
 		printf(YELLOW"posy:%f, minim-posy:%f\n"NO_ALL, GP.pos_y, GMM.pos_y);/////////////////////////////
 	}
 	else if (keysym == XK_Right || keysym == XK_e)
-	{
-		// if (near_wall(game, EAST))
-		// 	return ;
 		rotate_right(game);
-	}
 	else if (keysym == XK_Left || keysym == XK_q)
-	{
-		// if (near_wall(game, EAST))
-		// 	return ;
 		rotate_left(game);
-	}
 	execute_algorithm(game);
 	render_minimap(game);
 }
