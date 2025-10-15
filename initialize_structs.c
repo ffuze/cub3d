@@ -40,7 +40,8 @@ void    initialize_player(t_game *game)
 	game->plr.delta_y = 0;
 	game->plr.dist_x = 0;
 	game->plr.dist_y = 0;
-	game->plr.move_speed = 0.03;
+	game->plr.move_speed = 0.013;
+	game->plr.default_move_speed = 0.013;
 	game->plr.perp_wall_dist = 0;
 	game->plr.ray_dir_x = 0;
 	game->plr.ray_dir_y = 0;

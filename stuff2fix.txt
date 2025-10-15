@@ -6,3 +6,6 @@ it is still moving in the floor
 same time, the player rotates and moves simultanouesly, but the speed in this
 scenario is double (W move_speed + A move_speed) --> this may get applied as
 an actual feature
+
+3 - when the player gets himself in angle, then tries to move in two direcrtions
+at the same time, there's a little "shaking" effect

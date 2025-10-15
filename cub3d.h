@@ -96,6 +96,7 @@ typedef struct	s_player
 	float	dist_y;
 	float	perp_wall_dist;
 	float	move_speed;
+	float	default_move_speed;
 	float	rot_speed;
 }	t_player;
 
@@ -172,7 +173,6 @@ void	render_minimap(t_game *game);
 void	ft_padding(t_game *game, int color, float x, float y);
 
 /*_______________________________move_on_minimap.c___________________________*/
-void	move_player(int keysym, t_game *game);
 // void	sync_minimap_with_player(t_game *game);
 // void	sync_player_with_minimap(t_game *game);
 // void	toggle_minimap_sync(t_game *game);

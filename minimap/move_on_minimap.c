@@ -44,37 +44,3 @@ void	rotate_left_minimap(t_game *game)
 	GMM.ray_y = old_ray_x * sin(GMM.rot_speed) + GMM.ray_y * cos(GMM.rot_speed);
 	// ft_padding(game, 0xFF0000, GMM.pos_x, GMM.pos_y);
 }
-
-void	move_player(int keysym, t_game *game)
-{
-	if (keysym == XK_w)
-	{
-		move_front(game);
-		printf(YELLOW"posx:%f, minim-posx:%f\n"NO_ALL, GP.pos_x, GMM.pos_x);/////////////////////////////
-		printf(YELLOW"posy:%f, minim-posy:%f\n"NO_ALL, GP.pos_y, GMM.pos_y);/////////////////////////////
-	}
-	else if (keysym == XK_s)
-	{
-		move_behind(game);
-		printf(YELLOW"posx:%f, minim-posx:%f\n"NO_ALL, GP.pos_x, GMM.pos_x);/////////////////////////////
-		printf(YELLOW"posy:%f, minim-posy:%f\n"NO_ALL, GP.pos_y, GMM.pos_y);/////////////////////////////
-	}
-	else if (keysym == XK_a)
-	{
-		strafe_left(game);
-		printf(YELLOW"posx:%f, minim-posx:%f\n"NO_ALL, GP.pos_x, GMM.pos_x);/////////////////////////////
-		printf(YELLOW"posy:%f, minim-posy:%f\n"NO_ALL, GP.pos_y, GMM.pos_y);/////////////////////////////
-	}
-	else if (keysym == XK_d)
-	{
-		strafe_right(game);
-		printf(YELLOW"posx:%f, minim-posx:%f\n"NO_ALL, GP.pos_x, GMM.pos_x);/////////////////////////////
-		printf(YELLOW"posy:%f, minim-posy:%f\n"NO_ALL, GP.pos_y, GMM.pos_y);/////////////////////////////
-	}
-	else if (keysym == XK_Right || keysym == XK_e)
-		rotate_right(game);
-	else if (keysym == XK_Left || keysym == XK_q)
-		rotate_left(game);
-	execute_algorithm(game);
-	render_minimap(game);
-}

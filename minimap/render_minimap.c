@@ -67,7 +67,6 @@ void	render_minimap(t_game *game)
 			color = pick_color(game, i, j);
 			if (color < 0)
 			{
-				printf("i: %zu, j: %zu\n", i, j);
 				j++;
 				continue ;
 			}
