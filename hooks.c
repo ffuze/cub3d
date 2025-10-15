@@ -52,10 +52,7 @@ static int	on_key_press(int keysym, t_game *game)
 		}
 	}
 	else if (keysym == XK_Shift_L)
-	{
 		GP.move_speed = GP.default_move_speed * 1.61;
-		printf("+++ HIGH SPEED ENABLED AT %.4f +++\n", GP.move_speed);
-	}
 	if (keysym < 65535)
 		game->keys[keysym] = true;
 	return (0);
@@ -64,10 +61,7 @@ static int	on_key_press(int keysym, t_game *game)
 static int	on_key_release(int keysym, t_game *game)
 {
 	if (keysym == XK_Shift_L)
-	{
 		GP.move_speed = GP.default_move_speed;
-		printf("--- low speed enabled at %.4f ---\n", GP.move_speed);
-	}
 	if (keysym < 65535)
 		game->keys[keysym] = false;
 	return (0);
