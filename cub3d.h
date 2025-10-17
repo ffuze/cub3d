@@ -96,6 +96,7 @@ typedef struct	s_player
 	float	dist_y;
 	float	perp_wall_dist;
 	float	move_speed;
+	float	default_move_speed;
 	float	rot_speed;
 }	t_player;
 
@@ -144,7 +145,7 @@ typedef struct	s_game
 	t_player	plr;
 	t_minimap	minimap;
 	int			scale;
-	bool		keys[256];
+	bool		*keys;
 }	t_game;
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -172,14 +173,13 @@ void	render_minimap(t_game *game);
 void	ft_padding(t_game *game, int color, float x, float y);
 
 /*_______________________________move_on_minimap.c___________________________*/
-void	move_on_minimap(int keysym, t_game *game);
-void	sync_minimap_with_player(t_game *game);
-void	sync_player_with_minimap(t_game *game);
-void	toggle_minimap_sync(t_game *game);
-void	strafe_right_minimap(t_game *game);
-void	strafe_left_minimap(t_game *game);
-void	move_front_minimap(t_game *game);
-void	move_back_minimap(t_game *game);
+// void	sync_minimap_with_player(t_game *game);
+// void	sync_player_with_minimap(t_game *game);
+// void	toggle_minimap_sync(t_game *game);
+// void	strafe_right_minimap(t_game *game);
+// void	strafe_left_minimap(t_game *game);
+// void	move_front_minimap(t_game *game);
+// void	move_back_minimap(t_game *game);
 void	rotate_right_minimap(t_game *game);
 void	rotate_left_minimap(t_game *game);
 
@@ -205,7 +205,7 @@ void	setup_player_direction(t_game *game);
 
 /*____________________________________movement____________________________________*/
 void    move_front(t_game *game);
-void    move_back(t_game *game);
+void    move_behind(t_game *game);
 void    strafe_right(t_game *game);
 void    strafe_left(t_game *game);
 void    rotate_right(t_game *game);
