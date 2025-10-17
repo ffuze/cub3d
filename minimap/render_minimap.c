@@ -24,10 +24,10 @@ void	ft_padding(t_game *game, int color, float x, float y)
 			pixel_y = (int)(x * game->scale + py);
 
 			// Check if within window bounds
-			if (pixel_x >= 0 && pixel_x < WINWIDTH && pixel_y >= 0 && pixel_y < WINHEIGHT)
+			if ((int)(y * game->scale + px) >= 0 && (int)(y * game->scale + px) < WINWIDTH && (int)(x * game->scale + py) >= 0 && (int)(x * game->scale + py) < WINHEIGHT)
 			{
-				pixel_index = (pixel_y * game->win.line_len) + \
-							(pixel_x * (game->win.bits_per_pixel / 8));
+				pixel_index = ((int)(x * game->scale + py) * game->win.line_len) + \
+							((int)(y * game->scale + px) * (game->win.bits_per_pixel / 8));
 				*(unsigned int*)(game->win.addr + pixel_index) = color;
 			}
 			px++;
