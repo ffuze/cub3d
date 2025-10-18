@@ -76,7 +76,7 @@ typedef struct	s_win
 	void	*win_ptr;
 	void	*nimg;
 	char	*addr;
-	int		bits_per_pixel;
+	int		bpp;
 	int		line_len;
 	int		endian;
 }	t_win;
@@ -138,12 +138,25 @@ typedef struct	s_minimap
 	bool	sync_with_player;
 }	t_minimap;
 
+typedef struct	s_texture
+{
+	void	*img_ptr;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_texture;
+
 typedef struct	s_game
 {
 	t_win		win;
 	t_map		map;
 	t_player	plr;
 	t_minimap	minimap;
+	t_texture	*textures;
+	int			texture_count;
 	int			scale;
 	bool		*keys;
 }	t_game;
@@ -210,5 +223,8 @@ void    strafe_right(t_game *game);
 void    strafe_left(t_game *game);
 void    rotate_right(t_game *game);
 void    rotate_left(t_game *game);
+
+/*____________________________________textures____________________________________*/
+int		load_all_textures(t_game *game);
 
 #endif
