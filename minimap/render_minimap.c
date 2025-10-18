@@ -27,9 +27,9 @@ void	ft_padding(t_game *game, int color, float x, float y)
 			pixel_y = (cell_x * game->scale + py) - 0.1;
 			if (pixel_x >= 0 && pixel_x < WINWIDTH && pixel_y >= 0 && pixel_y < WINHEIGHT)
 			{
-				pixel_index = ((int)(x * game->scale + py) * game->win.line_len) + \
-							((int)(y * game->scale + px) * (game->win.bits_per_pixel / 8));
-				*(unsigned int*)(game->win.addr + pixel_index) = color;
+				pixel_index = ((int)(x * game->scale + py) * GW.line_len) + \
+							((int)(y * game->scale + px) * (GW.bpp / 8));
+				*(unsigned int*)(GW.addr + pixel_index) = color;
 			}
 			px++;
 		}

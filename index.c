@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 			return (0);
 	initialize_all(&game);
 	game.win.nimg = mlx_new_image(game.win.mlx_ptr, WINWIDTH, WINHEIGHT);
-	game.win.addr = mlx_get_data_addr(game.win.nimg, &game.win.bits_per_pixel, \
+	game.win.addr = mlx_get_data_addr(game.win.nimg, &game.win.bpp, \
 		&game.win.line_len, &game.win.endian);
 	//Alek u are preciuos and we love you a lot <3
 	//if this was you leo, lets kis

@@ -38,7 +38,7 @@ void    draw_ver_line(t_game *game, int x)
 	{
 		if (y >= 0 && y < WINHEIGHT && x >= 0 && x < WINWIDTH)
 		{
-			dest = GW.addr + (y * GW.line_len + x * (GW.bits_per_pixel / 8));
+			dest = GW.addr + (y * GW.line_len + x * (GW.bpp / 8));
 			*(unsigned int*)dest = GM.ccol;
 		}
 	}
@@ -47,7 +47,7 @@ void    draw_ver_line(t_game *game, int x)
 	{
 		if (y >= 0 && y < WINHEIGHT && x >= 0 && x < WINWIDTH)
 		{
-			dest = GW.addr + (y * GW.line_len + x * (GW.bits_per_pixel / 8));
+			dest = GW.addr + (y * GW.line_len + x * (GW.bpp / 8));
 			*(unsigned int*)dest = GM.hex_color;
 		}
 	}
@@ -56,7 +56,7 @@ void    draw_ver_line(t_game *game, int x)
 	{
 		if (y >= 0 && y < WINHEIGHT && x >= 0 && x < WINWIDTH)
 		{
-			dest = GW.addr + (y * GW.line_len + x * (GW.bits_per_pixel / 8));
+			dest = GW.addr + (y * GW.line_len + x * (GW.bpp / 8));
 			*(unsigned int*)dest = 0x222222;
 		}
 	}
