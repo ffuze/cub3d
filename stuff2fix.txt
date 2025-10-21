@@ -9,3 +9,5 @@ an actual feature
 
 3 - when the player gets himself in angle, then tries to move in two direcrtions
 at the same time, there's a little "shaking" effect
+
+4 - player gets stuck if it has a wall north or west of the spawning point
