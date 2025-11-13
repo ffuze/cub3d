@@ -115,6 +115,7 @@ typedef struct	s_map
 	float	plane_x;
 	float	plane_y;
 	float	camera_x;
+	float	wall_x;
 	int		map_x;
 	int		map_y;
 	int		step_x;
@@ -125,6 +126,9 @@ typedef struct	s_map
 	int 	draw_start;
 	int 	draw_end;
 	int		hex_color;
+	int		tex_num;
+	int		tex_x;
+	int		tex_y;
 }	t_map;
 
 typedef struct	s_minimap
@@ -147,6 +151,7 @@ typedef struct	s_texture
 	int		bpp;
 	int		line_len;
 	int		endian;
+	int		tex_x;
 }	t_texture;
 
 typedef struct	s_game
@@ -225,6 +230,6 @@ void    rotate_right(t_game *game);
 void    rotate_left(t_game *game);
 
 /*____________________________________textures____________________________________*/
-int		load_all_textures(t_game *game);
+void		load_all_textures(t_game *game);
 
 #endif
