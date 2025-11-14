@@ -20,7 +20,7 @@ static int	count_textures(char	**paths)
 	return (count);
 }
 
-static void		free_textures(t_game *game, t_texture *textures, int count)
+static void	free_textures(t_game *game, t_texture *textures, int count)
 {
 	int	i;
 
@@ -33,7 +33,7 @@ static void		free_textures(t_game *game, t_texture *textures, int count)
 	}
 }
 
-static	int	load_texture(t_game *game, t_texture *textures, char *path)
+static int	load_texture(t_game *game, t_texture *textures, char *path)
 {
 	textures->img_ptr = mlx_xpm_file_to_image(GW.mlx_ptr, path,
 		&GW.bpp, &GW.bpp);
@@ -46,7 +46,7 @@ static	int	load_texture(t_game *game, t_texture *textures, char *path)
 	return (1);
 }
 
-int		load_all_textures(t_game *game)
+int	load_all_textures(t_game *game)
 {
 	char		*paths;
 	t_texture 	*textures;
