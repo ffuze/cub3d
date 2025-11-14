@@ -70,6 +70,31 @@ void	get_next_position(t_game *game)
 	}
 }
 
+void	get_texture_coords(t_game *game)
+{
+	float	wall_x;
+	int		tex_width;
+
+	if (GM.side == 0)
+		GP.perp_wall_dist = GP.dist_x - GP.delta_x;
+	else
+		GP.perp_wall_dist = GP.dist_y - GP.delta_y;
+	GM.tex_num = GM.grid[GM.map_x][GM.map_y] - '0' - 1;
+	if (GM.tex_num < 0 || GM.tex_num >= game->texture_count)
+		GM.tex_num = 0;
+	if (GM.side == 0)
+		wall_x = GP.pos_y + GP.perp_wall_dist * GP.ray_dir_y;
+	else
+		wall_x = GP.pos_x + GP.perp_wall_dist * GP.ray_dir_x;
+	wall_x -= floor(wall_x);
+	tex_width = game->textures[GM.tex_num].width;
+	GM.tex_x = (int)(wall_x * (double)tex_width);
+	if (GM.side == 0 && GP.ray_dir_x > 0)
+		GM.tex_x = tex_width - GM.tex_x - 1;
+	if (GM.side == 1 && GP.ray_dir_y < 0)
+		GM.tex_x = tex_width - GM.tex_x - 1;
+}
+
 void    execute_algorithm(t_game *game)
 {
 	int     i;
@@ -83,11 +108,9 @@ void    execute_algorithm(t_game *game)
 		get_ray_derivates(game);
 		calculate_nearest_coords(game);
 		get_next_position(game);
-		if (GM.side)
-			GP.perp_wall_dist = GP.dist_y - GP.delta_y;
-		else
-			GP.perp_wall_dist = GP.dist_x - GP.delta_x;
+		get_texture_coords(game);
 		draw_ver_line(game, i);
+		// load_all_textures(game);
 	}
 	// mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
 }

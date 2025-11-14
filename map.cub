@@ -1,14 +1,13 @@
-NO ./path_to_the_north_texture/txtr.xpm
+NO ./xpms/wall_1.xpm
 
-SO ./path_to_the_south_texture/txtr.xpm
+SO ./xpms/wall_2.xpm
 
-
-WE        ./path_to_the_west_texture/txtr.xpm
+WE ./xpms/wall_3.xpm
 
 F 22, 22, 22
 C 211   ,     211,    211   
 
-EA ./path_to_the_east_texture/txtr.xpm
+EA ./xpms/wall_4.xpm
 
 
         1111111111111111111111111

@@ -28,40 +28,45 @@ static void	free_textures(t_game *game, t_texture *textures, int count)
 	while (i < count)
 	{
 		if (textures[i].img_ptr)
-			mlx_destroy_image(GW.mlx_ptr, textures->img_ptr);
+			mlx_destroy_image(GW.mlx_ptr, textures[i].img_ptr);
 		i++;
 	}
 }
 
-static int	load_texture(t_game *game, t_texture *textures, char *path)
+static	int	load_texture(t_game *game, t_texture *tex, char *path)
 {
-	textures->img_ptr = mlx_xpm_file_to_image(GW.mlx_ptr, path,
-		&GW.bpp, &GW.bpp);
-	if (!textures->img_ptr)
+	tex->img_ptr = mlx_xpm_file_to_image(GW.mlx_ptr, path,
+											&tex->width, &tex->height);
+	if (!tex->img_ptr)
 		return (0);
-	textures->addr = mlx_get_data_addr(textures->img_ptr, &GW.bpp,
-		&GW.line_len, &GW.endian);
-	if (!textures->addr)
+	tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp,
+									&tex->line_len, &tex->endian);
+	if (!tex->addr)
 		return (0);
 	return (1);
 }
 
-int	load_all_textures(t_game *game)
+void		load_all_textures(t_game *game)
 {
-	char		*paths;
+	char		*paths[7];
 	t_texture 	*textures;
 	int			count;
 	int			i;
 
 	init_texture_array(paths);
-	paths = malloc(6 * sizeof(char *));
+	paths[6] = NULL;
 	count = count_textures(paths);
 	textures = malloc(count * sizeof(t_texture));
+	if (!textures)
+		return ;
 	i = 0;
 	while (paths[i])
 	{
-		if (!load_texture(game, &textures, paths[i]))
-			free_textures(game, &textures, i);
+		if (!load_texture(game, &textures[i], paths[i]))
+		{
+			free_textures(game, textures, i);
+			return ;
+		}
 		i++;
 	}
 	game->textures = textures;

@@ -20,19 +20,19 @@ void    draw_ver_line(t_game *game, int x)
 	char	*dest;
 
 	get_wall_height(game);
-	if (GM.grid[GM.map_x] && GM.grid[GM.map_x][GM.map_y])
-	{
-		if (GM.grid[GM.map_x][GM.map_y] == '1')
-			GM.hex_color = 0x0000FF;
-		else if (GM.grid[GM.map_x][GM.map_y] == '0')
-			GM.hex_color = 0xFF0000;
-		else
-			GM.hex_color = 0xFFFF00;
-	}
-	else
-		GM.hex_color = 0x000000;
-	if (GM.side == 1)
-		GM.hex_color = GM.hex_color / 2;
+	// if (GM.grid[GM.map_x] && GM.grid[GM.map_x][GM.map_y])
+	// {
+	// 	if (GM.grid[GM.map_x][GM.map_y] == '1')
+	// 		GM.hex_color = 0x0000FF;
+	// 	else if (GM.grid[GM.map_x][GM.map_y] == '0')
+	// 		GM.hex_color = 0xFF0000;
+	// 	else
+	// 		GM.hex_color = 0xFFFF00;
+	// }
+	// else
+	// 	GM.hex_color = 0x000000;
+	// if (GM.side == 1)
+	// 	GM.hex_color = GM.hex_color / 2;
 	y = -1;
 	while (++y < GM.draw_start)
 	{
@@ -47,6 +47,12 @@ void    draw_ver_line(t_game *game, int x)
 	{
 		if (y >= 0 && y < WINHEIGHT && x >= 0 && x < WINWIDTH)
 		{
+			GM.tex_y = (int)((y - GM.draw_start) * game->textures[GM.tex_num].height / GM.wall_height);
+			GM.hex_color = *(unsigned int*)(game->textures[GM.tex_num].addr +
+							(GM.tex_y * game->textures[GM.tex_num].line_len + GM.tex_x *
+							(game->textures[GM.tex_num].bpp / 8)));
+			if (GM.side == 1)
+				GM.hex_color = (GM.hex_color >> 1) & 8355711;
 			dest = GW.addr + (y * GW.line_len + x * (GW.bpp / 8));
 			*(unsigned int*)dest = GM.hex_color;
 		}
