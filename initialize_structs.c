@@ -101,7 +101,8 @@ void	initialize_minimap(t_game *game)
 void    initialize_all(t_game *game)
 {
 	int	i;
-	
+
+	game->old_time = 0;
 	initialize_player(game);
 	initialize_map(game);
 	initialize_minimap(game);

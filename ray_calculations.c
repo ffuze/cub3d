@@ -98,10 +98,8 @@ void	get_texture_coords(t_game *game)
 void    execute_algorithm(t_game *game)
 {
 	int     i;
-	double  time;
 
 	i = -1;
-	time = get_current_time();
 	while (++i < WINWIDTH)
 	{
 		GM.x = i;

@@ -13,3 +13,17 @@ void	free_mapstruct(t_map *map)
 	if (map->grid)
 		free_dpc(map->grid);
 }
+
+void	free_textures(t_game *game, t_texture *textures, int count)
+{
+	int	i;
+
+	i = 0;
+	while (i < count)
+	{
+		if (textures[i].img_ptr)
+			mlx_destroy_image(GW.mlx_ptr, textures[i].img_ptr);
+		i++;
+	}
+	free(textures);
+}

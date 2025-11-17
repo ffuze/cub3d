@@ -164,6 +164,7 @@ typedef struct	s_game
 	int			texture_count;
 	int			scale;
 	bool		*keys;
+	float		old_time;
 }	t_game;
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -203,33 +204,34 @@ void	rotate_left_minimap(t_game *game);
 
 /*___________________________________free_mem________________________________*/
 void	free_mapstruct(t_map *map);
+void	free_textures(t_game *game, t_texture *textures, int count);
 
 /*____________________________________time_calc_______________________________*/
 float	get_current_time(void);
-void    get_fps(t_game *game);
+void	get_fps(t_game *game);
 
 /*____________________________________wall_calc_______________________________*/
 void	get_wall_height(t_game *game);
 void	draw_ver_line(t_game *game, int x);
 
 /*____________________________________ray_calc________________________________*/
-void    execute_algorithm(t_game *game);
+void	execute_algorithm(t_game *game);
 
 /*____________________________________init____________________________________*/
-void    initialize_player(t_game *game);
+void	initialize_player(t_game *game);
 void	initialize_all(t_game *game);
 void	initialize_minimap(t_game *game);
 void	setup_player_direction(t_game *game);
 
 /*____________________________________movement____________________________________*/
-void    move_front(t_game *game);
-void    move_behind(t_game *game);
-void    strafe_right(t_game *game);
-void    strafe_left(t_game *game);
-void    rotate_right(t_game *game);
-void    rotate_left(t_game *game);
+void	move_front(t_game *game);
+void	move_behind(t_game *game);
+void	strafe_right(t_game *game);
+void	strafe_left(t_game *game);
+void	rotate_right(t_game *game);
+void	rotate_left(t_game *game);
 
 /*____________________________________textures____________________________________*/
-void		load_all_textures(t_game *game);
+bool	load_all_textures(t_game *game);
 
 #endif

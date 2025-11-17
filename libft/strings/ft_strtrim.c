@@ -6,7 +6,7 @@
 /*   By: lemarino <lemarino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:37:28 by lemarino          #+#    #+#             */
-/*   Updated: 2025/09/15 16:47:08 by lemarino         ###   ########.fr       */
+/*   Updated: 2025/11/17 16:44:56 by lemarino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,23 @@ char	*ft_strtrim(char *s1, char const *set)
 	if (!s2)
 		return (NULL);
 	free(s1);
+	return (s2);
+}
+
+char	*ft_strtrim2(char *s1, char const *set)
+{
+	size_t		start;
+	size_t		end;
+	char		*s2;
+
+	start = 0;
+	end = ft_strlen(s1);
+	while (s1[start] && ft_strchr(set, s1[start]))
+		start++;
+	while (end > 0 && ft_strchr(set, s1[end]))
+		end--;
+	s2 = ft_substr(s1, start, end - start + 1);
+	if (!s2)
+		return (NULL);
 	return (s2);
 }

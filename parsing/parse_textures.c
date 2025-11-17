@@ -30,6 +30,29 @@ static bool	valid_texture_extension(char *str)
 	return (1);
 }
 
+static bool	check_permission(t_map *map)
+{
+	int	txtr_fd;
+
+	txtr_fd = open(map->n_txtr, O_RDONLY);
+	if (txtr_fd < 0)
+		return (ft_printfd(2, RED"Error\nCan't read NO texture\n"NO_ALL), 0);
+	close(txtr_fd);
+	txtr_fd = open(map->s_txtr, O_RDONLY);
+	if (txtr_fd == -1)
+		return (ft_printfd(2, RED"Error\nCan't read SO texture\n"NO_ALL), 0);
+	close(txtr_fd);
+	txtr_fd = open(map->e_txtr, O_RDONLY);
+	if (txtr_fd == -1)
+		return (ft_printfd(2, RED"Error\nCan't read EA texture\n"NO_ALL), 0);
+	close(txtr_fd);
+	txtr_fd = open(map->w_txtr, O_RDONLY);
+	if (txtr_fd == -1)
+		return (ft_printfd(2, RED"Error\nCan't read WE texture\n"NO_ALL), 0);
+	close(txtr_fd);
+	return (1);
+}
+
 // Saves the data found in the .ber file in the t_map structure.
 // Returns 0 if an invalid identifier is found.
 bool	set_map_textures(t_map *map, char *str)
@@ -37,13 +60,13 @@ bool	set_map_textures(t_map *map, char *str)
 	if (check_doubles(map, str) == 0)
 		return (ft_printfd(2, RED"Error\nDuplicate types found\n"NO_ALL), 0);
 	if (ft_strncmp(str, "NO", 2) == 0)
-		map->n_txtr = ft_strdup(ft_strchr2(str, ' '));
+		map->n_txtr = ft_strtrim2(ft_strchr2(str, ' '), "\n");
 	else if (ft_strncmp(str, "SO", 2) == 0)
-		map->s_txtr = ft_strdup(ft_strchr2(str, ' '));
+		map->s_txtr = ft_strtrim2(ft_strchr2(str, ' '), "\n");
 	else if (ft_strncmp(str, "EA", 2) == 0)
-		map->e_txtr = ft_strdup(ft_strchr2(str, ' '));
+		map->e_txtr = ft_strtrim2(ft_strchr2(str, ' '), "\n");
 	else if (ft_strncmp(str, "WE", 2) == 0)
-		map->w_txtr = ft_strdup(ft_strchr2(str, ' '));
+		map->w_txtr = ft_strtrim2(ft_strchr2(str, ' '), "\n");
 	else if (ft_strncmp(str, "F ", 2) == 0)
 		map->fcol = get_color(str);
 	else if (ft_strncmp(str, "C ", 2) == 0)
@@ -71,7 +94,7 @@ bool	parse_textures(t_map *map, char **str, int fd)
 		free(*str);
 		*str = get_next_line(fd);
 	}
-	if (check_map_struct(map) == 0)
+	if (check_map_struct(map) == 0 || check_permission(map) == 0)
 		return (free_mapstruct(map), free(*str), close(fd), 0);
 	if (!*str)
 		return (free_mapstruct(map), close(fd), 0);

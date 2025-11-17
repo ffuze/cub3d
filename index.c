@@ -38,6 +38,7 @@ int main(int argc, char **argv)
 		mlx_destroy_image(game.win.mlx_ptr, game.win.nimg);
 		mlx_destroy_window(game.win.mlx_ptr, game.win.win_ptr);
 		mlx_destroy_display(game.win.mlx_ptr);
+		free(game.keys);
 		free(game.win.mlx_ptr);
 		return (1);
 	}

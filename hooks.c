@@ -2,6 +2,7 @@
 
 int on_destroy(t_game *game)
 {
+	free_textures(game, game->textures, 4);
 	mlx_destroy_image(GW.mlx_ptr, GW.nimg);
 	mlx_destroy_window(GW.mlx_ptr, GW.win_ptr);
 	mlx_destroy_display(GW.mlx_ptr);

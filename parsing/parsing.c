@@ -97,7 +97,7 @@ bool	parse_map_file(char *mapfile, t_map *map, t_player *plr)
 
 	// Parsing e salvataggio delle textures
 	if (!parse_textures(map, &str, fd))
-		return (0);
+		return (close(fd), 0);
 
 	// Parsing e salvataggio della mappa
 	if (!parse_map(map, &str, fd))

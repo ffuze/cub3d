@@ -1,6 +1,6 @@
 #include "./cub3d.h"
 
-float	get_current_time(void)
+float	 get_current_time(void)
 {
 	struct timeval tv;
 
@@ -10,17 +10,16 @@ float	get_current_time(void)
 
 void    get_fps(t_game *game)
 {
-	float	old_time;
 	float	time;
 	float	frame_time;
 	int		fps_value;
 	char	*fps_string;
 
-	old_time = 0;
 	time = get_current_time();
-	if (old_time > 0)
+	ft_printf(GREEN"time: %f\n"NO_ALL, time);/////////////////////////
+	if (game->old_time > 0)
 	{
-		frame_time = (time - old_time) / 1000.0;
+		frame_time = (time - game->old_time) / 1000.0;
 		if (frame_time > 0)
 		{
 			fps_value = (int)(1.0 / frame_time);
@@ -30,5 +29,5 @@ void    get_fps(t_game *game)
 			free(fps_string);
 		}
 	}
-	old_time = time;
+	game->old_time = time;
 }

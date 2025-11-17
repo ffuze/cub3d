@@ -6,7 +6,7 @@
 /*   By: lemarino <lemarino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 10:59:03 by lemarino          #+#    #+#             */
-/*   Updated: 2025/09/11 12:27:13 by lemarino         ###   ########.fr       */
+/*   Updated: 2025/11/17 16:44:43 by lemarino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strjoin2(char *s1, char *s2);
 char			*ft_strjoin3(char *s1, char *s2);
 char			*ft_strtrim(char *s1, char const *set);
+char			*ft_strtrim2(char *s1, char const *set);
 char			**ft_split(char const *s, char c);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int				count_words(const char *str, char c);
