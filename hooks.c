@@ -48,7 +48,7 @@ static int	on_key_press(int keysym, t_game *game)
 		}
 		else
 		{
-			game->scale = 20;
+			game->scale = 0;
 			m_set = 0;
 		}
 	}
