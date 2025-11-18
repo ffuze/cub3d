@@ -6,10 +6,12 @@ void    get_wall_height(t_game *game)
 	if (GP.perp_wall_dist < 0.001)
 		GP.perp_wall_dist = 0.001;
 	GM.wall_height = WINHEIGHT / GP.perp_wall_dist;
-	GM.draw_start = (-GM.wall_height / 2) + (WINHEIGHT / 2);
+	GM.draw_start_real = (-GM.wall_height / 2) + (WINHEIGHT / 2);
+	GM.draw_end_real = (GM.wall_height / 2) + (WINHEIGHT / 2);
+	GM.draw_start = GM.draw_start_real;
 	if (GM.draw_start < 0)
 		GM.draw_start = 0;
-	GM.draw_end = (GM.wall_height / 2) + (WINHEIGHT / 2);
+	GM.draw_end = GM.draw_end_real;
 	if (GM.draw_end >= WINHEIGHT)
 		GM.draw_end = WINHEIGHT - 1;
 }
@@ -47,7 +49,7 @@ void    draw_ver_line(t_game *game, int x)
 	{
 		if (y >= 0 && y < WINHEIGHT && x >= 0 && x < WINWIDTH)
 		{
-			GM.tex_y = (int)((y - GM.draw_start) * game->textures[GM.tex_num].height / GM.wall_height);
+			GM.tex_y = (int)((y - GM.draw_start_real) * game->textures[GM.tex_num].height / GM.wall_height);
 			GM.hex_color = *(unsigned int*)(game->textures[GM.tex_num].addr +
 							(GM.tex_y * game->textures[GM.tex_num].line_len + GM.tex_x *
 							(game->textures[GM.tex_num].bpp / 8)));
