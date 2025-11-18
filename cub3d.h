@@ -125,6 +125,8 @@ typedef struct	s_map
 	int		x;
 	int 	draw_start;
 	int 	draw_end;
+	int		draw_start_real;
+	int		draw_end_real;
 	int		hex_color;
 	int		tex_num;
 	int		tex_x;

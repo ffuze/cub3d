@@ -79,9 +79,21 @@ void	get_texture_coords(t_game *game)
 		GP.perp_wall_dist = GP.dist_x - GP.delta_x;
 	else
 		GP.perp_wall_dist = GP.dist_y - GP.delta_y;
-	GM.tex_num = GM.grid[GM.map_x][GM.map_y] - '0' - 1;
-	if (GM.tex_num < 0 || GM.tex_num >= game->texture_count)
-		GM.tex_num = 0;
+	if (GM.side == 0)
+	{
+		if (GM.step_x > 0)
+			GM.tex_num = 2;
+		else
+			GM.tex_num = 3;
+	}
+	else
+	{
+		if (GM.step_y > 0)
+			GM.tex_num = 1;
+		else
+			GM.tex_num = 0;
+	}
+	
 	if (GM.side == 0)
 		wall_x = GP.pos_y + GP.perp_wall_dist * GP.ray_dir_y;
 	else
