@@ -48,15 +48,6 @@ static int	pick_color(t_game *game, size_t i, size_t j)
 		return (-1);
 }
 
-static void	update_minimap_pos(t_game *game)
-{
-	if (game->map.grid[(int)GP.pos_x + 1][(int)GP.pos_y] != '1')
-		GMM.pos_x = GP.pos_x;
-	if (game->map.grid[(int)GP.pos_x][(int)GP.pos_y + 1] != '1')
-		GMM.pos_y = GP.pos_y;
-	ft_padding(game, 0xFF0000, GMM.pos_x, GMM.pos_y);
-}
-
 void	render_minimap(t_game *game)
 {
 	size_t	i;
@@ -81,5 +72,7 @@ void	render_minimap(t_game *game)
 		}
 		i++;
 	}
-	update_minimap_pos(game);
+	GMM.pos_x = GP.pos_x;
+	GMM.pos_y = GP.pos_y;
+	ft_padding(game, 0xFF0000, GMM.pos_x, GMM.pos_y);
 }

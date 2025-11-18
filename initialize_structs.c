@@ -95,7 +95,7 @@ void	initialize_minimap(t_game *game)
 	GMM.move_speed = 0.15f;
 	GMM.rot_speed = 0.12f;
 	// GMM.sync_with_player = true;
-	printf("minimap initialized @ pos(%.2f, %.2f), ray(%.2f, %.2f)\n", GMM.pos_x, GMM.pos_y, GMM.ray_x, GMM.ray_y);
+	// printf("minimap initialized @ pos(%.2f, %.2f), ray(%.2f, %.2f)\n", GMM.pos_x, GMM.pos_y, GMM.ray_x, GMM.ray_y);
 }
 
 void    initialize_all(t_game *game)
