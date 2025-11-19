@@ -1,45 +1,64 @@
 #include "./cub3d.h"
 
-void    get_ray_derivates(t_game *game)
+void	get_ray_derivates(t_game *game)
 {
-	GM.map_x = (int)GP.pos_x;
-	GM.map_y = (int)GP.pos_y;
-	GM.camera_x = 2 * GM.x / (double)WINWIDTH - 1;
-	GP.ray_dir_x = GP.ray_x + GM.plane_x * GM.camera_x;
-	GP.ray_dir_y = GP.ray_y + GM.plane_y * GM.camera_x;
-	if (GP.ray_dir_x == 0)
-		GP.delta_x = 1e30;
+	game->map.map_x = (int)game->plr.pos_x;
+	game->map.map_y = (int)game->plr.pos_y;
+	game->map.camera_x = 2 * game->map.x / (double)WINWIDTH - 1;
+	game->plr.ray_dir_x = game->plr.ray_x + game->map.plane_x * \
+												game->map.camera_x;
+	game->plr.ray_dir_y = game->plr.ray_y + game->map.plane_y * \
+												game->map.camera_x;
+	if (game->plr.ray_dir_x == 0)
+		game->plr.delta_x = 1e30;
 	else
-		GP.delta_x = fabs(1 / GP.ray_dir_x);
-		
-	if (GP.ray_dir_y == 0)
-		GP.delta_y = 1e30;
+		game->plr.delta_x = fabs(1 / game->plr.ray_dir_x);
+	if (game->plr.ray_dir_y == 0)
+		game->plr.delta_y = 1e30;
 	else
-		GP.delta_y = fabs(1 / GP.ray_dir_y);
+		game->plr.delta_y = fabs(1 / game->plr.ray_dir_y);
 }
 
 void	calculate_nearest_coords(t_game *game)
 {
-	if (GP.ray_dir_x < 0)
+	if (game->plr.ray_dir_x < 0)
 	{
-		GM.step_x = -1;
-		GP.dist_x = (GP.pos_x - GM.map_x) * GP.delta_x;
+		game->map.step_x = -1;
+		game->plr.dist_x = (game->plr.pos_x - game->map.map_x) * \
+												game->plr.delta_x;
 	}
 	else
 	{
-		GM.step_x = 1;
-		GP.dist_x = ((float)GM.map_x + 1.0 - GP.pos_x) * GP.delta_x;
+		game->map.step_x = 1;
+		game->plr.dist_x = ((float)game->map.map_x + 1.0 - game->plr.pos_x) * \
+												game->plr.delta_x;
 	}
-	if (GP.ray_dir_y < 0)
+	if (game->plr.ray_dir_y < 0)
 	{
-		GM.step_y = -1;
-		GP.dist_y = (GP.pos_y - GM.map_y) * GP.delta_y;
+		game->map.step_y = -1;
+		game->plr.dist_y = (game->plr.pos_y - game->map.map_y) * \
+												game->plr.delta_y;
 	}
 	else
 	{
-		GM.step_y = 1;
-		GP.dist_y = ((float)GM.map_y + 1.0 - GP.pos_y) * GP.delta_y;
+		game->map.step_y = 1;
+		game->plr.dist_y = ((float)game->map.map_y + 1.0 - game->plr.pos_y) * \
+												game->plr.delta_y;
 	}
+}
+
+static void	on_x(t_game *game)
+{
+	game->map.map_x += game->map.step_x;
+	game->plr.dist_x += game->plr.delta_x;
+	game->map.side = 0;
+}
+
+static void	on_y(t_game *game)
+{
+	game->map.map_y += game->map.step_y;
+	game->plr.dist_y += game->plr.delta_y;
+	game->map.side = 1;
 }
 
 void	get_next_position(t_game *game)
@@ -49,78 +68,22 @@ void	get_next_position(t_game *game)
 	hit = 0;
 	while (!hit)
 	{
-		if (GP.dist_x < GP.dist_y)
+		if (game->plr.dist_x < game->plr.dist_y)
 		{
-			if ((GM.map_x + GM.step_x) < 0 || (GM.map_x + GM.step_x) >= (int)GM.map_h)/* || (GM.map_y) < 0 || (GM.map_y) >= (int)GM.map_l */
+			if ((game->map.map_x + game->map.step_x) < 0 || \
+				(game->map.map_x + game->map.step_x) >= (int)game->map.map_h)
 				return ;
-			GM.map_x += GM.step_x;
-			GP.dist_x += GP.delta_x;
-			GM.side = 0;
+			on_x(game);
 		}
 		else
 		{
-			if ((GM.map_y + GM.step_y) < 0 || (GM.map_y + GM.step_y) >= (int)GM.map_l)
+			if ((game->map.map_y + game->map.step_y) < 0 || \
+				(game->map.map_y + game->map.step_y) >= (int)game->map.map_l)
 				return ;
-			GM.map_y += GM.step_y;
-			GP.dist_y += GP.delta_y;
-			GM.side = 1;
+			on_y(game);
 		}
-		if (GM.grid[GM.map_x] && GM.grid[GM.map_x][GM.map_y] == '1')
+		if (game->map.grid[game->map.map_x] && \
+					game->map.grid[game->map.map_x][game->map.map_y] == '1')
 			hit = 1;
 	}
-}
-
-void	get_texture_coords(t_game *game)
-{
-	float	wall_x;
-	int		tex_width;
-
-	if (GM.side == 0)
-		GP.perp_wall_dist = GP.dist_x - GP.delta_x;
-	else
-		GP.perp_wall_dist = GP.dist_y - GP.delta_y;
-	if (GM.side == 0)
-	{
-		if (GM.step_x > 0)
-			GM.tex_num = 2;
-		else
-			GM.tex_num = 3;
-	}
-	else
-	{
-		if (GM.step_y > 0)
-			GM.tex_num = 1;
-		else
-			GM.tex_num = 0;
-	}
-	
-	if (GM.side == 0)
-		wall_x = GP.pos_y + GP.perp_wall_dist * GP.ray_dir_y;
-	else
-		wall_x = GP.pos_x + GP.perp_wall_dist * GP.ray_dir_x;
-	wall_x -= floor(wall_x);
-	tex_width = game->textures[GM.tex_num].width;
-	GM.tex_x = (int)(wall_x * (double)tex_width);
-	if (GM.side == 0 && GP.ray_dir_x > 0)
-		GM.tex_x = tex_width - GM.tex_x - 1;
-	if (GM.side == 1 && GP.ray_dir_y < 0)
-		GM.tex_x = tex_width - GM.tex_x - 1;
-}
-
-void    execute_algorithm(t_game *game)
-{
-	int     i;
-
-	i = -1;
-	while (++i < WINWIDTH)
-	{
-		GM.x = i;
-		get_ray_derivates(game);
-		calculate_nearest_coords(game);
-		get_next_position(game);
-		get_texture_coords(game);
-		draw_ver_line(game, i);
-		// load_all_textures(game);
-	}
-	// mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
 }

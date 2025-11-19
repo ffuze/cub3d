@@ -43,11 +43,13 @@ static bool	valid_surroundings(t_map *map, char **grid, size_t i, size_t j)
 	map->n_players += is_player(grid[i][j]);
 	if (j < 1 || grid[i][j - 1] == '\n' || grid[i][j - 1] == ' ')
 		return ((ft_printfd(2, RED"Error\nInvalid map\n"NO_ALL), 0));
-	else if (!grid[i][j + 1] || grid[i][j + 1] == '\n' || grid[i][j + 1] == ' ')
+	else if (!grid[i][j + 1] || grid[i][j + 1] == '\n' || \
+													grid[i][j + 1] == ' ')
 		return ((ft_printfd(2, RED"Error\nInvalid map\n"NO_ALL), 0));
 	else if (i < 1 || j >= ft_strlen(grid[i - 1]) || grid[i - 1][j] == ' ')
 		return ((ft_printfd(2, RED"Error\nInvalid map\n"NO_ALL), 0));
-	else if (!grid[i + 1] || j >= ft_strlen(grid[i + 1]) || grid[i + 1][j] == ' ')
+	else if (!grid[i + 1] || j >= ft_strlen(grid[i + 1]) || \
+													grid[i + 1][j] == ' ')
 		return ((ft_printfd(2, RED"Error\nInvalid map\n"NO_ALL), 0));
 	return (1);
 }
@@ -65,7 +67,7 @@ bool	valid_map(t_map *map, char **grid)
 			return ((ft_printfd(2, RED"Error\nInvalid map\n"NO_ALL), 0));
 		while (grid[i][j])
 		{
-			if (grid[i][j] == '0' ||  is_player(grid[i][j]))
+			if (grid[i][j] == '0' || is_player(grid[i][j]))
 				if (!valid_surroundings(map, grid, i, j))
 					return (ft_printfd(2, RED"Error\nInvalid map\n"NO_ALL), 0);
 			j++;
@@ -82,7 +84,7 @@ bool	valid_map(t_map *map, char **grid)
 // Parsing e salvataggio della mappa
 bool	parse_map(t_map *map, char **str, int fd)
 {
-	while (*str && !ft_strchr(*str, '1'))// Parsa e skippa linee vuote fino alla mappa
+	while (*str && !ft_strchr(*str, '1'))
 	{
 		if (*str[0] != '\n')
 			return (ft_printfd(2, \

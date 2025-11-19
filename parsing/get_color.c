@@ -16,8 +16,8 @@ int	rgb_to_int(int r, int g, int b)
 // Parsing of the rgb color code string.
 static bool	check_rgb_nums(char **split_num)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	char	*trimmed_s;
 
 	i = -1;

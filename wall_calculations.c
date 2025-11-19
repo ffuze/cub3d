@@ -1,71 +1,62 @@
 #include "./cub3d.h"
 
-void    get_wall_height(t_game *game)
+void	get_wall_height(t_game *game)
 {
-	// printf("=======PERP WALL DIST: %f=======\n", GP.perp_wall_dist);
-	if (GP.perp_wall_dist < 0.001)
-		GP.perp_wall_dist = 0.001;
-	GM.wall_height = WINHEIGHT / GP.perp_wall_dist;
-	GM.draw_start_real = (-GM.wall_height / 2) + (WINHEIGHT / 2);
-	GM.draw_end_real = (GM.wall_height / 2) + (WINHEIGHT / 2);
-	GM.draw_start = GM.draw_start_real;
-	if (GM.draw_start < 0)
-		GM.draw_start = 0;
-	GM.draw_end = GM.draw_end_real;
-	if (GM.draw_end >= WINHEIGHT)
-		GM.draw_end = WINHEIGHT - 1;
+	if (game->plr.perp_wall_dist < 0.001)
+		game->plr.perp_wall_dist = 0.001;
+	game->map.wall_height = WINHEIGHT / game->plr.perp_wall_dist;
+	game->map.draw_start_real = (-game->map.wall_height / 2) + (WINHEIGHT / 2);
+	game->map.draw_end_real = (game->map.wall_height / 2) + (WINHEIGHT / 2);
+	game->map.draw_start = game->map.draw_start_real;
+	if (game->map.draw_start < 0)
+		game->map.draw_start = 0;
+	game->map.draw_end = game->map.draw_end_real;
+	if (game->map.draw_end >= WINHEIGHT)
+		game->map.draw_end = WINHEIGHT - 1;
 }
 
-void    draw_ver_line(t_game *game, int x)
+static void	my_pixelput(t_game *game, int x, int y, int color)
 {
-	int		y;
 	char	*dest;
 
+	dest = game->win.addr + (y * game->win.line_len + x * (game->win.bpp / 8));
+	*(unsigned int *)dest = color;
+}
+
+static void	my_calculate(t_game *game, int x, int y)
+{
+	game->map.tex_y = (int)((y - game->map.draw_start_real) * \
+			game->txtrs[game->map.tex_num].height / game->map.wall_height);
+	game->map.hex_color = \
+		*(unsigned int *)(game->txtrs[game->map.tex_num].addr + \
+			(game->map.tex_y * game->txtrs[game->map.tex_num].line_len + \
+				game->map.tex_x * (game->txtrs[game->map.tex_num].bpp / 8)));
+	if (game->map.side == 1)
+		game->map.hex_color = (game->map.hex_color >> 1) & 8355711;
+	my_pixelput(game, x, y, game->map.hex_color);
+}
+
+void	draw_ver_line(t_game *game, int x)
+{
+	int		y;
+
 	get_wall_height(game);
-	// if (GM.grid[GM.map_x] && GM.grid[GM.map_x][GM.map_y])
-	// {
-	// 	if (GM.grid[GM.map_x][GM.map_y] == '1')
-	// 		GM.hex_color = 0x0000FF;
-	// 	else if (GM.grid[GM.map_x][GM.map_y] == '0')
-	// 		GM.hex_color = 0xFF0000;
-	// 	else
-	// 		GM.hex_color = 0xFFFF00;
-	// }
-	// else
-	// 	GM.hex_color = 0x000000;
-	// if (GM.side == 1)
-	// 	GM.hex_color = GM.hex_color / 2;
 	y = -1;
-	while (++y < GM.draw_start)
+	while (++y < game->map.draw_start)
 	{
 		if (y >= 0 && y < WINHEIGHT && x >= 0 && x < WINWIDTH)
-		{
-			dest = GW.addr + (y * GW.line_len + x * (GW.bpp / 8));
-			*(unsigned int*)dest = GM.ccol;
-		}
+			my_pixelput(game, x, y, game->map.ccol);
 	}
-	y = GM.draw_start - 1;
-	while (++y <= GM.draw_end)
+	y = game->map.draw_start - 1;
+	while (++y <= game->map.draw_end)
 	{
 		if (y >= 0 && y < WINHEIGHT && x >= 0 && x < WINWIDTH)
-		{
-			GM.tex_y = (int)((y - GM.draw_start_real) * game->textures[GM.tex_num].height / GM.wall_height);
-			GM.hex_color = *(unsigned int*)(game->textures[GM.tex_num].addr +
-							(GM.tex_y * game->textures[GM.tex_num].line_len + GM.tex_x *
-							(game->textures[GM.tex_num].bpp / 8)));
-			if (GM.side == 1)
-				GM.hex_color = (GM.hex_color >> 1) & 8355711;
-			dest = GW.addr + (y * GW.line_len + x * (GW.bpp / 8));
-			*(unsigned int*)dest = GM.hex_color;
-		}
+			my_calculate(game, x, y);
 	}
-	y = GM.draw_end;
+	y = game->map.draw_end;
 	while (++y < WINHEIGHT)
 	{
 		if (y >= 0 && y < WINHEIGHT && x >= 0 && x < WINWIDTH)
-		{
-			dest = GW.addr + (y * GW.line_len + x * (GW.bpp / 8));
-			*(unsigned int*)dest = 0x222222;
-		}
+			my_pixelput(game, x, y, 0x222222);
 	}
 }

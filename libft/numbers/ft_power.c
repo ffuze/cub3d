@@ -6,7 +6,7 @@
 /*   By: lemarino <lemarino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 23:13:55 by lemarino          #+#    #+#             */
-/*   Updated: 2025/07/19 23:15:58 by lemarino         ###   ########.fr       */
+/*   Updated: 2025/11/19 11:02:55 by lemarino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 // Returns 1 if power=0; Returns 0 if nbr=0
 int	ft_ipow(int nbr, int power)
 {
-	int i;
+	int	i;
 	int	n;
 
 	i = 0;
@@ -44,7 +44,7 @@ int	ft_ipow(int nbr, int power)
 // Returns 1 if power=0; Returns 0 if nbr=0
 int	ft_fpow(float nbr, int power)
 {
-	int i;
+	int	i;
 	int	n;
 
 	i = 0;

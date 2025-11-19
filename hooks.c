@@ -1,12 +1,12 @@
 #include "./cub3d.h"
 
-int on_destroy(t_game *game)
+int	on_destroy(t_game *game)
 {
-	free_textures(game, game->textures, 4);
-	mlx_destroy_image(GW.mlx_ptr, GW.nimg);
-	mlx_destroy_window(GW.mlx_ptr, GW.win_ptr);
-	mlx_destroy_display(GW.mlx_ptr);
-	free(GW.mlx_ptr);
+	free_textures(game, game->txtrs, 4);
+	mlx_destroy_image(game->win.mlx_ptr, game->win.nimg);
+	mlx_destroy_window(game->win.mlx_ptr, game->win.win_ptr);
+	mlx_destroy_display(game->win.mlx_ptr);
+	free(game->win.mlx_ptr);
 	free_mapstruct(&game->map);
 	if (game->keys)
 		free(game->keys);
@@ -29,7 +29,8 @@ int	ft_game_loop(t_game *game)
 		rotate_right(game);
 	execute_algorithm(game);
 	render_minimap(game);
-	mlx_put_image_to_window(GW.mlx_ptr, GW.win_ptr, GW.nimg, 0, 0);
+	mlx_put_image_to_window(game->win.mlx_ptr, game->win.win_ptr, \
+												game->win.nimg, 0, 0);
 	return (0);
 }
 
@@ -53,7 +54,7 @@ static int	on_key_press(int keysym, t_game *game)
 		}
 	}
 	else if (keysym == XK_Shift_L)
-		GP.move_speed = GP.default_move_speed * 1.61;
+		game->plr.move_speed = game->plr.default_move_speed * 1.61;
 	if (keysym < 65535)
 		game->keys[keysym] = true;
 	return (0);
@@ -62,7 +63,7 @@ static int	on_key_press(int keysym, t_game *game)
 static int	on_key_release(int keysym, t_game *game)
 {
 	if (keysym == XK_Shift_L)
-		GP.move_speed = GP.default_move_speed;
+		game->plr.move_speed = game->plr.default_move_speed;
 	if (keysym < 65535)
 		game->keys[keysym] = false;
 	return (0);
@@ -70,11 +71,11 @@ static int	on_key_release(int keysym, t_game *game)
 
 void	ft_hooks(t_game *game)
 {
-	mlx_hook(GW.win_ptr, DestroyNotify, StructureNotifyMask,
+	mlx_hook(game->win.win_ptr, DestroyNotify, StructureNotifyMask,
 		&on_destroy, game);
-	mlx_hook(GW.win_ptr, KeyPress, KeyPressMask,
+	mlx_hook(game->win.win_ptr, KeyPress, KeyPressMask,
 		&on_key_press, game);
-	mlx_hook(GW.win_ptr, KeyRelease, KeyReleaseMask,
+	mlx_hook(game->win.win_ptr, KeyRelease, KeyReleaseMask,
 		&on_key_release, game);
-	mlx_loop_hook(GW.mlx_ptr, &ft_game_loop, game);
+	mlx_loop_hook(game->win.mlx_ptr, &ft_game_loop, game);
 }

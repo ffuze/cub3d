@@ -14,8 +14,9 @@ SRCS = index.c \
 			hooks.c \
 			free_memory.c \
 			ray_calculations.c wall_calculations.c time_calculations.c \
-			initialize_structs.c \
-			movement_rotations.c \
+			initialize_structs.c initialize_player.c \
+			movement/movement_rotations.c movement/movement_walk.c \
+			movement/movement_collisions.c \
 			apply_textures.c
 
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)

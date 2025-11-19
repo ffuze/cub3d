@@ -11,7 +11,7 @@ void	init_texture_array(t_game *game, char	**paths)
 
 static	int	load_texture(t_game *game, t_texture *tex, char *path)
 {
-	tex->img_ptr = mlx_xpm_file_to_image(GW.mlx_ptr, path, \
+	tex->img_ptr = mlx_xpm_file_to_image(game->win.mlx_ptr, path, \
 										&tex->width, &tex->height);
 	if (!tex->img_ptr)
 		return (0);
@@ -22,27 +22,74 @@ static	int	load_texture(t_game *game, t_texture *tex, char *path)
 	return (1);
 }
 
-bool	load_all_textures(t_game *game)// mettere a bool
+bool	load_all_textures(t_game *game)
 {
 	char		*paths[5];
-	t_texture	*textures;
+	t_texture	*txtrs;
 	int			i;
 
 	init_texture_array(game, paths);
-	textures = malloc(4 * sizeof(t_texture));
-	if (!textures)
+	txtrs = malloc(4 * sizeof(t_texture));
+	if (!txtrs)
 		return (0);
 	i = 0;
 	while (paths[i])
 	{
-		if (!load_texture(game, &textures[i], paths[i]))
+		if (!load_texture(game, &txtrs[i], paths[i]))
 		{
-			free_textures(game, textures, i);
+			free_textures(game, txtrs, i);
 			return (0);
 		}
 		i++;
 	}
-	game->textures = textures;
+	game->txtrs = txtrs;
 	game->texture_count = 4;
 	return (1);
+}
+
+static void	pick_texture(t_game *game)
+{
+	if (game->map.side == 0)
+	{
+		if (game->map.step_x > 0)
+			game->map.tex_num = 2;
+		else
+			game->map.tex_num = 3;
+	}
+	else
+	{
+		if (game->map.step_y > 0)
+			game->map.tex_num = 1;
+		else
+			game->map.tex_num = 0;
+	}
+}
+
+void	get_texture_coords(t_game *game)
+{
+	float	wall_x;
+	int		tex_width;
+
+	if (game->map.side == 0)
+		game->plr.perp_wall_dist = game->plr.dist_x - game->plr.delta_x;
+	else
+		game->plr.perp_wall_dist = game->plr.dist_y - game->plr.delta_y;
+	pick_texture(game);
+	if (game->map.side == 0)
+	{
+		wall_x = game->plr.pos_y + game->plr.perp_wall_dist * \
+													game->plr.ray_dir_y;
+	}
+	else
+	{
+		wall_x = game->plr.pos_x + game->plr.perp_wall_dist * \
+													game->plr.ray_dir_x;
+	}
+	wall_x -= floor(wall_x);
+	tex_width = game->txtrs[game->map.tex_num].width;
+	game->map.tex_x = (int)(wall_x * (double)tex_width);
+	if (game->map.side == 0 && game->plr.ray_dir_x > 0)
+		game->map.tex_x = tex_width - game->map.tex_x - 1;
+	if (game->map.side == 1 && game->plr.ray_dir_y < 0)
+		game->map.tex_x = tex_width - game->map.tex_x - 1;
 }

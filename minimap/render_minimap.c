@@ -1,36 +1,43 @@
 #include "../cub3d.h"
 
-// static void	my_pixelput(t_game *game, int color, float x, float y)
-// {}
-
-// Colors the main pixel and fills the space around it.
-void	ft_padding(t_game *game, int color, float x, float y)
+static void	my_pixelput(t_game *game, t_pix *pix)
 {
-	int	px;
-	int	py;
 	int	pixel_index;
 	int	pixel_x;
 	int	pixel_y;
 
-	if (x < 0 || x >= GM.map_h || y < 0 || y >= GM.map_l)
-		return;
-	py = -game->scale/2;
-	while (py < game->scale/2)
+	pixel_x = (pix->y * game->scale + pix->px);
+	pixel_y = (pix->x * game->scale + pix->py);
+	if (pixel_x >= 0 && pixel_x < WINWIDTH && \
+				pixel_y >= 0 && pixel_y < WINHEIGHT)
 	{
-		px = -game->scale/2;
-		while (px < game->scale/2)
+		pixel_index = ((int)(pix->x * game->scale + pix->py) * \
+			game->win.line_len) + ((int)(pix->y * game->scale + pix->px) * \
+														(game->win.bpp / 8));
+		*(unsigned int *)(game->win.addr + pixel_index) = pix->color;
+	}
+}
+
+// Colors the main pixel and fills the space around it.
+void	ft_padding(t_game *game, int color, float x, float y)
+{
+	t_pix	pix;
+
+	pix.x = x;
+	pix.y = y;
+	pix.color = color;
+	if (x < 0 || x >= game->map.map_h || y < 0 || y >= game->map.map_l)
+		return ;
+	pix.py = -game->scale / 2;
+	while (pix.py < game->scale / 2)
+	{
+		pix.px = -game->scale / 2;
+		while (pix.px < game->scale / 2)
 		{
-			pixel_x = (y * game->scale + px);//center_x = (int)(x * game->scale);
-			pixel_y = (x * game->scale + py);//center_y = (int)(y * game->scale);
-			if (pixel_x >= 0 && pixel_x < WINWIDTH && pixel_y >= 0 && pixel_y < WINHEIGHT)
-			{
-				pixel_index = ((int)(x * game->scale + py) * GW.line_len) + \
-							((int)(y * game->scale + px) * (GW.bpp / 8));
-				*(unsigned int*)(GW.addr + pixel_index) = color;
-			}
-			px++;
+			my_pixelput(game, &pix);
+			pix.px++;
 		}
-		py++;
+		pix.py++;
 	}
 }
 
@@ -72,7 +79,7 @@ void	render_minimap(t_game *game)
 		}
 		i++;
 	}
-	GMM.pos_x = GP.pos_x;
-	GMM.pos_y = GP.pos_y;
-	ft_padding(game, 0xFF0000, GMM.pos_x, GMM.pos_y);
+	game->minimap.pos_x = game->plr.pos_x;
+	game->minimap.pos_y = game->plr.pos_y;
+	ft_padding(game, 0xFF0000, game->minimap.pos_x, game->minimap.pos_y);
 }
