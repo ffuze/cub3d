@@ -1,1 +1,5 @@
 1 - player gets stuck if it has a wall north or west of the spawning point
+succede quando si spawna entro i limit della variabile _margin usata in movement_collisions.c
+
+-Possibile soluzione: fare un controllo prima della renderizzazione e se necessario alterare 
+  lievemente il punto di inizio per distanziarsi
