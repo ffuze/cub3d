@@ -65,6 +65,7 @@ typedef enum s_dir
 
 // Struct forpassing variables to my_pixelput()
 //  (F*ck you norminette)
+//	agreed, I hope you step on a huge pile of shit
 typedef struct s_pix
 {
 	float	x;
