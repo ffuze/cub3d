@@ -4,8 +4,8 @@ void	init_texture_array(t_game *game, char	**paths)
 {
 	paths[0] = game->map.n_txtr;
 	paths[1] = game->map.s_txtr;
-	paths[2] = game->map.e_txtr;
-	paths[3] = game->map.w_txtr;
+	paths[2] = game->map.w_txtr;
+	paths[3] = game->map.e_txtr;
 	paths[4] = NULL;
 }
 
@@ -52,16 +52,16 @@ static void	pick_texture(t_game *game)
 	if (game->map.side == 0)
 	{
 		if (game->map.step_x > 0)
-			game->map.tex_num = 2;
+			game->map.tex_num = 0;
 		else
-			game->map.tex_num = 3;
+			game->map.tex_num = 1;
 	}
 	else
 	{
 		if (game->map.step_y > 0)
-			game->map.tex_num = 1;
+			game->map.tex_num = 2;
 		else
-			game->map.tex_num = 0;
+			game->map.tex_num = 3;
 	}
 }
 
