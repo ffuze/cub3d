@@ -1,0 +1,64 @@
+#include "../cub3d.h"
+
+static bool	check_above(char **grid, size_t i, size_t j)
+{
+	if (j < 1 || \
+			!grid[i][j] || \
+			grid[i][j] == '\n' || \
+			grid[i][j] == ' ')
+	{
+		return (0);
+	}
+	return (1);
+}
+
+static bool	check_below(char **grid, size_t i, size_t j)
+{
+	if (j < 1 || \
+			!grid[i][j] || \
+			grid[i][j] == '\n' || \
+			grid[i][j] == ' ')
+	{
+		return (0);
+	}
+	return (1);
+}
+
+static bool	check_right(char **grid, size_t i, size_t j)
+{
+	if (j < 1 || \
+			!grid[i][j] || \
+			grid[i][j] == '\n' || \
+			grid[i][j] == ' ')
+	{
+		return (0);
+	}
+	return (1);
+}
+
+static bool	check_left(char **grid, size_t i, size_t j)
+{
+	if (j < 1 || \
+			!grid[i][j] || \
+			grid[i][j] == '\n' || \
+			grid[i][j] == ' ')
+	{
+		return (0);
+	}
+	return (1);
+}
+
+
+// Returns 0 if a wall is missing.  
+bool	valid_surroundings(char **grid, size_t i, size_t j)
+{
+	if (check_above(grid, i - 1, j) == 0)
+		return (0);
+	else if (check_below(grid, i + 1, j) == 0)
+		return (0);
+	else if (check_left(grid, i, j - 1) == 0)
+		return (0);
+	else if (check_right(grid, i, j + 1) == 0)
+		return (0);
+	return (1);
+}

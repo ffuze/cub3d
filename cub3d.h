@@ -194,7 +194,9 @@ bool	parse_map(t_map *map, char **str, int fd);
 bool	isvalid_chr(char *str);
 bool	copy_map(t_map *map, char *str, int fd);
 bool	valid_map(t_map *map, char **grid);
+bool	valid_surroundings(char **grid, size_t i, size_t j);
 bool	check_map_struct(t_map *map);
+int		is_player(int c);
 
 /*___________________________________minimap.c_______________________________*/
 void	render_minimap(t_game *game);

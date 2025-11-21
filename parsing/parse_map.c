@@ -25,35 +25,6 @@ bool	copy_map(t_map *map, char *str, int fd)
 	return (1);
 }
 
-static int	is_player(int c)
-{
-	if (c == 'N')
-		return (1);
-	else if (c == 'S')
-		return (1);
-	else if (c == 'E')
-		return (1);
-	else if (c == 'W')
-		return (1);
-	return (0);
-}
-
-static bool	valid_surroundings(t_map *map, char **grid, size_t i, size_t j)
-{
-	map->n_players += is_player(grid[i][j]);
-	if (j < 1 || grid[i][j - 1] == '\n' || grid[i][j - 1] == ' ')
-		return ((ft_printfd(2, RED"Error\nInvalid map\n"NO_ALL), 0));
-	else if (!grid[i][j + 1] || grid[i][j + 1] == '\n' || \
-													grid[i][j + 1] == ' ')
-		return ((ft_printfd(2, RED"Error\nInvalid map\n"NO_ALL), 0));
-	else if (i < 1 || j >= ft_strlen(grid[i - 1]) || grid[i - 1][j] == ' ')
-		return ((ft_printfd(2, RED"Error\nInvalid map\n"NO_ALL), 0));
-	else if (!grid[i + 1] || j >= ft_strlen(grid[i + 1]) || \
-													grid[i + 1][j] == ' ')
-		return ((ft_printfd(2, RED"Error\nInvalid map\n"NO_ALL), 0));
-	return (1);
-}
-
 bool	valid_map(t_map *map, char **grid)
 {
 	size_t	i;
@@ -63,12 +34,13 @@ bool	valid_map(t_map *map, char **grid)
 	j = 0;
 	while (grid[i] && map->n_players < 2)
 	{
+		map->n_players += is_player(grid[i][j]);
 		if (grid[i][0] == '\n')
 			return ((ft_printfd(2, RED"Error\nInvalid map\n"NO_ALL), 0));
 		while (grid[i][j])
 		{
 			if (grid[i][j] == '0' || is_player(grid[i][j]))
-				if (!valid_surroundings(map, grid, i, j))
+				if (!valid_surroundings(grid, i, j))
 					return (ft_printfd(2, RED"Error\nInvalid map\n"NO_ALL), 0);
 			j++;
 		}

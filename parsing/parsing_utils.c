@@ -64,3 +64,16 @@ bool	isvalid_chr(char *str)
 	}
 	return (1);
 }
+
+int	is_player(int c)
+{
+	if (c == 'N')
+		return (1);
+	else if (c == 'S')
+		return (1);
+	else if (c == 'E')
+		return (1);
+	else if (c == 'W')
+		return (1);
+	return (0);
+}

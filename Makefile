@@ -9,7 +9,7 @@ OBJS_DIR = obj
 
 SRCS = index.c \
 			parsing/parsing.c parsing/parse_textures.c parsing/get_color.c \
-			parsing/parse_map.c parsing/parsing_utils.c \
+			parsing/parse_map.c parsing/parse_surroundings.c parsing/parsing_utils.c \
 			minimap/render_minimap.c minimap/move_on_minimap.c \
 			hooks.c \
 			free_memory.c \
