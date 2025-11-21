@@ -51,8 +51,8 @@ static void	def_starting_direction(t_map *map, t_player *plr, int i, int j)
 		plr->p_dir = EAST;
 	else if (map->grid[i][j] == 'W')
 		plr->p_dir = WEST;
-	plr->pos_x = i;
-	plr->pos_y = j;
+	plr->pos_x = i + 0.5;
+	plr->pos_y = j + 0.5;
 }
 
 // Player's spwaning position.

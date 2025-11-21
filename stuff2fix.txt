@@ -3,3 +3,11 @@ succede quando si spawna entro i limit della variabile _margin usata in movement
 
 -Possibile soluzione: fare un controllo prima della renderizzazione e se necessario alterare 
   lievemente il punto di inizio per distanziarsi
+^^^ fixato: all'inizio, la posizione del giocatore (es P(3, 2)), visto che e' in formato intero,
+veniva sempre fissata all'inizio della sua 'cella' nella mappa, ovvero nell'angolo. Essendo nell'
+angolo, bastava un qualsiasi valore in piu o in meno, tipo la collisione, per far andare il player
+ad una posizione che non doveva essere la sua. Per fixare, bastava centrare il player nella cella
+aumentando le coordinate di mezzo pixel (x + 0.5, y + 0.5)
+
+problemi parsing minimappa:
+1 - 

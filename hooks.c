@@ -36,22 +36,15 @@ int	ft_game_loop(t_game *game)
 
 static int	on_key_press(int keysym, t_game *game)
 {
-	static int	m_set;
-
+	/* Toggle minimap based on current scale instead of a static flag. */
 	if (keysym == XK_Escape)
 		on_destroy(game);
-	else if (keysym == XK_m)
+	else if (keysym == XK_m || keysym == XK_M)
 	{
-		if (!m_set)
-		{
+		if (game->scale == 0)
 			game->scale = 10;
-			m_set = 1;
-		}
 		else
-		{
 			game->scale = 0;
-			m_set = 0;
-		}
 	}
 	else if (keysym == XK_Shift_L)
 		game->plr.move_speed = game->plr.default_move_speed * 1.61;
