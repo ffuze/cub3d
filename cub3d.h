@@ -140,8 +140,8 @@ typedef struct s_map
 
 typedef struct s_minimap
 {
-	int		pos_x;
-	int		pos_y;
+	float		pos_x;
+	float		pos_y;
 	float	ray_x;
 	float	ray_y;
 	float	move_speed;
@@ -199,6 +199,7 @@ bool	check_map_struct(t_map *map);
 /*___________________________________minimap.c_______________________________*/
 void	render_minimap(t_game *game);
 void	ft_padding(t_game *game, int color, float x, float y);
+void	ft_padding_player(t_game *game, int color, float x, float y);
 
 /*_______________________________move_on_minimap.c___________________________*/
 void	rotate_right_minimap(t_game *game);

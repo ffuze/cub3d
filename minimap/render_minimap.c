@@ -81,5 +81,5 @@ void	render_minimap(t_game *game)
 	}
 	game->minimap.pos_x = game->plr.pos_x;
 	game->minimap.pos_y = game->plr.pos_y;
-	ft_padding(game, 0xFF0000, game->minimap.pos_x, game->minimap.pos_y);
+	ft_padding_player(game, 0xFF0000, game->minimap.pos_x, game->minimap.pos_y);
 }
