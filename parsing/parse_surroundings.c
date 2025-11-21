@@ -38,8 +38,7 @@ static bool	check_right(char **grid, size_t i, size_t j)
 
 static bool	check_left(char **grid, size_t i, size_t j)
 {
-	if (j < 1 || \
-			!grid[i][j] || \
+	if (j < 0 || \
 			grid[i][j] == '\n' || \
 			grid[i][j] == ' ')
 	{
@@ -48,17 +47,17 @@ static bool	check_left(char **grid, size_t i, size_t j)
 	return (1);
 }
 
-
 // Returns 0 if a wall is missing.  
-bool	valid_surroundings(char **grid, size_t i, size_t j)
+bool	valid_surroundings(t_map *map, char **grid, size_t i, size_t j)
 {
+	map->n_players += is_player(grid[i][j]);
 	if (check_above(grid, i - 1, j) == 0)
 		return (0);
 	else if (check_below(grid, i + 1, j) == 0)
 		return (0);
-	else if (check_left(grid, i, j - 1) == 0)
-		return (0);
 	else if (check_right(grid, i, j + 1) == 0)
+		return (0);
+	else if (check_left(grid, i, j - 1) == 0)
 		return (0);
 	return (1);
 }

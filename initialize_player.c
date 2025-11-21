@@ -26,7 +26,6 @@ static void	we_direction(t_game *game)
 
 void	check_plr_dir(t_game *game)
 {
-	printf("player direction: %d, pos (%f, %f)\n", game->plr.p_dir, game->plr.pos_x, game->plr.pos_y);
 	if (game->plr.p_dir == NORTH)
 	{
 		game->plr.ray_x = -1;
@@ -40,8 +39,6 @@ void	check_plr_dir(t_game *game)
 		ea_direction(game);
 	else if (game->plr.p_dir == WEST)
 		we_direction(game);
-	printf("ray direction set to (%f, %f)\n", game->plr.ray_x, game->plr.ray_y);///////////////
-	printf("plane direction set to (%f, %f)\n", game->map.plane_x, game->map.plane_y);/////////
 }
 
 void	initialize_player(t_game *game)

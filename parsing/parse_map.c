@@ -34,13 +34,12 @@ bool	valid_map(t_map *map, char **grid)
 	j = 0;
 	while (grid[i] && map->n_players < 2)
 	{
-		map->n_players += is_player(grid[i][j]);
 		if (grid[i][0] == '\n')
 			return ((ft_printfd(2, RED"Error\nInvalid map\n"NO_ALL), 0));
 		while (grid[i][j])
 		{
 			if (grid[i][j] == '0' || is_player(grid[i][j]))
-				if (!valid_surroundings(grid, i, j))
+				if (!valid_surroundings(map, grid, i, j))
 					return (ft_printfd(2, RED"Error\nInvalid map\n"NO_ALL), 0);
 			j++;
 		}

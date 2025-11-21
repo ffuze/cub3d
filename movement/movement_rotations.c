@@ -15,7 +15,6 @@ void	rotate_right(t_game *game)
 								game->map.plane_y * sin(-game->plr.rot_speed);
 	game->map.plane_y = old_plane_x * sin(-game->plr.rot_speed) + \
 								game->map.plane_y * cos(-game->plr.rot_speed);
-	printf("Rotate left: ray(%.2f, %.2f)\n", game->plr.ray_x, game->plr.ray_y);///////////////////////////////////
 }
 
 void	rotate_left(t_game *game)
@@ -33,5 +32,4 @@ void	rotate_left(t_game *game)
 		cos(game->plr.rot_speed) - game->map.plane_y * sin(game->plr.rot_speed);
 	game->map.plane_y = old_plane_x * \
 		sin(game->plr.rot_speed) + game->map.plane_y * cos(game->plr.rot_speed);
-	printf("Rotate right: ray(%.2f, %.2f)\n", game->plr.ray_x, game->plr.ray_y);////////////////////////////////
 }

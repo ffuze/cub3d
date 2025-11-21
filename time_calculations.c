@@ -16,7 +16,6 @@ void	get_fps(t_game *game)
 	char	*fps_string;
 
 	time = get_current_time();
-	ft_printf(GREEN"time: %f\n"NO_ALL, time);/////////////////////////
 	if (game->old_time > 0)
 	{
 		frame_time = (time - game->old_time) / 1000.0;
