@@ -34,9 +34,9 @@ int	ft_game_loop(t_game *game)
 	return (0);
 }
 
+/* Toggle minimap based on current scale instead of a static flag. */
 static int	on_key_press(int keysym, t_game *game)
 {
-	/* Toggle minimap based on current scale instead of a static flag. */
 	if (keysym == XK_Escape)
 		on_destroy(game);
 	else if (keysym == XK_m || keysym == XK_M)

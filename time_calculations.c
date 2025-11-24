@@ -1,4 +1,4 @@
-#include "./cub3d.h"
+#include "cub3d.h"
 
 float	get_current_time(void)
 {
@@ -9,7 +9,7 @@ float	get_current_time(void)
 }
 
 void	get_fps(t_game *game)
-{ 
+{
 	float	time;
 	float	frame_time;
 	int		fps_value;
@@ -23,7 +23,7 @@ void	get_fps(t_game *game)
 		{
 			fps_value = (int)(1.0 / frame_time);
 			fps_string = ft_itoa(fps_value);
-			mlx_string_put(game->win.mlx_ptr, game->win.win_ptr,
+			mlx_string_put(game->win.mlx_ptr, game->win.win_ptr, \
 				WINWIDTH - 5, WINHEIGHT - 5, 0xFF0000, fps_string);
 			free(fps_string);
 		}

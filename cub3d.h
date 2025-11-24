@@ -140,8 +140,8 @@ typedef struct s_map
 
 typedef struct s_minimap
 {
-	float		pos_x;
-	float		pos_y;
+	float	pos_x;
+	float	pos_y;
 	float	ray_x;
 	float	ray_y;
 	float	move_speed;
