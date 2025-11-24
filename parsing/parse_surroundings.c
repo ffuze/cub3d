@@ -6,7 +6,7 @@
 /*   By: lemarino <lemarino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 12:29:55 by adegl-in          #+#    #+#             */
-/*   Updated: 2025/11/24 12:45:13 by lemarino         ###   ########.fr       */
+/*   Updated: 2025/11/24 14:47:46 by lemarino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static bool	check_above(char **grid, size_t i, size_t j)
 {
-	if (j < 1 || \
-			ft_strlen(grid[i + 1]) > ft_strlen(grid[i])|| \
+	if (i > 0 && (j < 1 || \
+			j > ft_strlen(grid[i]) || \
+			!grid[i][j] || \
 			grid[i][j] == '\n' || \
-			grid[i][j] == ' ' || \
-			!grid[i][j] )
+			grid[i][j] == ' '))
 	{
 		return (0);
 	}
@@ -28,10 +28,10 @@ static bool	check_above(char **grid, size_t i, size_t j)
 static bool	check_below(char **grid, size_t i, size_t j)
 {
 	if (j < 1 || \
-			ft_strlen(grid[i - 1]) > ft_strlen(grid[i]) || \
+			j > ft_strlen(grid[i]) || \
+			!grid[i][j] || \
 			grid[i][j] == '\n' || \
-			grid[i][j] == ' ' || \
-			!grid[i][j])
+			grid[i][j] == ' ')
 	{
 		return (0);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adegl-in <adegl-in@student.42firenze.it>   +#+  +:+       +#+        */
+/*   By: lemarino <lemarino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 12:29:55 by adegl-in          #+#    #+#             */
-/*   Updated: 2025/11/24 10:28:15 by adegl-in         ###   ########.fr       */
+/*   Updated: 2025/11/24 14:53:41 by lemarino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ bool	valid_map(t_map *map, char **grid)
 	j = 0;
 	while (grid[i] && map->n_players < 2)
 	{
-		if (grid[i][0] == '\n')
-			return ((ft_printfd(2, RED"Error\nInvalid map\n"NO_ALL), 0));
 		while (grid[i][j])
 		{
+			if (grid[i][j] == '\n' && (j == 0 || grid[i][j] != 1))
+				return ((ft_printfd(2, RED"Error\nInvalid map\n"NO_ALL), 0));
 			if (grid[i][j] == '0' || is_player(grid[i][j]))
 				if (!valid_surroundings(map, grid, i, j))
 					return (ft_printfd(2, RED"Error\nInvalid map\n"NO_ALL), 0);

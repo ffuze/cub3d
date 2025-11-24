@@ -6,7 +6,7 @@
 /*   By: lemarino <lemarino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 15:21:51 by adegl-in          #+#    #+#             */
-/*   Updated: 2025/11/24 12:45:18 by lemarino         ###   ########.fr       */
+/*   Updated: 2025/11/24 14:50:22 by lemarino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (1);
 	game = (t_game){0};
+	initialize_all(&game);
 	if (parse_map_file(argv[1], &game.map, &game.plr) == 0)
-		return (1);
+		return (free(game.keys), 1);
 	if (!init_mlx(&game))
 		return (1);
-	initialize_all(&game);
 	get_fps(&game);
 	check_plr_dir(&game);
 	sync_minimap_player(&game);
