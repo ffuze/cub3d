@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wall_calculations.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adegl-in <adegl-in@student.42firenze.it>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/20 17:37:45 by adegl-in          #+#    #+#             */
+/*   Updated: 2025/11/24 10:28:15 by adegl-in         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./cub3d.h"
 
 void	get_wall_height(t_game *game)
@@ -57,6 +69,6 @@ void	draw_ver_line(t_game *game, int x)
 	while (++y < WINHEIGHT)
 	{
 		if (y >= 0 && y < WINHEIGHT && x >= 0 && x < WINWIDTH)
-			my_pixelput(game, x, y, 0x222222);
+			my_pixelput(game, x, y, game->map.fcol);
 	}
 }

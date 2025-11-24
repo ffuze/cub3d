@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adegl-in <adegl-in@student.42firenze.it>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/21 12:29:55 by adegl-in          #+#    #+#             */
+/*   Updated: 2025/11/24 10:28:15 by adegl-in         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 static void	init_mapvars(t_map *map)
@@ -28,7 +40,7 @@ static void	def_starting_direction(t_map *map, t_player *plr, int i, int j)
 	plr->pos_y = j + 0.5;
 }
 
-// Player's spwaning position.
+// Player's spawning position.
 static void	init_player(t_map *map, t_player *plr)
 {
 	int	i;
